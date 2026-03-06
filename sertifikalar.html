@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Öncü Savunma — Sertifikalar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tailwind.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <style>
+    .red-line { width: 48px; height: 3px; background: var(--red); margin-bottom: 1.5rem; }
+    .section-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); }
+    .cert-card {
+      border: 1px solid #e5e5e5;
+      background: white;
+      padding: 2rem;
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .cert-card:hover {
+      border-color: var(--red);
+      box-shadow: 4px 4px 0 0 var(--red);
+    }
+    .cert-seal {
+      width: 80px; height: 80px;
+      border: 2px solid #e5e5e5;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+    .cert-seal-inner {
+      width: 64px; height: 64px;
+      border: 1px dashed #ccc;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cert-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--red);
+      letter-spacing: 0.05em;
+    }
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #2a7a2a; padding: 3px 8px;
+      background: #f0fff0; border: 1px solid #b8dfb8;
+    }
+    .status-badge::before {
+      content: ''; width: 6px; height: 6px;
+      background: #2a7a2a; border-radius: 50%;
+    }
+
+  </style>
+</head>
+<body class="bg-white text-gray-900 min-h-screen flex flex-col">
+
+  <a href="#main-content" class="skip-link">İçeriğe geç</a>
+
+  <div id="site-header"></div>
+
+  <main id="main-content" class="flex-1 pt-20 md:pt-24">
+
+    <!-- PAGE HERO -->
+    <section style="background:#F5F5F6;border-bottom:1px solid #e5e5e5;" class="px-6 py-16">
+      <div class="max-w-7xl mx-auto">
+        <div class="section-tag mb-4">Sertifikalar / Akreditasyon</div>
+        <div class="red-line"></div>
+        <h1 class="display font-black mb-4" style="font-size:3rem;line-height:1.0;color:#0A0A0A;">SERTİFİKA PORTFÖYÜ</h1>
+        <p class="text-gray-500 max-w-xl leading-relaxed" style="font-size:0.92rem;">
+          Ulusal ve uluslararası kuruluşlar tarafından akredite edilen sertifikalarımız, tasarım, üretim, test ve çevre yönetimi alanlarındaki
+          yetkinliğimizi belgelendirmektedir.
+        </p>
+      </div>
+    </section>
+
+    <!-- CERTIFICATE GRID -->
+    <section class="py-14 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="section-tag mb-3">Sertifika Galerisi</div>
+        <div class="red-line"></div>
+        <h2 class="display font-black mb-10" style="font-size:2rem;color:#0A0A0A;">AKREDİTE SERTİFİKALARIMIZ</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+          <!-- ISO 9001 -->
+          <div class="cert-card">
+            <div class="cert-seal">
+              <div class="cert-seal-inner">
+                <span class="cert-num">ISO</span>
+              </div>
+            </div>
+            <span class="status-badge mb-3 inline-flex">Geçerli</span>
+            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">ISO 9001:2015</h3>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">Kalite Yönetim Sistemi. Tasarım, üretim ve teslimat süreçlerinin tamamını kapsar.</p>
+            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Yenileme: 2026 · Belge No: TR-QMS-00124</div>
+          </div>
+
+          <!-- AS9100D -->
+          <div class="cert-card">
+            <div class="cert-seal">
+              <div class="cert-seal-inner">
+                <span class="cert-num">AS</span>
+              </div>
+            </div>
+            <span class="status-badge mb-3 inline-flex">Geçerli</span>
+            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">AS9100 Rev. D</h3>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">Havacılık, Uzay ve Savunma Kalite Yönetim Sistemi. Uluslararası IAQG kapsamındadır.</p>
+            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Yenileme: 2026 · Belge No: TR-AS-00089</div>
+          </div>
+
+          <!-- AQAP 2110 -->
+          <div class="cert-card">
+            <div class="cert-seal">
+              <div class="cert-seal-inner">
+                <span class="cert-num">NATO</span>
+              </div>
+            </div>
+            <span class="status-badge mb-3 inline-flex">Geçerli</span>
+            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">AQAP 2110</h3>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">NATO Tedarik Kalite Güvence Gereksinimleri. Tasarım, geliştirme ve üretim kapsamlıdır.</p>
+            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Yenileme: 2025 · Belge No: TR-AQAP-00041</div>
+          </div>
+
+          <!-- MIL-DTL-27500 -->
+          <div class="cert-card">
+            <div class="cert-seal">
+              <div class="cert-seal-inner">
+                <span class="cert-num">MIL</span>
+              </div>
+            </div>
+            <span class="status-badge mb-3 inline-flex">Geçerli</span>
+            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">MIL-DTL-27500</h3>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">Askeri havacılık kablo detay şartnamesi. Kablo demeti üretimi özelinde ABD DoD yetkilendirmesi.</p>
+            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Yenileme: 2027 · Belge No: US-MIL-TR-0312</div>
+          </div>
+
+          <!-- EN 9120 -->
+          <div class="cert-card">
+            <div class="cert-seal">
+              <div class="cert-seal-inner">
+                <span class="cert-num">EN</span>
+              </div>
+            </div>
+            <span class="status-badge mb-3 inline-flex">Geçerli</span>
+            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">EN 9120:2018</h3>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">Havacılık ve Uzay Dağıtıcılar için Kalite Yönetim Sistemi standartı. Avrupa EASA uyumlu.</p>
+            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Yenileme: 2026 · Belge No: EU-EN9120-0087</div>
+          </div>
+
+          <!-- TÜRKAK -->
+          <div class="cert-card">
+            <div class="cert-seal">
+              <div class="cert-seal-inner">
+                <span class="cert-num" style="font-size:0.7rem;">TÜRKAK</span>
+              </div>
+            </div>
+            <span class="status-badge mb-3 inline-flex">Geçerli</span>
+            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">TÜRKAK Akreditasyonu</h3>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">Türk Akreditasyon Kurumu onaylı test ve muayene laboratuvarı statüsü. TS EN ISO/IEC 17025.</p>
+            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Yenileme: 2025 · Belge No: TK-LAB-0234</div>
+          </div>
+
+          <!-- SSB -->
+          <div class="cert-card">
+            <div class="cert-seal">
+              <div class="cert-seal-inner">
+                <span class="cert-num" style="font-size:0.75rem;">SSB</span>
+              </div>
+            </div>
+            <span class="status-badge mb-3 inline-flex">Geçerli</span>
+            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">SSB Tedarikçi Yeterliliği</h3>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">Savunma Sanayii Başkanlığı onaylı tedarikçi. Millî savunma projelerinde doğrudan sözleşme yetkisi.</p>
+            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Yenileme: 2026 · Tedarikçi No: SSB-TR-1182</div>
+          </div>
+
+          <!-- MIL-STD-461 -->
+          <div class="cert-card">
+            <div class="cert-seal">
+              <div class="cert-seal-inner">
+                <span class="cert-num" style="font-size:0.75rem;">EMC</span>
+              </div>
+            </div>
+            <span class="status-badge mb-3 inline-flex">Geçerli</span>
+            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">MIL-STD-461G</h3>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">EMI/EMC uyumluluk doğrulaması. Emisyon ve duyarlılık testleri için akredite ölçüm altyapısı.</p>
+            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Kapsam: CE / CS / RE / RS</div>
+          </div>
+
+          <!-- ISO 14001 -->
+          <div class="cert-card">
+            <div class="cert-seal">
+              <div class="cert-seal-inner">
+                <span class="cert-num" style="font-size:0.75rem;">ENV</span>
+              </div>
+            </div>
+            <span class="status-badge mb-3 inline-flex">Geçerli</span>
+            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">ISO 14001:2015</h3>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">Çevre Yönetim Sistemi. Üretim atıklarının kontrolü ve çevresel etkilerin minimize edilmesi.</p>
+            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Yenileme: 2026 · Belge No: TR-EMS-00055</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/layout.js"></script>
+
+</body>
+</html>
+
