@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Öncü Savunma — Sivil kablaj üretimi: beyaz eşya, otomotiv, iklimlendirme ve endüstriyel otomasyon sektörlerinde veri, sinyal ve güç kablosu takımları, elektromekanik montaj ve uçtan uca süreç yönetimi." />
+  <title>Öncü Savunma — Sivil Kablaj Üretimi</title>
+  <link rel="icon" href="images/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tailwind.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <style>
+    :root {
+      --red: #C8102E;
+      --red-dark: #9B0A22;
+      --navy: #0B2341;
+      --dark: var(--navy);
+      --mid: #3A3A3A;
+      --light: #F5F5F5;
+    }
+    .red-line { width: 48px; height: 3px; background: var(--red); margin-bottom: 1.5rem; }
+    .section-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); }
+
+    /* Üst fotoğraf alanları */
+    .uretim-photo-block {
+      aspect-ratio: 16/10;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--navy);
+    }
+    @media (min-width: 768px) {
+      .uretim-photo-block { aspect-ratio: 21/9; }
+    }
+
+    /* Aura-style kart grid: temiz, gölgeli, rounded-md */
+    .aura-card {
+      position: relative;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 0.5rem;
+      padding: 1.5rem 1.75rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.04);
+      transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+      overflow: hidden;
+    }
+    .aura-card:hover {
+      border-color: rgba(11,35,65,0.12);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 28px rgba(11,35,65,0.08);
+      transform: translateY(-2px);
+    }
+    .aura-card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    @media (min-width: 768px) {
+      .aura-card-grid { gap: 1.25rem; }
+    }
+
+    /* Yazıların yanında sağda ürün/kablo foto alanı */
+    .uretim-cards-with-photo {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (min-width: 1024px) {
+      .uretim-cards-with-photo {
+        grid-template-columns: 1fr minmax(280px, 380px);
+        gap: 2.5rem;
+      }
+    }
+    .uretim-product-photo {
+      aspect-ratio: 3/4;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--navy);
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 28px rgba(11,35,65,0.08);
+      overflow: hidden;
+    }
+    @media (min-width: 1024px) {
+      .uretim-product-photo { aspect-ratio: 4/5; min-height: 320px; }
+    }
+
+    /* Alt bölüm: bölünmüş ekran / Hero – Aura tarzı */
+    .uretim-split {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    @media (min-width: 1024px) {
+      .uretim-split {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        min-height: 0;
+      }
+    }
+    .uretim-split-content {
+      padding: 0;
+    }
+    .uretim-split-media {
+      aspect-ratio: 4/3;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--navy);
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(11,35,65,0.1);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      overflow: hidden;
+    }
+    .uretim-split-media:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 20px 40px rgba(11,35,65,0.12);
+    }
+    @media (min-width: 768px) {
+      .uretim-split-media { aspect-ratio: 16/10; min-height: 320px; }
+    }
+
+    /* Scroll reveal – görünür olunca tetiklenir */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .reveal.reveal-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal.reveal-from-left { transform: translateX(-32px) translateY(0); }
+    .reveal.reveal-from-left.reveal-visible { transform: translateX(0) translateY(0); }
+    .reveal.reveal-from-right { transform: translateX(32px) translateY(0); }
+    .reveal.reveal-from-right.reveal-visible { transform: translateX(0) translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-no-motion { opacity: 1; transform: none !important; }
+
+    /* Fotoğraf blokları: giriş + hover zoom */
+    .uretim-photo-block {
+      transition: transform 0.5s ease, opacity 0.6s ease;
+      transform: scale(1);
+    }
+    .uretim-photo-block.reveal { transform: translateY(24px) scale(0.98); opacity: 0; }
+    .uretim-photo-block.reveal.reveal-visible { transform: translateY(0) scale(1); opacity: 1; }
+    .uretim-photo-block:hover { transform: scale(1.03); }
+    .uretim-photo-block .photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(11,35,65,0.2) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+    .uretim-photo-block:hover .photo-overlay { opacity: 1; }
+
+    /* Kırmızı çizgi animasyonu */
+    .red-line-anim {
+      width: 0;
+      max-width: 48px;
+      transition: width 0.6s ease 0.2s;
+      overflow: hidden;
+    }
+    .reveal-visible .red-line-anim { width: 48px; }
+
+  </style>
+</head>
+<body class="bg-white text-gray-900 min-h-screen flex flex-col">
+
+  <a href="#main-content" class="skip-link">İçeriğe geç</a>
+
+  <div id="site-header"></div>
+
+  <main id="main-content" class="flex-1 pt-20 md:pt-24">
+    <!-- 1. İki fotoğraf alanı -->
+    <section class="max-w-7xl mx-auto px-6 pt-6 pb-8 md:pt-8 md:pb-10 reveal" aria-label="Görsel galeri">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <div class="uretim-photo-block rounded-lg overflow-hidden relative reveal reveal-delay-1" style="background-image: url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800');" role="img" aria-label="Sivil üretim tesisleri">
+          <span class="photo-overlay" aria-hidden="true"></span>
+        </div>
+        <div class="uretim-photo-block rounded-lg overflow-hidden relative reveal reveal-delay-2" style="background-image: url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800');" role="img" aria-label="Sivil kablaj üretimi">
+          <span class="photo-overlay" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Üç satır baloncuk metin düzeni -->
+    <section class="max-w-7xl mx-auto px-6 py-10 md:py-14 reveal" aria-labelledby="uretim-baslik">
+      <div class="section-tag mb-2 reveal reveal-delay-1">Üretim</div>
+      <div class="red-line red-line-anim mb-6"></div>
+      <h1 id="uretim-baslik" class="font-black text-2xl md:text-3xl mb-10 reveal reveal-delay-2" style="font-family:'Barlow Condensed',sans-serif;color:var(--navy);letter-spacing:-0.02em;">SİVİL KABLAJ ÜRETİMİ</h1>
+
+      <div class="uretim-cards-with-photo">
+        <div class="aura-card-grid">
+          <div class="reveal reveal-from-left reveal-delay-1 flex justify-start">
+            <div class="aura-card w-full max-w-3xl">
+              <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                Öncü Savunma; beyaz eşya, otomotiv, iklimlendirme ve endüstriyel otomasyon sektörlerindeki sivil kurum ve kuruluşların tüm kablaj ihtiyaçlarını yüksek hassasiyetle karşılamaktadır.
+              </p>
+            </div>
+          </div>
+          <div class="reveal reveal-from-right reveal-delay-2 flex justify-end">
+            <div class="aura-card w-full max-w-3xl">
+              <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                Sivil üretim bandımızda; her türlü veri kablosu, sinyal kablosu ve güç kablosu takımları, maliyet etkinliği ve seri üretim hızı prensibi çerçevesinde profesyonelce üretilmektedir.
+              </p>
+            </div>
+          </div>
+          <div class="reveal reveal-from-left reveal-delay-3 flex justify-start">
+            <div class="aura-card w-full max-w-3xl">
+              <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                Öncü Savunma olarak, elektromekanik montaj çözümlerimizle birlikte bu sistemlerin kontrol üniteleri ve yan bileşenlerinin montajını yapıyor, malzeme tedarikinden kalite kontrol aşamasına kadar tüm süreci uçtan uca yönetiyoruz.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="uretim-product-photo reveal reveal-delay-2 order-first lg:order-last" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600');" role="img" aria-label="Ürün / kablo görseli"></div>
+      </div>
+    </section>
+
+    <!-- 3. Alt bölüm: bölünmüş ekran / Hero – sol metin, sağ görsel -->
+    <section class="bg-[#fafafa] py-14 md:py-20 px-6 reveal" aria-labelledby="alt-bolum-baslik">
+      <div class="max-w-7xl mx-auto">
+        <div class="uretim-split">
+          <div class="uretim-split-content order-2 lg:order-1">
+            <h2 id="alt-bolum-baslik" class="font-black text-xl md:text-2xl mb-6 reveal reveal-delay-1" style="font-family:'Barlow Condensed',sans-serif;color:var(--navy);letter-spacing:-0.02em;">KABİLİYETLERİMİZ</h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Öncü Savunma; beyaz eşya, otomotiv, iklimlendirme ve endüstriyel otomasyon sektörlerindeki sivil kurum ve kuruluşların tüm kablaj ihtiyaçlarını yüksek hassasiyetle karşılamaktadır.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Sivil üretim bandımızda; her türlü veri kablosu, sinyal kablosu ve güç kablosu takımları, maliyet etkinliği ve seri üretim hızı prensibi çerçevesinde profesyonelce üretilmektedir.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Öncü Savunma olarak, elektromekanik montaj çözümlerimizle birlikte bu sistemlerin kontrol üniteleri ve yan bileşenlerinin montajını yapıyor, malzeme tedarikinden kalite kontrol aşamasına kadar tüm süreci uçtan uca yönetiyoruz.
+            </p>
+          </div>
+          <div class="uretim-split-media order-1 lg:order-2 reveal reveal-delay-2" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900');" role="img" aria-label="Elektromekanik montaj"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/layout.js"></script>
+  <script>
+  (function () {
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('reveal-no-motion', 'reveal-visible'); });
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('reveal-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -40px 0px', threshold: 0.05 });
+
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) el.classList.add('reveal-visible');
+      else observer.observe(el);
+    });
+  })();
+  </script>
+</body>
+</html>

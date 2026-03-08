@@ -37,6 +37,26 @@ function initMobileNav() {
   });
 }
 
+function initUretimDropdown() {
+  var dropdown = document.getElementById('uretim-dropdown');
+  var trigger = document.getElementById('uretim-dropdown-trigger');
+  if (!dropdown || !trigger) return;
+
+  trigger.addEventListener('click', function (e) {
+    e.preventDefault();
+    var open = dropdown.getAttribute('aria-expanded') === 'true';
+    dropdown.setAttribute('aria-expanded', !open);
+    dropdown.querySelector('.nav-dropdown-panel').setAttribute('aria-hidden', open ? 'true' : 'false');
+  });
+
+  document.addEventListener('click', function (e) {
+    if (dropdown.contains(e.target)) return;
+    dropdown.setAttribute('aria-expanded', 'false');
+    var panel = dropdown.querySelector('.nav-dropdown-panel');
+    if (panel) panel.setAttribute('aria-hidden', 'true');
+  });
+}
+
 function setActiveNavLinks() {
   var path = window.location.pathname.split('/').pop() || 'index.html';
   if (!path) path = 'index.html';
@@ -50,7 +70,7 @@ function setActiveNavLinks() {
 
     if (href === 'index.html') {
       if (path === '' || path === 'index.html') {
-        if (!hash || ['#tasarim', '#uretim', '#test'].indexOf(hash) === -1) {
+        if (!hash || ['#uretim', '#test'].indexOf(hash) === -1) {
           a.classList.add('active');
         }
       }
@@ -60,7 +80,7 @@ function setActiveNavLinks() {
       a.classList.add('active');
     } else if (href === 'iletisim.html' && path === 'iletisim.html') {
       a.classList.add('active');
-    } else if (href === 'index.html#tasarim' && path === 'index.html' && hash === '#tasarim') {
+    } else if (href === 'uretim-askeri-kablaj.html' && path === 'uretim-askeri-kablaj.html') {
       a.classList.add('active');
     } else if (href === 'index.html#uretim' && path === 'index.html' && hash === '#uretim') {
       a.classList.add('active');
@@ -68,6 +88,11 @@ function setActiveNavLinks() {
       a.classList.add('active');
     }
   });
+
+  if (path === 'uretim-askeri-kablaj.html') {
+    var trigger = document.getElementById('uretim-dropdown-trigger');
+    if (trigger) trigger.classList.add('active');
+  }
 }
 
 function hardenExternalLinks() {
@@ -99,8 +124,12 @@ function hardenExternalLinks() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  // Sayfa değişince her zaman en üstten başla
+  window.scrollTo(0, 0);
+
   injectPartial('site-header', 'partials/header.html', function () {
     initMobileNav();
+    initUretimDropdown();
     setActiveNavLinks();
   });
 

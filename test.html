@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Öncü Savunma — Güçlü test altyapısı: çekme/kopma dayanım, elektriksel süreklilik ve kısa devre testleri, ölçüm ve kalite doğrulama." />
+  <title>Öncü Savunma — Güçlü Test Altyapısı</title>
+  <link rel="icon" href="images/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tailwind.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <style>
+    :root {
+      --red: #C8102E;
+      --red-dark: #9B0A22;
+      --navy: #0B2341;
+      --dark: var(--navy);
+      --mid: #3A3A3A;
+      --light: #F5F5F5;
+    }
+    .red-line { width: 48px; height: 3px; background: var(--red); margin-bottom: 1.5rem; }
+    .section-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); }
+
+    /* Üst fotoğraf alanları */
+    .test-photo-block {
+      aspect-ratio: 16/10;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--navy);
+      border-radius: 0.5rem;
+      overflow: hidden;
+      transition: transform 0.5s ease, opacity 0.6s ease;
+    }
+    .test-photo-block:hover { transform: scale(1.03); }
+    .test-photo-block .photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(11,35,65,0.2) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+    .test-photo-block:hover .photo-overlay { opacity: 1; }
+    @media (min-width: 768px) {
+      .test-photo-block { aspect-ratio: 21/9; }
+    }
+
+    /* Büyük paragraf alanı */
+    .test-intro-block {
+      max-width: 52rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .test-intro-block p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--mid);
+    }
+    @media (min-width: 768px) {
+      .test-intro-block p { font-size: 1.1rem; }
+    }
+
+    /* Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .reveal.reveal-visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-no-motion { opacity: 1; transform: none !important; }
+
+    /* Process – site uyumlu: beyaz arka plan, Barlow Condensed + Inter, tek renk (navy) */
+    .process {
+      background: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+    .process::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(11, 35, 65, 0.02) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .process .process-container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 4vw, 3rem);
+    }
+    .process .process-header {
+      text-align: center;
+      margin-bottom: clamp(3rem, 6vw, 5rem);
+    }
+    .process .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.5rem;
+    }
+    .process .section-label::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--red), transparent);
+    }
+    /* Başlık + tüm makine/cihaz metinleri aynı font (base.css * Inter'ı ezer) */
+    .process .process-container,
+    .process .process-container .section-title,
+    .process .process-container .section-title em,
+    .process .process-container .process-step h4,
+    .process .process-container .process-step p {
+      font-family: 'Barlow Condensed', sans-serif !important;
+    }
+    .process .section-title {
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--navy);
+    }
+    .process .section-title em {
+      font-style: italic;
+      color: var(--navy);
+    }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 44px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200, 16, 46, 0.25) 20%, rgba(200, 16, 46, 0.25) 80%, transparent);
+    }
+    /* Kutu yok: başlık altında ince çizgi ile yumuşak ayrım */
+    .process-outline-wrap {
+      padding: 0;
+    }
+    .process .process-header::after {
+      content: '';
+      display: block;
+      width: 64px;
+      height: 2px;
+      margin: 1.5rem auto 0;
+      background: linear-gradient(90deg, transparent, var(--red), transparent);
+      opacity: 0.7;
+    }
+    .process-step {
+      text-align: center;
+      padding: 0 1.5rem;
+      position: relative;
+      border-radius: 0.75rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+    .process-step:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(11, 35, 65, 0.08);
+      background: rgba(11, 35, 65, 0.02);
+    }
+    .process-step-number {
+      width: 88px;
+      height: 88px;
+      margin: 0 auto 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--navy);
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 4px 14px rgba(11, 35, 65, 0.25);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .process-step:hover .process-step-number {
+      transform: scale(1.08);
+      box-shadow: 0 8px 24px rgba(11, 35, 65, 0.35);
+    }
+    .process-step-number span {
+      font-family: 'Barlow Condensed', sans-serif !important;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .process-step h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+    .process-step p {
+      font-size: 0.88rem;
+      font-weight: 500;
+      line-height: 1.6;
+      letter-spacing: 0.01em;
+      color: var(--mid);
+    }
+    .stagger-draw > * {
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .stagger-draw.visible > *:nth-child(1) { transition-delay: 0s; }
+    .stagger-draw.visible > *:nth-child(2) { transition-delay: 0.15s; }
+    .stagger-draw.visible > *:nth-child(3) { transition-delay: 0.3s; }
+    .stagger-draw.visible > *:nth-child(4) { transition-delay: 0.45s; }
+    .stagger-draw.visible > * {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    @media (max-width: 1024px) {
+      .process-steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+      }
+      .process-steps::before {
+        display: none;
+      }
+    }
+    @media (max-width: 768px) {
+      .process-steps {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900 min-h-screen flex flex-col">
+
+  <a href="#main-content" class="skip-link">İçeriğe geç</a>
+  <div id="site-header"></div>
+
+  <main id="main-content" class="flex-1 pt-20 md:pt-24">
+    <!-- 1. İki fotoğraf alanı -->
+    <section class="max-w-7xl mx-auto px-6 pt-6 pb-8 md:pt-8 md:pb-10 reveal" aria-label="Test altyapısı görselleri">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <div class="test-photo-block relative reveal reveal-delay-1" style="background-image: url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800');" role="img" aria-label="Test laboratuvarı">
+          <span class="photo-overlay" aria-hidden="true"></span>
+        </div>
+        <div class="test-photo-block relative reveal reveal-delay-2" style="background-image: url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800');" role="img" aria-label="Ölçüm ve kalite kontrol">
+          <span class="photo-overlay" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Büyük paragraf -->
+    <section class="max-w-7xl mx-auto px-6 py-10 md:py-14 reveal" aria-labelledby="test-baslik">
+      <div class="section-tag mb-2 reveal reveal-delay-1">Test</div>
+      <div class="red-line mb-6"></div>
+      <h1 id="test-baslik" class="font-black text-2xl md:text-3xl mb-8 reveal reveal-delay-2" style="font-family:'Barlow Condensed',sans-serif;color:var(--navy);letter-spacing:-0.02em;">GÜÇLÜ TEST ALTYAPISI</h1>
+      <div class="test-intro-block reveal reveal-delay-3">
+        <p>
+          Birim içerisinde yer alan komponentlerin montajlanması, kablajın üretilip montajlanarak cihaz haline getirilmesi ve elektronik ile mekanik montaj desteği konusunda savunma sanayisine hizmet vermekteyiz. Öncü Savunma olarak, ürünlerimizin yaşam döngüsü boyunca güvenilirliğini ve uygunluğunu garanti altına almak için güçlü bir test altyapısı kullanıyoruz. Yağmurlama ve çevresel dayanım testlerinin yanı sıra tüm kablo demetlerinde %100 elektriksel doğrulama ve izlenebilirlik sağlanmaktadır. Test, ölçüm ve kalite kontrol aşamasında kullandığımız makine ve cihazlar ile müşteri teknik şartnamelerine ve askerî standartlara tam uyum hedeflenmektedir.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. Test adımları – outline + hover animasyon -->
+    <section class="process section" id="test-adimlari" aria-labelledby="process-baslik" style="padding: clamp(5rem, 12vh, 9rem) 0;">
+      <div class="process-container">
+        <div class="process-outline-wrap">
+          <div class="process-header reveal">
+            <div class="section-label" style="justify-content:center">Test, Ölçüm ve Kalite Kontrol</div>
+            <h2 id="process-baslik" class="section-title" style="text-align:center">Kullanılan <em>makine ve cihazlar</em></h2>
+          </div>
+          <div class="process-steps stagger-draw">
+            <div class="process-step">
+              <div class="process-step-number"><span>01</span></div>
+              <h4>IMADA ACT1000</h4>
+              <p>Makine. Çekme / kopma dayanım testleri.</p>
+            </div>
+          <div class="process-step">
+            <div class="process-step-number"><span>02</span></div>
+            <h4>CIRIS EASY TOUCH X 512</h4>
+            <p>Test Cihazı. Elektriksel süreklilik ve kısa devre testleri.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step-number"><span>03</span></div>
+            <h4>B440</h4>
+            <p>Ölçüm Cihazı. Elektriksel kontrol ve ölçüm.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step-number"><span>04</span></div>
+            <h4>MIC 08</h4>
+            <p>Ölçüm Cihazı. Hassas ölçüm ve kalite doğrulama.</p>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/layout.js"></script>
+  <script>
+  (function () {
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('reveal-no-motion', 'reveal-visible'); });
+      document.querySelectorAll('.stagger-draw').forEach(function (el) { el.classList.add('visible'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('reveal-visible');
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -40px 0px', threshold: 0.05 });
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('reveal-visible');
+        el.classList.add('visible');
+      } else {
+        observer.observe(el);
+      }
+    });
+    document.querySelectorAll('.stagger-draw').forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('visible');
+      } else {
+        observer.observe(el);
+      }
+    });
+  })();
+  </script>
+</body>
+</html>

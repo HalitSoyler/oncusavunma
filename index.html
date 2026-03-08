@@ -67,12 +67,101 @@
       color: var(--red);
     }
 
-    /* Hero split / background */
+    /* Hero: header bittiği yerde başlar, uzun (tam viewport yüksekliği) */
     .hero-section {
-      background: #F7F7F8;
-      min-height: calc(100vh - 64px);
+      position: relative;
+      min-height: calc(100vh - 4.5rem);
       display: flex;
       align-items: center;
+      overflow: hidden;
+    }
+
+    /* Hero arka plan: referans yapısı (aura + grid) */
+    .hero-aura-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+    /* 1) Lacivert overlay - mix-blend ile Unicorn Studio'yu boyar */
+    .hero-aura-color {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(11, 35, 65, 0.48);
+      mix-blend-mode: color;
+      z-index: 1;
+      pointer-events: none;
+    }
+    /* 2) Grid üstte */
+    .hero-aura-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 64px 64px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    /* 3) Unicorn Studio canvas en arkada - referanstaki gibi */
+    .hero-unicorn-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    .hero-section .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    /* Hero metin: sade, dikkat çekmeyen biçim */
+    .hero-section .hero-section-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .hero-section .hero-heading {
+      font-size: clamp(1.35rem, 2.5vw, 1.65rem);
+      font-weight: 500;
+      line-height: 1.45;
+      letter-spacing: 0.01em;
+      color: rgba(255,255,255,0.92);
+    }
+    .hero-section .hero-lead {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.7);
+      max-width: 480px;
+    }
+    .hero-section .stat-divider { background: rgba(255,255,255,0.4); }
+    .hero-section .hero-content [style*="color:var(--dark)"] { color: rgba(255,255,255,0.85) !important; }
+    .hero-section .hero-content .text-gray-500 { color: rgba(255,255,255,0.6) !important; }
+    .hero-section .btn-hero-outline {
+      border: 1px solid rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.9);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 0.6rem 1.25rem;
+    }
+    .hero-section .btn-hero-outline:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.6);
+      color: #fff;
     }
 
     .red-line {
@@ -258,40 +347,35 @@
 
   <div id="site-header"></div>
 
-  <!-- MAIN -->
-  <main id="main-content" class="flex-1 pt-20 md:pt-24">
+  <!-- MAIN: header yüksekliği (4.5rem) ile hizalı, hero tam header altında başlar -->
+  <main id="main-content" class="flex-1 pt-[4.5rem]">
     <!-- HERO -->
     <section class="hero-section">
-      <div class="max-w-7xl mx-auto px-6 py-16 w-full">
-        <div class="max-w-3xl hero-animate">
-          <div class="section-tag mb-4">Zorlu Şartlarda Yüksek Güvenilirlik</div>
-          <h1 class="display font-black mb-6 hero-title">
-            ZORLU <span style="color:var(--red);">ŞARTLARDA</span><br />
-            YÜKSEK GÜVENİLİRLİK
+      <!-- Lacivert aura + grid (Unicorn en arkada, overlay+grid üstte - referans yapısı) -->
+      <div class="hero-aura-background">
+        <div data-us-project="tPmIIl0vKqHO9yqmtge2" class="hero-unicorn-container" aria-hidden="true"></div>
+        <div class="hero-aura-color" aria-hidden="true"></div>
+        <div class="hero-aura-grid" aria-hidden="true"></div>
+        <script type="text/javascript">
+          !function(){if(!window.UnicornStudio){window.UnicornStudio={isInitialized:!1};var i=document.createElement("script");i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js",i.onload=function(){window.UnicornStudio.isInitialized||(UnicornStudio.init(),window.UnicornStudio.isInitialized=!0)},(document.head||document.body).appendChild(i)}}();
+        </script>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-6 py-16 w-full hero-content">
+        <div class="max-w-2xl hero-animate">
+          <p class="hero-section-tag mb-3">Kablo demeti ve elektro-mekanik çözümler</p>
+          <h1 class="hero-heading mb-5">
+            Zorlu ortamlarda güvenilir bağlantı.
           </h1>
-          <p class="text-gray-600 mb-8 leading-relaxed hero-text">
-            Güvenirlik geçerlilik için şarttır, ama yeterli değildir. Bu ilkeden yola çıkarak Öncü Savunma,
-            geliştirdiği her kablo demeti ve elektro-mekanik çözümde kalitesini ve güvenilirliğini bir adım
-            öteye taşımayı hedefler. Ürünlerimiz, en zorlu hava, kara ve deniz koşullarında dahi görevini
-            sürdürmek üzere tasarlanır ve test edilir.
+          <p class="hero-lead mb-8">
+            Askeri ve sivil projeler için kablo demeti tasarımı, üretimi ve testi. Hava, kara ve deniz koşullarında çalışmaya uygun ürünler.
           </p>
-          <div class="flex gap-4 flex-wrap mb-10">
-            <a href="index.html#tasarim" class="btn-primary">Çözümlerimiz</a>
-            <a href="kurumsal.html" class="btn-outline-dark">Şirket Profili</a>
+          <div class="flex gap-3 flex-wrap mb-10">
+            <a href="index.html#uretim" class="btn-primary">Çözümlerimiz</a>
+            <a href="kurumsal.html" class="btn-hero-outline">Kurumsal</a>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-4">
-            <article id="tasarim">
-              <div class="stat-divider"></div>
-              <h2 class="font-bold text-sm uppercase tracking-widest mb-3" style="color:var(--dark);">
-                Tasarım
-              </h2>
-              <p class="text-gray-500 text-sm leading-relaxed">
-                Analog, veri ve sistem kablaj tasarımı; kablaj test jigi ve harness board tasarımı, MIL-SPEC
-                gereksinimlerine uygun mühendislik.
-              </p>
-            </article>
-
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
             <article id="uretim">
               <div class="stat-divider"></div>
               <h2 class="font-bold text-sm uppercase tracking-widest mb-3" style="color:var(--dark);">
