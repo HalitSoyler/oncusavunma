@@ -1,48 +1,138 @@
-<header class="site-header fixed top-0 left-0 right-0 z-50 bg-[#0B2341] text-white shadow-md">
+<header class="site-header fixed top-0 left-0 right-0 z-50 text-white" style="background:linear-gradient(180deg,#060E1F 0%,#0B2341 100%);box-shadow:0 1px 0 rgba(80,130,200,0.12),0 4px 24px rgba(2,8,16,0.7);">
   <style>
+    /* ── Dropdown ── */
     .nav-dropdown { position: relative; }
     .nav-dropdown .nav-dropdown-panel {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      min-width: 220px;
-      padding-top: 0.5rem;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-4px);
-      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+      position: absolute; top: 100%; left: 0;
+      min-width: 250px; padding-top: 0;
+      opacity: 0; visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity 0.2s ease, transform 0.22s ease, visibility 0.2s;
     }
     .nav-dropdown:hover .nav-dropdown-panel,
-    .nav-dropdown[aria-expanded="true"] .nav-dropdown-panel { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-dropdown[aria-expanded="true"] .nav-dropdown-panel {
+      opacity: 1; visibility: visible; transform: translateY(0);
+    }
     .nav-dropdown-panel-inner {
-      background: #fff;
-      color: #0B2341;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      border: 1px solid rgba(11,35,65,0.12);
-      padding: 0.5rem 0;
+      background: linear-gradient(160deg, #0D1E38 0%, #060E1F 100%);
+      border-top: 2px solid #C8102E;
+      border: 1px solid rgba(80,130,200,0.14);
+      border-top: 2px solid #C8102E;
+      box-shadow: 0 16px 40px rgba(2,8,16,0.75), 0 4px 12px rgba(2,8,16,0.5);
+      padding: 0.4rem 0;
     }
     .nav-dropdown-panel a {
-      display: block;
-      padding: 0.65rem 1.25rem;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #0B2341;
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s;
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.72rem 1.35rem;
+      font-size: 0.71rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(180,210,255,0.65); text-decoration: none;
+      transition: background 0.18s, color 0.18s, padding-left 0.18s;
+      border-left: 2px solid transparent;
     }
-    .nav-dropdown-panel a:hover { background: rgba(200,16,46,0.08); color: #C8102E; }
+    .nav-dropdown-panel a::before {
+      content: '';
+      width: 4px; height: 4px;
+      background: #C8102E;
+      flex-shrink: 0; opacity: 0;
+      transition: opacity 0.18s;
+    }
+    .nav-dropdown-panel a:hover {
+      background: rgba(200,16,46,0.08);
+      color: #E8F0FF;
+      padding-left: 1.6rem;
+      border-left-color: #C8102E;
+    }
+    .nav-dropdown-panel a:hover::before { opacity: 1; }
+
+    /* ── Nav items ── */
+    .header-nav-item {
+      position: relative;
+      display: flex; align-items: center;
+      padding: 0 1.1rem; height: 4.5rem;
+      font-size: 0.71rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(180,210,255,0.62); text-decoration: none;
+      cursor: pointer; white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+    .header-nav-item::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #C8102E, #A00E25);
+      transform: scaleX(0);
+      transition: transform 0.22s ease;
+    }
+    .header-nav-item:hover,
+    .header-nav-item.active { color: #E8F0FF; }
+    .header-nav-item:hover::after,
+    .header-nav-item.active::after { transform: scaleX(1); }
+
+    /* ── CTA button — accent teal on header ── */
+    .header-cta {
+      display: flex; align-items: center;
+      padding: 0 1.5rem; height: 2.8rem;
+      font-size: 0.69rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      background: #C8102E; color: #fff;
+      text-decoration: none; flex-shrink: 0;
+      margin-left: 1.5rem;
+      box-shadow: 0 4px 14px rgba(200,16,46,0.3);
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+    .header-cta:hover {
+      background: #A00E25;
+      box-shadow: 0 6px 20px rgba(200,16,46,0.45);
+    }
+
+    /* ── Logo divider ── */
+    .header-logo-divider {
+      width: 1px; height: 2rem;
+      background: rgba(80,130,200,0.2);
+      margin: 0 1.25rem 0 1.5rem; flex-shrink: 0;
+    }
+
+    /* ── Accent line beneath header ── */
+    .header-accent-line {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(80,130,200,0.2) 20%,
+        rgba(80,130,200,0.35) 50%,
+        rgba(80,130,200,0.2) 80%,
+        transparent 100%);
+    }
   </style>
-  <div class="max-w-7xl mx-auto px-6 h-[4.5rem] flex items-center justify-between">
-    <a href="index.html" class="flex items-center gap-3 flex-shrink-0" aria-label="Öncü Savunma ana sayfa">
-      <img src="images/logo2.jpeg" alt="Öncü Savunma" style="height:36px;width:auto;max-width:140px;display:block;object-fit:contain;" decoding="async" loading="eager" />
+
+  <!-- Brand red top stripe -->
+  <div aria-hidden="true" style="width:100%;height:3px;background:linear-gradient(90deg,#C8102E,#A00E25 60%,#C8102E);"></div>
+
+  <!-- Main header row -->
+  <div class="w-full px-8 xl:px-14 h-[4.5rem] flex items-center justify-between" style="position:relative;">
+
+    <!-- Logo -->
+    <a href="index.html" class="flex items-center flex-shrink-0" aria-label="Öncü Savunma ana sayfa">
+      <img src="images/logo2.jpeg" alt="Öncü Savunma"
+        style="height:34px;width:auto;max-width:130px;display:block;object-fit:contain;"
+        decoding="async" loading="eager" />
+      <div class="header-logo-divider hidden sm:block"></div>
+      <span class="hidden sm:block leading-snug" style="font-size:0.57rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(120,160,220,0.42);">Savunma<br>Sistemleri</span>
     </a>
-    <nav id="primary-navigation" class="hidden md:flex items-center gap-x-12 text-[0.8rem] font-semibold tracking-wider uppercase" aria-label="Ana navigasyon">
-      <a href="index.html" class="nav-link px-3 py-2 text-white/90 hover:text-white transition-colors">Anasayfa</a>
-      <a href="kurumsal.html" class="nav-link px-3 py-2 text-white/80 hover:text-white transition-colors">Kurumsal</a>
+
+    <!-- Desktop nav -->
+    <nav id="primary-navigation" class="hidden md:flex items-center" aria-label="Ana navigasyon">
+      <a href="index.html"        class="header-nav-item">Anasayfa</a>
+      <a href="kurumsal.html"     class="header-nav-item">Kurumsal</a>
+
       <div class="nav-dropdown" id="uretim-dropdown" aria-expanded="false">
-        <span class="nav-link px-3 py-2 text-white/80 hover:text-white transition-colors cursor-pointer" id="uretim-dropdown-trigger">Üretim</span>
+        <span class="header-nav-item" id="uretim-dropdown-trigger">
+          Üretim
+          <svg class="ml-1.5 w-2.5 h-2.5 flex-shrink-0" style="opacity:0.45;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </span>
         <div class="nav-dropdown-panel" aria-hidden="true">
           <div class="nav-dropdown-panel-inner">
             <a href="uretim-askeri-kablaj.html">Askeri Kablaj Üretimi</a>
@@ -50,13 +140,20 @@
           </div>
         </div>
       </div>
-      <a href="test.html" class="nav-link px-3 py-2 text-white/80 hover:text-white transition-colors">Test</a>
-      <a href="sertifikalar.html" class="nav-link px-3 py-2 text-white/80 hover:text-white transition-colors">Sertifikalarımız</a>
-      <a href="iletisim.html" class="nav-link px-3 py-2 text-white/80 hover:text-white transition-colors">İletişim</a>
+
+      <a href="tasarim.html"      class="header-nav-item">Tasarım</a>
+      <a href="test.html"         class="header-nav-item">Test</a>
+      <a href="projelerimiz.html" class="header-nav-item">Projelerimiz</a>
+      <a href="sertifikalar.html" class="header-nav-item">Sertifikalarımız</a>
+
+      <a href="iletisim.html" class="header-cta">İletişim</a>
     </nav>
+
+    <!-- Mobile toggle -->
     <button
       type="button"
-      class="mobile-nav-toggle md:hidden inline-flex items-center justify-center w-10 h-10 rounded border border-white/30 text-white"
+      class="mobile-nav-toggle md:hidden inline-flex items-center justify-center w-10 h-10 text-white"
+      style="border:1px solid rgba(80,130,200,0.2);"
       aria-label="Menüyü aç"
       aria-expanded="false"
       aria-controls="mobile-nav-panel"
@@ -64,20 +161,27 @@
     >
       <div class="mobile-nav-toggle-icon"><span></span><span></span><span></span></div>
     </button>
+
+    <!-- Subtle bottom shimmer line -->
+    <div class="header-accent-line" aria-hidden="true"></div>
   </div>
-  <div id="mobile-nav-panel" class="hidden md:hidden border-t border-white/10 bg-[#0B2341] shadow-lg" aria-label="Ana navigasyon mobil">
-    <nav class="px-6 py-5 flex flex-col gap-0">
-      <a href="index.html" class="nav-link py-3.5 text-white/90 hover:text-white border-b border-white/10">Anasayfa</a>
-      <a href="kurumsal.html" class="nav-link py-3.5 text-white/80 hover:text-white border-b border-white/10">Kurumsal</a>
-      <div class="border-b border-white/10">
-        <span class="block py-3.5 text-white/80 font-semibold text-[0.8rem] uppercase tracking-wider">Üretim</span>
-        <a href="uretim-askeri-kablaj.html" class="nav-link block py-2.5 pl-4 text-white/70 hover:text-white text-sm">Askeri Kablaj Üretimi</a>
-        <a href="uretim-sivil-kablaj.html" class="nav-link block py-2.5 pl-4 text-white/70 hover:text-white text-sm">Sivil Kablaj Üretimi</a>
+
+  <!-- Mobile nav panel -->
+  <div id="mobile-nav-panel" class="hidden md:hidden" style="background:linear-gradient(160deg,#0D1E38 0%,#060E1F 100%);border-top:2px solid #C8102E;box-shadow:0 16px 40px rgba(2,8,16,0.75);" aria-label="Ana navigasyon mobil">
+    <nav class="px-8 py-3 flex flex-col" role="navigation">
+      <a href="index.html"        class="nav-link py-3.5 border-b text-[0.72rem] tracking-[0.12em]" style="color:rgba(180,210,255,0.72);border-color:rgba(80,130,200,0.1);">Anasayfa</a>
+      <a href="kurumsal.html"     class="nav-link py-3.5 border-b text-[0.72rem] tracking-[0.12em]" style="color:rgba(180,210,255,0.65);border-color:rgba(80,130,200,0.1);">Kurumsal</a>
+      <div style="border-bottom:1px solid rgba(80,130,200,0.1);">
+        <span class="block py-3.5 font-semibold text-[0.72rem] uppercase tracking-[0.12em]" style="color:rgba(180,210,255,0.65);">Üretim</span>
+        <a href="uretim-askeri-kablaj.html" class="nav-link flex items-center gap-2 py-2.5 pl-4 text-[0.7rem] tracking-[0.1em] mb-1 border-l-2" style="color:rgba(130,170,230,0.55);border-left-color:rgba(200,16,46,0.45);">Askeri Kablaj Üretimi</a>
+        <a href="uretim-sivil-kablaj.html"  class="nav-link flex items-center gap-2 py-2.5 pl-4 text-[0.7rem] tracking-[0.1em] mb-3 border-l-2" style="color:rgba(130,170,230,0.55);border-left-color:rgba(200,16,46,0.45);">Sivil Kablaj Üretimi</a>
       </div>
-      <a href="test.html" class="nav-link py-3.5 text-white/80 hover:text-white border-b border-white/10">Test</a>
-      <a href="sertifikalar.html" class="nav-link py-3.5 text-white/80 hover:text-white border-b border-white/10">Sertifikalarımız</a>
-      <a href="iletisim.html" class="nav-link py-3.5 text-white/80 hover:text-white">İletişim</a>
+      <a href="tasarim.html"      class="nav-link py-3.5 border-b text-[0.72rem] tracking-[0.12em]" style="color:rgba(180,210,255,0.65);border-color:rgba(80,130,200,0.1);">Tasarım</a>
+      <a href="test.html"         class="nav-link py-3.5 border-b text-[0.72rem] tracking-[0.12em]" style="color:rgba(180,210,255,0.65);border-color:rgba(80,130,200,0.1);">Test</a>
+      <a href="projelerimiz.html" class="nav-link py-3.5 border-b text-[0.72rem] tracking-[0.12em]" style="color:rgba(180,210,255,0.65);border-color:rgba(80,130,200,0.1);">Projelerimiz</a>
+      <a href="sertifikalar.html" class="nav-link py-3.5 border-b text-[0.72rem] tracking-[0.12em]" style="color:rgba(180,210,255,0.65);border-color:rgba(80,130,200,0.1);">Sertifikalarımız</a>
+      <a href="iletisim.html" class="mt-4 mb-2 py-3 px-6 text-white text-[0.72rem] font-bold tracking-[0.14em] uppercase text-center transition-colors"
+         style="background:#C8102E;box-shadow:0 4px 14px rgba(200,16,46,0.3);">İletişim</a>
     </nav>
   </div>
 </header>
-

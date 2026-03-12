@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Öncü Savunma projeleri: savunma sanayi, elektromekanik ve endüstriyel otomasyon alanlarında anahtar teslim kablo demeti ve sistem çözümleri."
+  />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none';" />
+  <title>Öncü Savunma — Projelerimiz</title>
+
+  <link rel="icon" href="images/favicon.ico" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/tailwind.css" />
+  <link rel="stylesheet" href="css/base.css" />
+
+  <style>
+    :root {
+      --surface-0:   #020810;
+      --surface-1:   #060E1F;
+      --surface-2:   #091526;
+      --surface-3:   #0D1E38;
+      --surface-4:   #132540;
+      --primary:     #0B2341;
+      --primary-deep:#071629;
+      --brand:       #C8102E;
+      --brand-dark:  #A00E25;
+      --accent:      #00C2E0;
+      --accent-dark: #009AB8;
+      --accent-dim:  rgba(0,194,224,0.08);
+      /* legacy aliases */
+      --red:         #C8102E;
+      --red-dark:    #A00E25;
+      --navy:        #0B2341;
+      --anthracite:  #0D1E38;
+      --anthracite-light: #132540;
+      --dark:        #0B2341;
+      --mid:         #3A4A5E;
+      --light:       #EEF2FA;
+      --metallic:    #5A7090;
+      --metallic-light: #8AAAC8;
+      /* text */
+      --text-primary:   #E8F0FF;
+      --text-secondary: rgba(180,210,255,0.72);
+      --text-muted:     rgba(130,170,230,0.48);
+      --text-label:     rgba(120,160,220,0.58);
+      /* border */
+      --border-subtle: rgba(80,130,200,0.10);
+      --border-mid:    rgba(80,130,200,0.18);
+      --border-strong: rgba(80,130,200,0.32);
+      /* shadows — navy-based */
+      --shadow-sm: 0 2px 8px rgba(2,8,16,0.55);
+      --shadow-md: 0 8px 24px rgba(2,8,16,0.65), 0 2px 6px rgba(2,8,16,0.40);
+      --shadow-lg: 0 20px 50px rgba(2,8,16,0.78), 0 8px 20px rgba(2,8,16,0.50);
+      --shadow-brand: 0 8px 28px rgba(200,16,46,0.28);
+      --shadow-accent: 0 4px 18px rgba(0,194,224,0.22);
+      /* gradients */
+      --grad-card: linear-gradient(155deg,#0D1E38 0%,#060E1F 70%);
+      --anim-hover: 0.22s ease;
+      --anim-spring: cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .projects-hero {
+      position: relative;
+      width: 100%;
+      min-height: 260px;
+      background-image: url("images/hero-slide1.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    @media (min-width: 768px) {
+      .projects-hero {
+        min-height: 340px;
+      }
+    }
+
+    .projects-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(7,22,41,0.88), rgba(7,22,41,0.65));
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    .projects-hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 1.5rem 4.5rem;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    @media (min-width: 1024px) {
+      .projects-hero-inner {
+        padding-top: 5rem;
+        padding-bottom: 5.5rem;
+      }
+    }
+
+    .projects-hero-title {
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .projects-hero-lead {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 620px;
+    }
+
+    .projects-hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .projects-hero-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(11, 35, 65, 0.35);
+    }
+
+    .projects-section {
+      padding: 4rem 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .projects-section {
+        padding: 4.5rem 1.5rem 5rem;
+      }
+    }
+
+    .projects-section--muted {
+      background: #f7f7f8;
+    }
+
+    .projects-section--soft {
+      background: #fafafa;
+    }
+
+    .projects-lead {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #4b5563;
+      max-width: 720px;
+    }
+
+    .projects-body-text {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: #4b5563;
+    }
+
+    .projects-areas-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .projects-areas-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .projects-areas-card {
+      border-radius: 0.75rem;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 1.4rem 1.5rem;
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.04);
+      transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .projects-areas-card:hover {
+      border-color: var(--red);
+      transform: translateY(-2px);
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+    }
+
+    .projects-areas-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 0.5rem;
+    }
+
+    .projects-areas-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--dark);
+      margin-bottom: 0.35rem;
+    }
+
+    .projects-areas-text {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: #6b7280;
+    }
+
+    .projects-columns {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    @media (min-width: 900px) {
+      .projects-columns {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .projects-column-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .projects-column-sub {
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 0.6rem;
+    }
+
+    .projects-values-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .projects-values-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    .projects-value-card {
+      border-radius: 0.9rem;
+      padding: 1.3rem 1.1rem;
+      background: #0b2341;
+      color: #e5e7eb;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.4);
+    }
+
+    .projects-value-title {
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .projects-value-text {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: rgba(249, 250, 251, 0.8);
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900 min-h-screen flex flex-col">
+  <a href="#main-content" class="skip-link">İçeriğe geç</a>
+
+  <div id="site-header"></div>
+
+  <main id="main-content" class="flex-1 pt-24">
+    <!-- HERO -->
+    <section class="projects-hero" aria-labelledby="page-title">
+      <div class="projects-hero-inner max-w-7xl mx-auto">
+        <div class="max-w-2xl hero-animate">
+          <p class="section-tag mb-3">Projeler</p>
+          <h1 id="page-title" class="projects-hero-title">Savunma ve elektromekanik projelerimiz</h1>
+          <p class="projects-hero-lead">
+            Kablo demeti, pano ve elektro-mekanik sistemlerde; savunma platformları, raylı sistemler ve endüstriyel
+            tesisler için anahtar teslim çözümler geliştiriyoruz. Tasarımdan teste kadar her aşamada izlenebilir, standartlara
+            uygun ve sahada güvenle çalışan projeler yürütüyoruz.
+          </p>
+          <div class="projects-hero-tags">
+            <span class="projects-hero-tag">Savunma sanayi</span>
+            <span class="projects-hero-tag">Elektromekanik</span>
+            <span class="projects-hero-tag">Endüstriyel otomasyon</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GİRİŞ -->
+    <section class="projects-section pt-24 md:pt-28" aria-labelledby="projeler-giris">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-3xl reveal">
+          <div class="section-tag mb-3">Yaklaşımımız</div>
+          <div class="red-line mb-6"></div>
+          <h2
+            id="projeler-giris"
+            class="display font-black text-[2.1rem] md:text-[2.4rem] mb-4"
+            style="color: var(--dark);"
+          >
+            Farklı sektörlerde, ortak mühendislik disiplini.
+          </h2>
+          <p class="projects-lead mb-4">
+            Öncü Savunma; savunma sanayi projeleri, elektromekanik tesisler ve endüstriyel otomasyon uygulamalarında
+            kablo demeti ve elektro-mekanik sistem tasarımı ile üretim kabiliyetini bir araya getirir. Her proje,
+            platform gereksinimleri ve uluslararası standartlar dikkate alınarak, uzun ömürlü ve bakım dostu olacak
+            şekilde planlanır.
+          </p>
+          <p class="projects-body-text">
+            Modern çalışma yöntemleri, test altyapısı ve nitelikli mühendislik ekibimiz sayesinde kara, hava ve deniz
+            platformlarından raylı sistemlere, havalimanlarından üretim tesislerine uzanan geniş bir yelpazede
+            projeler yürütüyoruz. Proje yönetiminde şeffaflık, dokümantasyonda bütünlük ve teslimatta süreklilik temel
+            önceliklerimizdir.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJE ALANLARI / KISA ÖZET KARTLAR -->
+    <section class="projects-section projects-section--muted" aria-labelledby="proje-alanlari">
+      <div class="max-w-7xl mx-auto">
+        <header class="mb-8 md:mb-10 max-w-3xl reveal">
+          <div class="section-tag mb-3">Proje Alanlarımız</div>
+          <div class="red-line mb-5"></div>
+          <h2
+            id="proje-alanlari"
+            class="display font-black text-[2.0rem] md:text-[2.3rem] mb-3"
+            style="color: var(--dark);"
+          >
+            Uçtan uca destek verdiğimiz başlıca alanlar.
+          </h2>
+          <p class="projects-lead">
+            Projelerimizi; kablo demeti, pano ve kontrol sistemleri etrafında kurguluyor, platform ve tesis
+            gereksinimlerine göre özelleştiriyoruz.
+          </p>
+        </header>
+
+        <div class="projects-areas-grid reveal reveal-delay-1">
+          <article class="projects-areas-card">
+            <div class="projects-areas-label">Savunma sanayi</div>
+            <h3 class="projects-areas-title">Zırhlı ve taktik araç programları</h3>
+            <p class="projects-areas-text">
+              Kara platformları için güç, veri ve haberleşme kablo demetleri, pano ve elektro-mekanik modüller; EMI/EMC
+              gereksinimlerine uygun şekilde tasarlanıp üretilir.
+            </p>
+          </article>
+
+          <article class="projects-areas-card">
+            <div class="projects-areas-label">Raylı sistemler</div>
+            <h3 class="projects-areas-title">Hat, tünel ve istasyon altyapıları</h3>
+            <p class="projects-areas-text">
+              Raylı sistem hatları, tünel ve istasyon projelerinde kumanda panoları, saha kablo demetleri ve kontrol
+              kabinleri için çözüm ortaklığı sunuyoruz.
+            </p>
+          </article>
+
+          <article class="projects-areas-card">
+            <div class="projects-areas-label">Endüstriyel tesisler</div>
+            <h3 class="projects-areas-title">Üretim hatları ve otomasyon</h3>
+            <p class="projects-areas-text">
+              Fabrikalar, lojistik depolar ve proses tesislerinde makine otomasyonu, motor kontrol panoları ve saha
+              kablolaması projeleri yürütüyoruz.
+            </p>
+          </article>
+
+          <article class="projects-areas-card">
+            <div class="projects-areas-label">Enerji ve altyapı</div>
+            <h3 class="projects-areas-title">Güç dağıtım ve kumanda</h3>
+            <p class="projects-areas-text">
+              OG/AG güç dağıtım panoları, MCC panoları ve kritik yükler için kumanda kabinleri, uzun hizmet ömrü ve
+              güvenilir işletme hedefiyle projelendirilir.
+            </p>
+          </article>
+
+          <article class="projects-areas-card">
+            <div class="projects-areas-label">Havalimanları ve kamu binaları</div>
+            <h3 class="projects-areas-title">Hassas altyapı projeleri</h3>
+            <p class="projects-areas-text">
+              Havalimanları, tüneller, kamu binaları ve kampüsler için elektro-mekanik altyapı kablo demeti ve pano
+              çözümleri sunuyoruz.
+            </p>
+          </article>
+
+          <article class="projects-areas-card">
+            <div class="projects-areas-label">Özel projeler</div>
+            <h3 class="projects-areas-title">Müşteri özgü kablaj ve test</h3>
+            <p class="projects-areas-text">
+              Standart ürün kataloglarının dışında kalan, tamamen müşteri şartnamesine bağlı özel kablaj, test
+              fixtürü ve panel projeleri geliştiriyoruz.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DETAYLI PROJE KAPSAMLARI (GNY ELEKTROMEKANIK REFERANSININ YAPISINA BENZER) -->
+    <section class="projects-section projects-section--soft" aria-labelledby="detayli-projeler">
+      <div class="max-w-7xl mx-auto">
+        <header class="mb-8 md:mb-10 max-w-3xl reveal">
+          <div class="section-tag mb-3">Detaylı proje kapsamları</div>
+          <div class="red-line mb-5"></div>
+          <h2
+            id="detayli-projeler"
+            class="display font-black text-[2.0rem] md:text-[2.3rem] mb-3"
+            style="color: var(--dark);"
+          >
+            Pano, kablo demeti ve otomasyon odaklı çözümler.
+          </h2>
+          <p class="projects-lead">
+            GNY Elektromekanik sayfasındaki yapıdan ilham alarak, pano üretimi, kumanda ve enerji panoları, raylı
+            sistemler ve endüstriyel otomasyon gibi başlıkları kendi uzmanlık alanımıza göre yeniden kurguluyoruz.
+          </p>
+        </header>
+
+        <div class="projects-columns reveal reveal-delay-1">
+          <div class="space-y-8">
+            <article>
+              <div class="projects-column-sub">Pano & Yazılım</div>
+              <h3 class="projects-column-title">Pano, PLC yazılım ve SCADA entegrasyonu</h3>
+              <p class="projects-body-text">
+                Makine üreticileri ve son kullanıcılar için elektrik panoları, MCC panoları ve özel kumanda panolarını
+                projelendiriyor, kablo demeti tasarımı ile birlikte uçtan uca çözümler sunuyoruz. PLC ve SCADA
+                yazılımlarının saha gerçekleriyle uyumlu çalışması için test senaryoları, devreye alma desteği ve
+                dokümantasyon hazırlıyoruz.
+              </p>
+            </article>
+
+            <article>
+              <div class="projects-column-sub">Kumanda & Enerji</div>
+              <h3 class="projects-column-title">Kumanda ve enerji panoları ile kablo takımları</h3>
+              <p class="projects-body-text">
+                Bina, su, enerji ve endüstriyel tesis ihtiyaçlarına yönelik alçak gerilim panoları, motor kontrol
+                merkezleri ve saha kablo demetleri üretiyoruz. Proje gereksinimlerine göre pano içi kablo demetleri,
+                harici bağlantılar ve saha kablajı birlikte tasarlanarak montaj süreleri kısaltılır, hata riski
+                azaltılır.
+              </p>
+            </article>
+
+            <article>
+              <div class="projects-column-sub">Elektromekanik taahhüt</div>
+              <h3 class="projects-column-title">Anahtar teslim elektromekanik projeler</h3>
+              <p class="projects-body-text">
+                Proje hazırlama, imalat, devreye alma ve işletmeye alma aşamalarını kapsayan elektromekanik
+                projelerde; kablo demeti, pano ve saha kablajı bileşenlerine odaklanıyoruz. Büyük ölçekli projelerde
+                farklı disiplinlerle koordineli çalışarak, sahada bakım ve genişlemeyi kolaylaştıran dokümantasyon
+                yapısı oluşturuyoruz.
+              </p>
+            </article>
+          </div>
+
+          <div class="space-y-8">
+            <article>
+              <div class="projects-column-sub">Raylı sistemler</div>
+              <h3 class="projects-column-title">Raylı sistem projeleri için kablaj ve panolar</h3>
+              <p class="projects-body-text">
+                Raylı sistem hatları, depo alanları ve istasyonlar için kumanda, enerji ve sinyalizasyon panoları ile
+                birlikte saha kablo demeti çözümleri sunuyoruz. Hat boyunca güvenilir işletme için kablo güzergâhları,
+                bağlantı kutuları ve test senaryoları proje başından itibaren planlanır.
+              </p>
+            </article>
+
+            <article>
+              <div class="projects-column-sub">Endüstriyel otomasyon</div>
+              <h3 class="projects-column-title">Endüstriyel otomasyon sistemleri</h3>
+              <p class="projects-body-text">
+                Motor sürücüleri, sensör hatları ve kontrol kabinleri için kablo demetleri tasarlıyor; otomasyon
+                projelerinde malzeme temini, kablo kesim & markalama, montaj ve test adımlarını tek çatı altında
+                topluyoruz. Böylece sahadaki devreye alma sürecini kısaltıp işletme güvenilirliğini artırıyoruz.
+              </p>
+            </article>
+
+            <article>
+              <div class="projects-column-sub">Havalimanları & tesisler</div>
+              <h3 class="projects-column-title">Havalimanı ve kompleks tesis projeleri</h3>
+              <p class="projects-body-text">
+                Havalimanları, lojistik depolar, alışveriş merkezleri ve çok amaçlı tesislerde; aydınlatma, güç
+                dağıtım, yangın algılama ve özel sistemlere ait kablaj ve panolarda görev alıyoruz. Mevcut
+                tesisatların incelenmesi, test edilmesi ve projeye uygun şekilde devreye alınması için sahada teknik
+                ekip desteği sağlıyoruz.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEĞER ÖNERİLERİ: KALİTE / GÜVENİLİRLİK / İNOVASYON / DENEYİM -->
+    <section class="projects-section" aria-labelledby="projeler-degerler" style="background: #0B2341;">
+      <div class="max-w-7xl mx-auto">
+        <header class="mb-8 md:mb-10 max-w-2xl reveal">
+          <div class="section-tag mb-3" style="color: rgba(248, 250, 252, 0.7);">Değerlerimiz</div>
+          <div class="red-line mb-5" style="background: var(--red);"></div>
+          <h2
+            id="projeler-degerler"
+            class="display font-black text-[2.0rem] md:text-[2.3rem] mb-3"
+            style="color: #ffffff;"
+          >
+            Her projede aynı mühendislik çizgisi.
+          </h2>
+          <p class="projects-lead" style="color: rgba(243, 244, 246, 0.8);">
+            GNY Elektromekanik’in kalite, güvenilirlik, inovasyon ve deneyim vurgusunu; kendi üretim ve test
+            kabiliyetlerimizle birleştirerek projelerimize yansıtıyoruz.
+          </p>
+        </header>
+
+        <div class="projects-values-grid reveal reveal-delay-1">
+          <article class="projects-value-card">
+            <h3 class="projects-value-title">Kalite</h3>
+            <p class="projects-value-text">
+              Ulusal ve uluslararası standartlara uygun, izlenebilir üretim süreçleri ile kablo demeti ve
+              elektro-mekanik bileşenlerin her birini kayıt altına alıyoruz. Giriş, proses ve final kontrolleri ile
+              kaliteyi dokümante ediyoruz.
+            </p>
+          </article>
+
+          <article class="projects-value-card">
+            <h3 class="projects-value-title">Güvenilirlik</h3>
+            <p class="projects-value-text">
+              Zorlu çevresel koşullarda çalışacak sistemler için tasarım kararlarını sahadaki gerçek işletme
+              tecrübeleriyle birleştiriyoruz. Test altyapımızla, teslim edilen her ürünü senaryo bazlı doğruluyoruz.
+            </p>
+          </article>
+
+          <article class="projects-value-card">
+            <h3 class="projects-value-title">İnovasyon</h3>
+            <p class="projects-value-text">
+              Yeni konektör teknolojileri, malzemeler ve test yöntemlerini projelerimize dahil ederek; hem savunma
+              sanayi hem de sivil alanlarda rekabetçi çözümler geliştiriyoruz.
+            </p>
+          </article>
+
+          <article class="projects-value-card">
+            <h3 class="projects-value-title">Deneyim</h3>
+            <p class="projects-value-text">
+              Farklı platform ve tesislerde kazanılan yıllara dayalı kablo demeti ve elektro-mekanik montaj deneyimi,
+              karmaşık projelerde hızlı ve doğru kararlar almamızı sağlıyor.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- KURUMSAL PROJE BAKIŞI -->
+    <section class="projects-section projects-section--soft" aria-labelledby="projeler-kurumsal">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-4xl space-y-4 reveal">
+          <div class="section-tag mb-3">Projelerimize kurumsal bakış</div>
+          <div class="red-line mb-5"></div>
+          <h2
+            id="projeler-kurumsal"
+            class="display font-black text-[2.0rem] md:text-[2.2rem] mb-3"
+            style="color: var(--dark);"
+          >
+            Sürdürülebilir iş modeli ve uzun vadeli iş ortaklıkları.
+          </h2>
+          <p class="projects-body-text">
+            Öncü Savunma olarak hedefimiz; yenilikçi teknolojiyi hassas mühendislikle birleştirerek, savunma sanayi ve
+            endüstriyel projelerde tercih edilen çözüm ortağı olmaktır. Projelerimizi yalnızca teslim edilen ürünler
+            üzerinden değil, proje ömrü boyunca sağlanan teknik destek, dokümantasyon ve revizyon kabiliyetiyle
+            değerlendiriyoruz.
+          </p>
+          <p class="projects-body-text">
+            Eğitimlere ve insan kaynağına yaptığımız yatırımlarla, ekibimizin teknik bilgisini sürekli artırmayı ve
+            müşterilerimizin beklentilerini proaktif şekilde yönetmeyi amaçlıyoruz. İş büyümesini sürdürürken,
+            kalite yönetim sistemlerine uyum, bilgi güvenliği ve iş sağlığı–güvenliği standartlarını gözetiyoruz.
+          </p>
+          <p class="projects-body-text">
+            Her projede; müşterilerimiz, tedarikçilerimiz ve çalışanlarımızla kurduğumuz ilişkilerde şeffaflık ve
+            güveni esas alıyor, uzun vadeli iş ortaklıkları kurmaya odaklanıyoruz. Üretim, test ve saha desteği
+            kabiliyetlerimizi sürekli iyileştirerek, projelerimizle değer üretmeye devam ediyoruz.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/layout.js"></script>
+</body>
+</html>
+

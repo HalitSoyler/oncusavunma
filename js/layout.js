@@ -1,6 +1,26 @@
+// İzin verilen partial dosyaları (path traversal / dinamik URL riskine karşı)
+var PARTIAL_ALLOWLIST = ['partials/header.html', 'partials/footer.html'];
+
+// İletişim formu: HTML/script enjeksiyonuna (XSS) karşı – veriyi DOM, mailto veya backend'e kullanmadan önce temizle
+function sanitizeFormValue(str) {
+  if (str == null || typeof str !== 'string') return '';
+  return str
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/&/g, '&amp;')
+    .substring(0, 10000);
+}
+function stripHtmlTags(str) {
+  if (str == null || typeof str !== 'string') return '';
+  return str.replace(/<[^>]*>/g, '').substring(0, 10000);
+}
+
 function injectPartial(targetId, url, callback) {
   var container = document.getElementById(targetId);
   if (!container) return;
+  if (PARTIAL_ALLOWLIST.indexOf(url) === -1) return;
 
   fetch(url)
     .then(function (res) {
@@ -80,6 +100,10 @@ function setActiveNavLinks() {
       a.classList.add('active');
     } else if (href === 'iletisim.html' && path === 'iletisim.html') {
       a.classList.add('active');
+    } else if (href === 'tasarim.html' && path === 'tasarim.html') {
+      a.classList.add('active');
+    } else if (href === 'projelerimiz.html' && path === 'projelerimiz.html') {
+      a.classList.add('active');
     } else if (href === 'uretim-askeri-kablaj.html' && path === 'uretim-askeri-kablaj.html') {
       a.classList.add('active');
     } else if (href === 'index.html#uretim' && path === 'index.html' && hash === '#uretim') {
@@ -93,6 +117,163 @@ function setActiveNavLinks() {
     var trigger = document.getElementById('uretim-dropdown-trigger');
     if (trigger) trigger.classList.add('active');
   }
+}
+
+function initReveal() {
+  var elements = document.querySelectorAll('.reveal');
+  var stagger = document.querySelectorAll('.stagger-draw');
+  if (!elements.length && !stagger.length) return;
+
+  var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    elements.forEach(function (el) {
+      el.classList.add('reveal-visible', 'reveal-no-motion');
+    });
+    stagger.forEach(function (el) {
+      el.classList.add('visible');
+    });
+    return;
+  }
+
+  if (!('IntersectionObserver' in window)) {
+    elements.forEach(function (el) {
+      el.classList.add('reveal-visible');
+    });
+    stagger.forEach(function (el) {
+      el.classList.add('visible');
+    });
+    return;
+  }
+
+  var observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        if (entry.target.classList.contains('reveal')) {
+          entry.target.classList.add('reveal-visible');
+        }
+        if (entry.target.classList.contains('stagger-draw')) {
+          entry.target.classList.add('visible');
+        }
+      });
+    },
+    { rootMargin: '0px 0px -40px 0px', threshold: 0.05 }
+  );
+
+  elements.forEach(function (el) {
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('reveal-visible');
+    } else {
+      observer.observe(el);
+    }
+  });
+
+  stagger.forEach(function (el) {
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('visible');
+    } else {
+      observer.observe(el);
+    }
+  });
+}
+
+function initContactForm() {
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+
+  var success = document.getElementById('form-success');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (form.checkValidity && !form.checkValidity()) {
+      return;
+    }
+
+    // Tüm alanları al ve XSS riskine karşı temizle (HTML/script hiçbir yerde çalışmasın)
+    var rawName = form.querySelector('#contact-name') && form.querySelector('#contact-name').value;
+    var rawCompany = form.querySelector('#contact-company') && form.querySelector('#contact-company').value;
+    var rawEmail = form.querySelector('#contact-email') && form.querySelector('#contact-email').value;
+    var rawPhone = form.querySelector('#contact-phone') && form.querySelector('#contact-phone').value;
+    var rawSubject = form.querySelector('#contact-subject') && form.querySelector('#contact-subject').value;
+    var rawMessage = form.querySelector('#contact-message') && form.querySelector('#contact-message').value;
+
+    var safe = {
+      name: stripHtmlTags(rawName),
+      company: stripHtmlTags(rawCompany),
+      email: stripHtmlTags(rawEmail),
+      phone: stripHtmlTags(rawPhone),
+      subject: stripHtmlTags(rawSubject),
+      message: stripHtmlTags(rawMessage)
+    };
+
+    // Veriyi sadece sanitize edilmiş haliyle kullan (mailto/backend eklenince bu safe objesi kullanılacak)
+    // Sayfada asla ham kullanıcı girdisi gösterme; göstereceksen sanitizeFormValue() kullan
+
+    if (success) {
+      success.style.display = 'block';
+      setTimeout(function () {
+        success.style.display = 'none';
+      }, 5000);
+    }
+
+    form.reset();
+  });
+}
+
+function initCertBlocks() {
+  var blocks = document.querySelectorAll('.cert-block');
+  if (!blocks.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    blocks.forEach(function (block) {
+      block.classList.add('is-visible');
+    });
+    return;
+  }
+
+  var io = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    },
+    { rootMargin: '0px 0px -40px 0px', threshold: 0.1 }
+  );
+
+  blocks.forEach(function (block) {
+    io.observe(block);
+  });
+}
+
+function initUnicornHero() {
+  var container = document.querySelector('[data-us-project]');
+  if (!container) return;
+
+  function doInit() {
+    if (window.UnicornStudio && window.UnicornStudio.isInitialized) return;
+    if (typeof UnicornStudio === 'undefined') return;
+    try {
+      UnicornStudio.init();
+      window.UnicornStudio = window.UnicornStudio || {};
+      window.UnicornStudio.isInitialized = true;
+    } catch (e) {}
+  }
+
+  if (typeof UnicornStudio !== 'undefined') {
+    doInit();
+    return;
+  }
+
+  window.UnicornStudio = { isInitialized: false };
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.3/dist/unicornStudio.umd.js';
+  script.onload = doInit;
+  (document.head || document.body).appendChild(script);
 }
 
 function hardenExternalLinks() {
@@ -135,5 +316,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   injectPartial('site-footer', 'partials/footer.html');
   hardenExternalLinks();
+  initReveal();
+  initContactForm();
+  initCertBlocks();
+  initUnicornHero();
 });
 

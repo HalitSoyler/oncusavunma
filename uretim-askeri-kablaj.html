@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Öncü Savunma — Askeri kablaj üretimi: analog kablo tasarımı, kablo ağacı ve takımı üretimi, ekranlı kablo sonlandırma, elektromekanik montaj ve tedarik zinciri yönetimi." />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none';" />
   <title>Öncü Savunma — Askeri Kablaj Üretimi</title>
   <link rel="icon" href="images/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,17 +14,128 @@
   <link rel="stylesheet" href="css/base.css" />
   <style>
     :root {
-      --red: #C8102E;
-      --red-dark: #9B0A22;
-      --navy: #0B2341;
-      --dark: var(--navy);
-      --mid: #3A3A3A;
-      --light: #F5F5F5;
+      --surface-0:   #020810;
+      --surface-1:   #060E1F;
+      --surface-2:   #091526;
+      --surface-3:   #0D1E38;
+      --surface-4:   #132540;
+      --primary:     #0B2341;
+      --primary-deep:#071629;
+      --brand:       #C8102E;
+      --brand-dark:  #A00E25;
+      --accent:      #00C2E0;
+      --accent-dark: #009AB8;
+      --accent-dim:  rgba(0,194,224,0.08);
+      /* legacy aliases */
+      --red:         #C8102E;
+      --red-dark:    #A00E25;
+      --navy:        #0B2341;
+      --anthracite:  #0D1E38;
+      --anthracite-light: #132540;
+      --dark:        #0B2341;
+      --mid:         #3A4A5E;
+      --light:       #EEF2FA;
+      --metallic:    #5A7090;
+      --metallic-light: #8AAAC8;
+      /* text */
+      --text-primary:   #E8F0FF;
+      --text-secondary: rgba(180,210,255,0.72);
+      --text-muted:     rgba(130,170,230,0.48);
+      --text-label:     rgba(120,160,220,0.58);
+      /* border */
+      --border-subtle: rgba(80,130,200,0.10);
+      --border-mid:    rgba(80,130,200,0.18);
+      --border-strong: rgba(80,130,200,0.32);
+      /* shadows — navy-based */
+      --shadow-sm: 0 2px 8px rgba(2,8,16,0.55);
+      --shadow-md: 0 8px 24px rgba(2,8,16,0.65), 0 2px 6px rgba(2,8,16,0.40);
+      --shadow-lg: 0 20px 50px rgba(2,8,16,0.78), 0 8px 20px rgba(2,8,16,0.50);
+      --shadow-brand: 0 8px 28px rgba(200,16,46,0.28);
+      --shadow-accent: 0 4px 18px rgba(0,194,224,0.22);
+      /* gradients */
+      --grad-card: linear-gradient(155deg,#0D1E38 0%,#060E1F 70%);
+      --anim-hover: 0.22s ease;
+      --anim-spring: cubic-bezier(0.16,1,0.3,1);
     }
     .red-line { width: 48px; height: 3px; background: var(--red); margin-bottom: 1.5rem; }
     .section-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); }
 
-    /* Üst fotoğraf alanları */
+    .projects-hero {
+      position: relative;
+      width: 100%;
+      min-height: 260px;
+      background-image: url("images/hero-savunma-arac.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    @media (min-width: 768px) {
+      .projects-hero {
+        min-height: 340px;
+      }
+    }
+
+    .projects-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(7,22,41,0.88), rgba(7,22,41,0.65));
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    .projects-hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 1.5rem 4.5rem;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    @media (min-width: 1024px) {
+      .projects-hero-inner {
+        padding-top: 5rem;
+        padding-bottom: 5.5rem;
+      }
+    }
+
+    .projects-hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .projects-hero-lead {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 620px;
+    }
+
+    .projects-hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .projects-hero-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(11, 35, 65, 0.35);
+    }
+
+    /* Üst fotoğraf alanları (eski yapı, ileride kaldırılabilir) */
     .uretim-photo-block {
       aspect-ratio: 16/10;
       background-size: cover;
@@ -120,52 +232,6 @@
       .uretim-split-media { aspect-ratio: 16/10; min-height: 320px; }
     }
 
-    /* Scroll reveal – görünür olunca tetiklenir */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .reveal.reveal-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal.reveal-from-left { transform: translateX(-32px) translateY(0); }
-    .reveal.reveal-from-left.reveal-visible { transform: translateX(0) translateY(0); }
-    .reveal.reveal-from-right { transform: translateX(32px) translateY(0); }
-    .reveal.reveal-from-right.reveal-visible { transform: translateX(0) translateY(0); }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
-    .reveal-no-motion { opacity: 1; transform: none !important; }
-
-    /* Fotoğraf blokları: giriş + hover zoom */
-    .uretim-photo-block {
-      transition: transform 0.5s ease, opacity 0.6s ease;
-      transform: scale(1);
-    }
-    .uretim-photo-block.reveal { transform: translateY(24px) scale(0.98); opacity: 0; }
-    .uretim-photo-block.reveal.reveal-visible { transform: translateY(0) scale(1); opacity: 1; }
-    .uretim-photo-block:hover { transform: scale(1.03); }
-    .uretim-photo-block .photo-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(11,35,65,0.2) 0%, transparent 50%);
-      opacity: 0;
-      transition: opacity 0.35s ease;
-      pointer-events: none;
-    }
-    .uretim-photo-block:hover .photo-overlay { opacity: 1; }
-
-    /* Kırmızı çizgi animasyonu */
-    .red-line-anim {
-      width: 0;
-      max-width: 48px;
-      transition: width 0.6s ease 0.2s;
-      overflow: hidden;
-    }
-    .reveal-visible .red-line-anim { width: 48px; }
-
   </style>
 </head>
 <body class="bg-white text-gray-900 min-h-screen flex flex-col">
@@ -174,24 +240,32 @@
 
   <div id="site-header"></div>
 
-  <main id="main-content" class="flex-1 pt-20 md:pt-24">
-    <!-- 1. İki fotoğraf alanı -->
-    <section class="max-w-7xl mx-auto px-6 pt-6 pb-8 md:pt-8 md:pb-10 reveal" aria-label="Görsel galeri">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-        <div class="uretim-photo-block rounded-lg overflow-hidden relative reveal reveal-delay-1" style="background-image: url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800');" role="img" aria-label="Üretim tesisleri">
-          <span class="photo-overlay" aria-hidden="true"></span>
-        </div>
-        <div class="uretim-photo-block rounded-lg overflow-hidden relative reveal reveal-delay-2" style="background-image: url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800');" role="img" aria-label="Kablaj üretimi">
-          <span class="photo-overlay" aria-hidden="true"></span>
+  <main id="main-content" class="flex-1 pt-24">
+    <!-- HERO -->
+    <section class="projects-hero" aria-labelledby="askeri-page-title">
+      <div class="projects-hero-inner max-w-7xl mx-auto">
+        <div class="max-w-2xl hero-animate">
+          <p class="section-tag mb-3">Üretim</p>
+          <h1 id="askeri-page-title" class="projects-hero-title">Askeri kablaj üretimi</h1>
+          <p class="projects-hero-lead">
+            Kara, hava ve deniz platformlarında görev yapan sistemler için analog kablo tasarımı, kablo ağacı ve kablo
+            takımı üretimini tek çatı altında yürütüyoruz. Ekranlı kablo sonlandırma, elektromekanik montaj ve malzeme
+            tedarik süreçlerini askeri standartlara uygun şekilde yönetiyoruz.
+          </p>
+          <div class="projects-hero-tags">
+            <span class="projects-hero-tag">Kara platformları</span>
+            <span class="projects-hero-tag">Hava / deniz sistemleri</span>
+            <span class="projects-hero-tag">Askeri standartlar</span>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 2. Üç satır baloncuk metin düzeni -->
-    <section class="max-w-7xl mx-auto px-6 py-10 md:py-14 reveal" aria-labelledby="uretim-baslik">
+    <section class="max-w-7xl mx-auto px-6 pt-24 pb-10 md:pt-28 md:pb-14 reveal" aria-labelledby="uretim-baslik">
       <div class="section-tag mb-2 reveal reveal-delay-1">Üretim</div>
       <div class="red-line red-line-anim mb-6"></div>
-      <h1 id="uretim-baslik" class="font-black text-2xl md:text-3xl mb-10 reveal reveal-delay-2" style="font-family:'Barlow Condensed',sans-serif;color:var(--navy);letter-spacing:-0.02em;">ASKERİ KABLAJ ÜRETİMİ</h1>
+      <h2 id="uretim-baslik" class="font-black text-2xl md:text-3xl mb-10 reveal reveal-delay-2" style="font-family:'Barlow Condensed',sans-serif;color:var(--navy);letter-spacing:-0.02em;">ASKERİ KABLAJ ÜRETİMİ</h2>
 
       <div class="uretim-cards-with-photo">
         <div class="aura-card-grid">
@@ -217,7 +291,7 @@
             </div>
           </div>
         </div>
-        <div class="uretim-product-photo reveal reveal-delay-2 order-first lg:order-last" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600');" role="img" aria-label="Ürün / kablo görseli"></div>
+        <div class="uretim-product-photo reveal reveal-delay-2 order-first lg:order-last" style="background-image: url('images/hero-savunma-arac.jpg');" role="img" aria-label="Savunma aracı / kablo uygulaması"></div>
       </div>
     </section>
 
@@ -237,7 +311,7 @@
               Ayrıca üretim sürecine dahil olan boyama işlemleri ile PCB, switch, anahtar, ampul ve LED gibi tüm bileşenlerin tedarik zinciri yönetimi de tarafımızca profesyonelce yürütülmektedir.
             </p>
           </div>
-          <div class="uretim-split-media order-1 lg:order-2 reveal reveal-delay-2" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900');" role="img" aria-label="Elektromekanik montaj"></div>
+          <div class="uretim-split-media order-1 lg:order-2 reveal reveal-delay-2" style="background-image: url('images/hero-savunma-arac.jpg');" role="img" aria-label="Elektromekanik montaj"></div>
         </div>
       </div>
     </section>
@@ -246,28 +320,5 @@
   <div id="site-footer"></div>
 
   <script src="js/layout.js"></script>
-  <script>
-  (function () {
-    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('reveal-no-motion', 'reveal-visible'); });
-      return;
-    }
-
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('reveal-visible');
-        observer.unobserve(entry.target);
-      });
-    }, { rootMargin: '0px 0px -40px 0px', threshold: 0.05 });
-
-    document.querySelectorAll('.reveal').forEach(function (el) {
-      var rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) el.classList.add('reveal-visible');
-      else observer.observe(el);
-    });
-  })();
-  </script>
 </body>
 </html>

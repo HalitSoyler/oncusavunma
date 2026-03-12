@@ -4,337 +4,720 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Öncü Savunma, zorlu hava, kara ve deniz koşullarında yüksek güvenilirlik sunan kablo demeti ve elektro-mekanik sistem çözümleri geliştirir ve üretir." />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https://firebasestorage.googleapis.com https://assets.unicorn.studio data:; connect-src 'self' https://storage.googleapis.com; base-uri 'self'; form-action 'self'; object-src 'none';" />
   <title>Öncü Savunma — Ana Sayfa</title>
 
-  <!-- Favicon (replace with actual path/asset in production) -->
   <link rel="icon" href="images/favicon.ico" />
 
-  <!-- External dependency: Google Fonts (consider self-hosting for strict production hardening) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Compiled Tailwind CSS (built locally via npm run build:css) -->
   <link rel="stylesheet" href="css/tailwind.css" />
   <link rel="stylesheet" href="css/base.css" />
 
   <style>
     :root {
-      --red: #C8102E;
-      --red-dark: #9B0A22;
-      --navy: #0B2341;
-      --dark: var(--navy);
-      --mid: #3A3A3A;
-      --light: #F5F5F5;
+      --surface-0:   #020810;
+      --surface-1:   #060E1F;
+      --surface-2:   #091526;
+      --surface-3:   #0D1E38;
+      --surface-4:   #132540;
+      --primary:     #0B2341;
+      --primary-deep:#071629;
+      --brand:       #C8102E;
+      --brand-dark:  #A00E25;
+      --brand-glow:  rgba(200,16,46,0.12);
+      --accent:      #00C2E0;
+      --accent-dark: #009AB8;
+      --accent-dim:  rgba(0,194,224,0.08);
+      --accent-glow: rgba(0,194,224,0.18);
+      /* legacy aliases */
+      --red:     var(--brand);
+      --red-dark:var(--brand-dark);
+      --navy:    var(--primary);
+      --dark:    var(--primary);
+      --charcoal:var(--surface-1);
+      --mid:     #3A4A5E;
+      --light:   #EEF2FA;
+      /* text */
+      --text-primary:   #E8F0FF;
+      --text-secondary: rgba(180,210,255,0.72);
+      --text-muted:     rgba(130,170,230,0.48);
+      --text-label:     rgba(120,160,220,0.58);
+      /* border */
+      --border-subtle: rgba(80,130,200,0.10);
+      --border-mid:    rgba(80,130,200,0.18);
+      --border-strong: rgba(80,130,200,0.32);
+      /* shadows — navy-based */
+      --shadow-sm: 0 2px 8px rgba(2,8,16,0.55);
+      --shadow-md: 0 8px 24px rgba(2,8,16,0.65), 0 2px 6px rgba(2,8,16,0.40);
+      --shadow-lg: 0 20px 50px rgba(2,8,16,0.78), 0 8px 20px rgba(2,8,16,0.50);
+      /* gradients */
+      --grad-card: linear-gradient(155deg,#0D1E38 0%,#060E1F 70%);
+      --anim-spring: cubic-bezier(0.16,1,0.3,1);
     }
 
-    * {
-      font-family: 'Inter', sans-serif;
-    }
+    * { font-family: 'Inter', sans-serif; box-sizing: border-box; }
+    .display { font-family: 'Barlow Condensed', sans-serif; }
 
-    .display {
-      font-family: 'Barlow Condensed', sans-serif;
+    .skip-link {
+      position: absolute; top: -40px; left: 1.5rem;
+      padding: 0.5rem 1rem; background: #fff; color: #000;
+      border: 1px solid #000; z-index: 60;
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      transition: top 0.15s ease;
+    }
+    .skip-link:focus { top: 0.5rem; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0;
+      margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap; border: 0;
     }
 
     .nav-link {
-      position: relative;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: inherit;
-      text-decoration: none;
-      padding-bottom: 2px;
+      position: relative; font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: inherit; text-decoration: none; padding-bottom: 2px;
     }
-
     .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--red);
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 2px; background: var(--red);
       transition: width 0.25s ease;
     }
-
-    .nav-link:hover::after,
-    .nav-link.active::after {
-      width: 100%;
-    }
-
-    .nav-link.active {
-      color: var(--red);
-    }
-
-    /* Hero: header bittiği yerde başlar, uzun (tam viewport yüksekliği) */
-    .hero-section {
-      position: relative;
-      min-height: calc(100vh - 4.5rem);
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    /* Hero arka plan: referans yapısı (aura + grid) */
-    .hero-aura-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      min-height: 100%;
-      z-index: 0;
-      overflow: hidden;
-    }
-    /* 1) Lacivert overlay - mix-blend ile Unicorn Studio'yu boyar */
-    .hero-aura-color {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(11, 35, 65, 0.48);
-      mix-blend-mode: color;
-      z-index: 1;
-      pointer-events: none;
-    }
-    /* 2) Grid üstte */
-    .hero-aura-grid {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image:
-        linear-gradient(to right, rgba(255,255,255,0.07) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.07) 1px, transparent 1px);
-      background-size: 64px 64px;
-      z-index: 2;
-      pointer-events: none;
-    }
-    /* 3) Unicorn Studio canvas en arkada - referanstaki gibi */
-    .hero-unicorn-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
-    .hero-section .hero-content {
-      position: relative;
-      z-index: 1;
-    }
-    /* Hero metin: sade, dikkat çekmeyen biçim */
-    .hero-section .hero-section-tag {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-    }
-    .hero-section .hero-heading {
-      font-size: clamp(1.35rem, 2.5vw, 1.65rem);
-      font-weight: 500;
-      line-height: 1.45;
-      letter-spacing: 0.01em;
-      color: rgba(255,255,255,0.92);
-    }
-    .hero-section .hero-lead {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      color: rgba(255,255,255,0.7);
-      max-width: 480px;
-    }
-    .hero-section .stat-divider { background: rgba(255,255,255,0.4); }
-    .hero-section .hero-content [style*="color:var(--dark)"] { color: rgba(255,255,255,0.85) !important; }
-    .hero-section .hero-content .text-gray-500 { color: rgba(255,255,255,0.6) !important; }
-    .hero-section .btn-hero-outline {
-      border: 1px solid rgba(255,255,255,0.5);
-      color: rgba(255,255,255,0.9);
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      padding: 0.6rem 1.25rem;
-    }
-    .hero-section .btn-hero-outline:hover {
-      background: rgba(255,255,255,0.12);
-      border-color: rgba(255,255,255,0.6);
-      color: #fff;
-    }
-
-    .red-line {
-      width: 48px;
-      height: 3px;
-      background: var(--red);
-      margin-bottom: 1.5rem;
-    }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .nav-link.active { color: var(--red); }
 
     .section-tag {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
       color: var(--red);
     }
-
-    .hero-title {
-      font-size: clamp(2.4rem, 4vw, 3.1rem);
-      line-height: 1.1;
-      color: var(--dark);
-      letter-spacing: -0.01em;
-    }
-
-    .hero-text {
-      font-size: 0.98rem;
-      max-width: 560px;
-    }
+    .red-line { width: 40px; height: 3px; background: var(--red); margin-bottom: 1.5rem; }
 
     .btn-primary {
-      display: inline-block;
-      padding: 0.75rem 1.9rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      background: var(--red);
-      color: #fff;
-      border-radius: 0;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.8rem 2rem; font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      background: var(--red); color: #fff;
+      border-radius: 0; text-decoration: none;
+      transition: background 0.2s ease;
     }
-
-    .btn-primary:hover {
-      background: var(--red-dark);
+    .btn-primary:hover { background: var(--red-dark); }
+    .btn-outline-light {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.8rem 2rem; font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      border: 1px solid rgba(255,255,255,0.4); color: rgba(255,255,255,0.9);
+      border-radius: 0; text-decoration: none;
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
-
+    .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.65); color: #fff; }
     .btn-outline-dark {
-      display: inline-block;
-      padding: 0.75rem 1.9rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      border: 1px solid #1a1a1a;
-      color: #1a1a1a;
-      border-radius: 0;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.75rem; font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      border: 1px solid var(--navy); color: var(--navy);
+      border-radius: 0; text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .btn-outline-dark:hover { background: var(--navy); color: #fff; }
+
+    .card-hover { transition: box-shadow 0.22s ease, border-color 0.22s ease, transform 0.22s ease; }
+    .card-hover:hover { transform: translateY(-3px); }
+
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .reveal.reveal-visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.09s; }
+    .reveal-delay-2 { transition-delay: 0.18s; }
+    .reveal-delay-3 { transition-delay: 0.27s; }
+    .reveal-delay-4 { transition-delay: 0.36s; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .hero-animate, .hero-animate-2, .hero-animate-3, .hero-animate-4 {
+        animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important;
+      }
     }
 
-    .btn-outline-dark:hover {
-      background: #1a1a1a;
-      color: #fff;
-    }
-
-    .stat-divider {
-      width: 36px;
-      height: 3px;
-      background: var(--red);
-      margin-bottom: 1.2rem;
-    }
-
-    /* Footer silhouette */
-    .footer-silhouette {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
+    /* ═══ HERO ═══ */
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
+    }
+
+    .hero-slideshow { position: absolute; inset: 0; z-index: 0; }
+    .hero-slide {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center; background-repeat: no-repeat;
+    }
+    .hero-slide-1 { background-image: url('images/hero-kablo-1.jpg'); animation: hero-fade1 28s ease-in-out infinite; }
+    .hero-slide-2 { background-image: url('images/hero-kablo-2.jpg'); animation: hero-fade2 28s ease-in-out infinite; }
+    .hero-slide-3 { background-image: url('images/hero-kablo-3.jpg'); animation: hero-fade3 28s ease-in-out infinite; }
+    .hero-slide-4 { background-image: url('images/hero-kablo-4.jpg'); animation: hero-fade4 28s ease-in-out infinite; }
+    .hero-slide-5 { background-image: url('images/hero-kablo-5.jpg'); animation: hero-fade5 28s ease-in-out infinite; }
+    @keyframes hero-fade1 { 0%,12%{opacity:1} 18%,100%{opacity:0} }
+    @keyframes hero-fade2 { 0%,14%{opacity:0} 20%,34%{opacity:1} 40%,100%{opacity:0} }
+    @keyframes hero-fade3 { 0%,36%{opacity:0} 42%,56%{opacity:1} 62%,100%{opacity:0} }
+    @keyframes hero-fade4 { 0%,58%{opacity:0} 64%,76%{opacity:1} 82%,100%{opacity:0} }
+    @keyframes hero-fade5 { 0%,78%{opacity:0} 84%,96%{opacity:1} 100%{opacity:0} }
+
+    .hero-unicorn { position: absolute; inset: 0; z-index: 0; }
+    .hero-overlay-dark {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(155deg, rgba(2,8,16,0.92) 0%, rgba(11,35,65,0.76) 52%, rgba(2,8,16,0.68) 100%);
+    }
+    .hero-overlay-grid {
+      position: absolute; inset: 0; z-index: 2;
+      background-image:
+        linear-gradient(to right, rgba(80,130,200,0.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(80,130,200,0.045) 1px, transparent 1px);
+      background-size: 72px 72px;
+    }
+    .hero-overlay-vignette {
+      position: absolute; inset: 0; z-index: 2;
+      background: radial-gradient(ellipse at 30% 50%, transparent 45%, rgba(2,8,16,0.65) 100%);
+    }
+    .hero-accent-bar {
+      position: absolute; top: 0; left: 0; bottom: 0;
+      width: 4px; background: var(--red);
+      z-index: 3;
+    }
+    .hero-body-layer {
+      position: relative; z-index: 4;
+      flex: 1;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.85rem;
+      font-size: 0.63rem; font-weight: 600;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 1.75rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block; width: 28px; height: 1px;
+      background: var(--red); flex-shrink: 0;
+    }
+    .hero-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      line-height: 0.93;
+      letter-spacing: -0.01em;
+      color: #fff;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+    .hero-headline .hl-red { color: var(--red); }
+    .hero-headline .hl-outline {
+      -webkit-text-stroke: 2px rgba(255,255,255,0.45);
+      color: transparent;
+    }
+    .hero-description {
+      font-size: 0.88rem; line-height: 1.75;
+      color: rgba(255,255,255,0.58);
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-animate   { animation: fade-up 0.75s ease-out both; }
+    .hero-animate-2 { animation: fade-up 0.75s 0.12s ease-out both; }
+    .hero-animate-3 { animation: fade-up 0.75s 0.24s ease-out both; }
+    .hero-animate-4 { animation: fade-up 0.75s 0.38s ease-out both; }
+
+    .hero-stats-bar {
+      position: relative; z-index: 4;
+      border-top: 1px solid rgba(80,130,200,0.12);
+      background: rgba(2,8,16,0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .hero-stats-inner {
+      max-width: 88rem; margin: 0 auto; padding: 0 1.5rem;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+    }
+    .hero-stat {
+      padding: 1.5rem 1.25rem;
+      border-right: 1px solid rgba(80,130,200,0.1);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1.85rem;
+      color: #fff; line-height: 1; margin-bottom: 0.3rem;
+    }
+    .hero-stat-num .accent { color: var(--red); }
+    .hero-stat-label {
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(120,160,220,0.42);
+    }
+    @media (max-width: 640px) {
+      .hero-stats-inner { grid-template-columns: 1fr 1fr; }
+      .hero-stat:nth-child(2) { border-right: none; }
+      .hero-stat:nth-child(3) { border-top: 1px solid rgba(80,130,200,0.1); }
+      .hero-stat:nth-child(4) { border-top: 1px solid rgba(80,130,200,0.1); }
+    }
+
+    /* ═══ FOCUS GRID (TASARIM / ÜRETİM / TEST) ═══ */
+    .focus-section {
+      background: #ffffff;
+      border-bottom: 1px solid rgba(226,232,240,0.9);
+      border-top: 1px solid rgba(226,232,240,0.9);
+      padding: 4.5rem 1.5rem 4.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .focus-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at top left, rgba(148,163,184,0.08) 0%, transparent 55%);
       pointer-events: none;
     }
-
-    /* Skip link for accessibility */
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 1.5rem;
-      padding: 0.5rem 1rem;
-      background: #ffffff;
-      color: #000000;
-      border: 1px solid #000000;
-      z-index: 60;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transition: top 0.15s ease;
-    }
-
-    .skip-link:focus {
-      top: 0.5rem;
-    }
-
-    /* Screen-reader only text */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    /* Mobile nav toggle icon */
-    .mobile-nav-toggle-icon {
+    .focus-inner {
+      max-width: 88rem;
+      margin: 0 auto;
       position: relative;
-      width: 20px;
-      height: 14px;
+      z-index: 1;
     }
-
-    .mobile-nav-toggle-icon span {
-      position: absolute;
-      left: 0;
-      right: 0;
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.75rem;
+      margin-top: 2rem;
+    }
+    .focus-card {
+      position: relative;
+      background: var(--grad-card);
+      border-radius: 0;
+      border: 1px solid var(--border-subtle);
+      padding: 2.25rem 2rem 2.1rem;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+    }
+    /* Metallic sheen on hover */
+    .focus-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(105deg, transparent 30%, rgba(80,140,220,0.06) 50%, transparent 70%);
+      opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
+    }
+    /* Red accent top bar — expands on hover */
+    .focus-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
       height: 2px;
-      background: #111827;
-      transition: transform 0.2s ease, opacity 0.2s ease, top 0.2s ease, bottom 0.2s ease;
+      background: linear-gradient(90deg, var(--brand), var(--brand-dark));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+    .focus-card:hover::before { opacity: 1; }
+    .focus-card:hover::after  { transform: scaleX(1); }
+    .focus-card:hover {
+      border-color: var(--border-mid);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-5px);
+    }
+    .focus-kicker {
+      font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 0.7rem;
+    }
+    .focus-header-row {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 1rem; margin-bottom: 0.65rem;
+    }
+    .focus-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1.6rem;
+      text-transform: uppercase;
+      color: var(--text-primary); letter-spacing: 0.05em;
+    }
+    .focus-icon-ring {
+      width: 38px; height: 38px;
+      border-radius: 4px;
+      border: 1px solid var(--border-mid);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-label);
+      background: linear-gradient(135deg, rgba(80,130,200,0.08), transparent);
+    }
+    .focus-sub {
+      font-size: 0.82rem; line-height: 1.72;
+      color: var(--text-secondary); max-width: 28rem;
+    }
+    .focus-link {
+      font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--text-secondary); margin-top: 1.4rem;
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      transition: color 0.2s ease;
+    }
+    .focus-card:hover .focus-link { color: var(--accent); }
+    .focus-link span {
+      display: inline-block; width: 28px; height: 1px;
+      background: linear-gradient(90deg, var(--border-mid), var(--border-strong));
+      transform-origin: left; transition: transform 0.25s ease, background 0.25s ease;
+    }
+    .focus-card:hover .focus-link span {
+      transform: scaleX(1.2);
+      background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+    }
+    @media (max-width: 1024px) {
+      .focus-card { min-height: 195px; padding: 1.9rem 1.75rem 1.85rem; }
+    }
+    @media (max-width: 768px) {
+      .focus-grid { grid-template-columns: 1fr; }
+      .focus-section { padding-top: 3.5rem; padding-bottom: 3.75rem; }
     }
 
-    .mobile-nav-toggle-icon span:nth-child(1) {
-      top: 0;
+    /* ═══ SERVICES ═══ */
+    .services-section { padding: 6rem 1.5rem 6.5rem; background: #fff; }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0; border: 1px solid #e5e7eb;
+      margin-top: 3.5rem;
+    }
+    .service-card {
+      padding: 2.75rem 2.25rem;
+      border-right: 1px solid #e5e7eb;
+      background: #fff;
+      position: relative; overflow: hidden;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column;
+      transition: background 0.25s ease;
+    }
+    .service-card:last-child { border-right: none; }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--red);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover { background: #fafafa; }
+    .service-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 5rem;
+      color: rgba(11,35,65,0.04);
+      position: absolute; top: 0.5rem; right: 1rem;
+      line-height: 1; user-select: none; pointer-events: none;
+    }
+    .service-icon {
+      width: 50px; height: 50px;
+      background: var(--light);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.75rem; flex-shrink: 0;
+      transition: background 0.25s ease;
+    }
+    .service-card:hover .service-icon { background: rgba(200,16,46,0.08); }
+    .service-icon svg { width: 22px; height: 22px; stroke: var(--navy); fill: none; }
+    .service-card:hover .service-icon svg { stroke: var(--red); }
+    .service-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1.45rem;
+      color: var(--navy); text-transform: uppercase;
+      letter-spacing: 0.02em; margin-bottom: 1rem; line-height: 1.15;
+    }
+    .service-body {
+      font-size: 0.845rem; line-height: 1.7;
+      color: #6b7280; margin-bottom: 1.75rem; flex: 1;
+    }
+    .service-link {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--red); margin-top: auto;
+    }
+    @media (max-width: 768px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card { border-right: none; border-bottom: 1px solid #e5e7eb; }
+      .service-card:last-child { border-bottom: none; }
     }
 
-    .mobile-nav-toggle-icon span:nth-child(2) {
-      top: 6px;
+    /* ═══ PLATFORMS ═══ */
+    .platforms-section {
+      padding: 6rem 1.5rem 6.5rem;
+      background: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+    .platforms-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(148,163,184,0.12) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .platforms-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 3.5rem;
+    }
+    .platform-card {
+      position: relative; overflow: hidden;
+      height: 400px;
+      cursor: default;
+    }
+    .platform-card-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform 0.6s ease;
+    }
+    .platform-card:hover .platform-card-bg { transform: scale(1.06); }
+    .platform-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(2,8,16,0.92) 0%, rgba(11,35,65,0.52) 55%, rgba(2,8,16,0.22) 100%);
+      transition: background 0.35s ease;
+    }
+    .platform-card:hover .platform-card-overlay {
+      background: linear-gradient(to top, rgba(7,22,41,0.96) 0%, rgba(11,35,65,0.70) 55%, rgba(7,22,41,0.22) 100%);
+    }
+    .platform-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 0; height: 3px;
+      background: var(--red); z-index: 3;
+      transition: width 0.4s ease;
+    }
+    .platform-card:hover::before { width: 100%; }
+    .platform-card-content {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 2rem; z-index: 2;
+    }
+    .platform-category-tag {
+      font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 0.5rem;
+    }
+    .platform-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 2.5rem;
+      color: #fff; text-transform: uppercase;
+      line-height: 1; margin-bottom: 0.85rem;
+      letter-spacing: 0.02em;
+    }
+    .platform-desc {
+      font-size: 0.8rem; line-height: 1.6;
+      color: rgba(255,255,255,0.6);
+      max-width: 280px;
+      transform: translateY(4px);
+      opacity: 0.8;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .platform-card:hover .platform-desc { opacity: 1; transform: translateY(0); }
+    .platform-card-index {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 4rem; line-height: 1;
+      color: rgba(255,255,255,0.06);
+      z-index: 2; user-select: none;
+    }
+    @media (max-width: 900px) {
+      .platforms-grid { grid-template-columns: 1fr; }
+      .platform-card { height: 300px; }
     }
 
-    .mobile-nav-toggle-icon span:nth-child(3) {
-      bottom: 0;
+    /* ═══ PROJECTS ═══ */
+    .projects-section { padding: 6rem 1.5rem 6.5rem; background: #f3f4f6; }
+    .projects-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 1.5rem; flex-wrap: wrap;
+      margin-bottom: 3.5rem;
+    }
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: #fff; border: 1px solid #e5e7eb;
+      display: flex; flex-direction: column;
+      overflow: hidden; text-decoration: none; color: inherit;
+      transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+    }
+    .project-card:hover {
+      border-color: rgba(200,16,46,0.25);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      transform: translateY(-4px);
+    }
+    .project-card-stripe { height: 4px; }
+    .project-card-body { padding: 1.85rem; flex: 1; }
+    .project-platform {
+      font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(11,35,65,0.4); margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .project-platform::before {
+      content: ''; display: block;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: currentColor; flex-shrink: 0;
+    }
+    .project-title {
+      font-size: 0.98rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 0.8rem; line-height: 1.35;
+    }
+    .project-desc {
+      font-size: 0.8rem; line-height: 1.65;
+      color: #6b7280; margin-bottom: 1.25rem;
+    }
+    .project-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .project-tag {
+      font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border: 1px solid #e5e7eb; color: #4b5563;
+    }
+    .project-card-footer {
+      padding: 1rem 1.85rem;
+      border-top: 1px solid #f3f4f6;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .project-link-text {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--red);
+    }
+    @media (max-width: 768px) { .projects-grid { grid-template-columns: 1fr; } }
+
+    /* ═══ PROCESS ═══ */
+    .process-section {
+      padding: 5.5rem 1.5rem 6.5rem;
+      background: var(--navy);
+      position: relative; overflow: hidden;
+    }
+    .process-section .section-tag { color: rgba(255,255,255,0.7); }
+    .process-section .red-line { background: var(--red); }
+    .process-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: clamp(2rem, 3.5vw, 2.8rem);
+      color: #fff; letter-spacing: -0.01em; line-height: 1.1;
+    }
+    .process-subtitle {
+      font-size: 0.875rem; color: rgba(255,255,255,0.55);
+      margin-top: 0.75rem; max-width: 440px;
+    }
+    .process-columns {
+      display: grid; grid-template-columns: 1fr 1.1fr;
+      gap: 2rem 5rem; align-items: start; margin-top: 2.5rem;
+    }
+    .process-note {
+      background: rgba(200,16,46,0.12);
+      border: 1px solid rgba(200,16,46,0.3);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+    }
+    .process-note__label {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #e88a9a; margin-bottom: 0.6rem;
+    }
+    .process-note__text { font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.65); }
+    .process-note--secondary { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); }
+    .process-note--secondary .process-note__label { color: rgba(255,255,255,0.75); }
+    .process-timeline { list-style: none; padding: 0; margin: 0; position: relative; }
+    .process-timeline::before {
+      content: '';
+      position: absolute; left: 23px; top: 24px; bottom: 24px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--red), rgba(200,16,46,0.4), rgba(200,16,46,0.15));
+      z-index: 0;
+    }
+    .process-step {
+      display: grid; grid-template-columns: 48px 1fr;
+      gap: 1.25rem; padding-bottom: 2rem;
+      position: relative; z-index: 1;
+    }
+    .process-step:last-child { padding-bottom: 0; }
+    .step-badge {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1rem; color: #fff; flex-shrink: 0;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .process-step:hover .step-badge {
+      transform: scale(1.08);
+      box-shadow: 0 4px 18px rgba(200,16,46,0.45);
+    }
+    .process-step:nth-child(2) .step-badge { background: var(--red-dark); }
+    .process-step:nth-child(3) .step-badge { background: #7a1a2e; }
+    .process-step:nth-child(4) .step-badge { background: #5c1422; }
+    .process-step:nth-child(5) .step-badge { background: var(--red-dark); }
+    .step-body { padding-top: 0.4rem; }
+    .step-title { font-size: 1rem; font-weight: 700; color: rgba(255,255,255,0.95); margin-bottom: 0.35rem; }
+    .step-desc { font-size: 0.85rem; line-height: 1.65; color: rgba(255,255,255,0.55); max-width: 540px; }
+    @media (max-width: 900px) { .process-columns { grid-template-columns: 1fr; gap: 2rem; } }
+
+    /* ═══ CTA ═══ */
+    .cta-section {
+      padding: 5rem 1.5rem;
+      background: var(--navy);
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--red);
+    }
+    .cta-inner {
+      max-width: 88rem; margin: 0 auto;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 3rem; flex-wrap: wrap;
+      position: relative; z-index: 1;
+    }
+    .cta-section .section-tag { color: rgba(200,16,46,0.7); }
+    .cta-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: clamp(2rem, 3.5vw, 3rem);
+      color: #fff; text-transform: uppercase;
+      line-height: 1.05; margin-top: 0.75rem;
+    }
+    .cta-body {
+      font-size: 0.875rem; line-height: 1.7;
+      color: rgba(255,255,255,0.45);
+      max-width: 460px; margin-top: 0.75rem;
+    }
+    .cta-divider {
+      width: 1px; height: 80px;
+      background: rgba(255,255,255,0.12);
+      flex-shrink: 0;
+    }
+    @media (max-width: 800px) {
+      .cta-inner { flex-direction: column; }
+      .cta-divider { display: none; }
     }
 
-    .mobile-nav-toggle[aria-expanded="true"] .mobile-nav-toggle-icon span:nth-child(1) {
-      top: 6px;
-      transform: rotate(45deg);
+    /* Mobile nav */
+    .mobile-nav-toggle-icon { position: relative; width: 20px; height: 14px; }
+    .mobile-nav-toggle-icon span {
+      position: absolute; left: 0; right: 0; height: 2px; background: #fff;
+      transition: transform .2s ease, opacity .2s ease, top .2s ease, bottom .2s ease;
     }
-
-    .mobile-nav-toggle[aria-expanded="true"] .mobile-nav-toggle-icon span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .mobile-nav-toggle[aria-expanded="true"] .mobile-nav-toggle-icon span:nth-child(3) {
-      bottom: 6px;
-      transform: rotate(-45deg);
-    }
-
-    /* Subtle hero animation */
-    @keyframes fade-up {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .hero-animate {
-      animation: fade-up 0.7s ease-out both;
-    }
-
-    /* Mobil menü paneli: header altında, içeriğin üstünde */
+    .mobile-nav-toggle-icon span:nth-child(1) { top: 0; }
+    .mobile-nav-toggle-icon span:nth-child(2) { top: 6px; }
+    .mobile-nav-toggle-icon span:nth-child(3) { bottom: 0; }
+    .mobile-nav-toggle[aria-expanded="true"] .mobile-nav-toggle-icon span:nth-child(1) { top:6px; transform:rotate(45deg); }
+    .mobile-nav-toggle[aria-expanded="true"] .mobile-nav-toggle-icon span:nth-child(2) { opacity:0; }
+    .mobile-nav-toggle[aria-expanded="true"] .mobile-nav-toggle-icon span:nth-child(3) { bottom:6px; transform:rotate(-45deg); }
     #mobile-nav-panel.mobile-nav-open { display: block !important; }
     @media (max-width: 767px) {
       #mobile-nav-panel { position: absolute; top: 100%; left: 0; right: 0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
@@ -344,129 +727,176 @@
 <body class="bg-white text-gray-900 min-h-screen flex flex-col">
 
   <a href="#main-content" class="skip-link">İçeriğe geç</a>
-
   <div id="site-header"></div>
 
-  <!-- MAIN: header yüksekliği (4.5rem) ile hizalı, hero tam header altında başlar -->
   <main id="main-content" class="flex-1 pt-[4.5rem]">
+
     <!-- HERO -->
-    <section class="hero-section">
-      <!-- Lacivert aura + grid (Unicorn en arkada, overlay+grid üstte - referans yapısı) -->
-      <div class="hero-aura-background">
-        <div data-us-project="tPmIIl0vKqHO9yqmtge2" class="hero-unicorn-container" aria-hidden="true"></div>
-        <div class="hero-aura-color" aria-hidden="true"></div>
-        <div class="hero-aura-grid" aria-hidden="true"></div>
-        <script type="text/javascript">
-          !function(){if(!window.UnicornStudio){window.UnicornStudio={isInitialized:!1};var i=document.createElement("script");i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js",i.onload=function(){window.UnicornStudio.isInitialized||(UnicornStudio.init(),window.UnicornStudio.isInitialized=!0)},(document.head||document.body).appendChild(i)}}();
-        </script>
+    <section class="hero-section" aria-label="Ana tanıtım">
+      <div aria-hidden="true">
+        <div class="hero-slideshow">
+          <div class="hero-slide hero-slide-1" role="img" aria-label="Kablo demeti üretimi"></div>
+          <div class="hero-slide hero-slide-2" role="img" aria-label="Endüstriyel kablolama"></div>
+          <div class="hero-slide hero-slide-3" role="img" aria-label="Elektronik montaj"></div>
+          <div class="hero-slide hero-slide-4" role="img" aria-label="Askeri teçhizat kablajı"></div>
+          <div class="hero-slide hero-slide-5" role="img" aria-label="Kablo demeti üretim süreci"></div>
+        </div>
+        <div data-us-project="PajrBMWUFGqNAiEXzN3m" data-us-production="true" class="hero-unicorn" aria-hidden="true"></div>
+        <script src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.3/dist/unicornStudio.umd.js"></script>
+        <div class="hero-overlay-dark"></div>
+        <div class="hero-overlay-vignette"></div>
+        <div class="hero-overlay-grid"></div>
       </div>
+      <div class="hero-accent-bar" aria-hidden="true"></div>
 
-      <div class="max-w-7xl mx-auto px-6 py-16 w-full hero-content">
-        <div class="max-w-2xl hero-animate">
-          <p class="hero-section-tag mb-3">Kablo demeti ve elektro-mekanik çözümler</p>
-          <h1 class="hero-heading mb-5">
-            Zorlu ortamlarda güvenilir bağlantı.
-          </h1>
-          <p class="hero-lead mb-8">
-            Askeri ve sivil projeler için kablo demeti tasarımı, üretimi ve testi. Hava, kara ve deniz koşullarında çalışmaya uygun ürünler.
-          </p>
-          <div class="flex gap-3 flex-wrap mb-10">
-            <a href="index.html#uretim" class="btn-primary">Çözümlerimiz</a>
-            <a href="kurumsal.html" class="btn-hero-outline">Kurumsal</a>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
-            <article id="uretim">
-              <div class="stat-divider"></div>
-              <h2 class="font-bold text-sm uppercase tracking-widest mb-3" style="color:var(--dark);">
-                Üretim
-              </h2>
-              <p class="text-gray-500 text-sm leading-relaxed">
-                Askeri ve sivil kablo demeti üretimi, elektro mekanik montaj ve modern makine parkuruyla seri
-                üretim kabiliyeti.
-              </p>
-            </article>
-
-            <article id="test">
-              <div class="stat-divider"></div>
-              <h2 class="font-bold text-sm uppercase tracking-widest mb-3" style="color:var(--dark);">
-                Test
-              </h2>
-              <p class="text-gray-500 text-sm leading-relaxed">
-                Güçlü test altyapısı, yağmurlama ve çevresel dayanım testleri ile %100 elektriksel doğrulama ve
-                izlenebilirlik.
-              </p>
-            </article>
+      <div class="hero-body-layer">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 w-full py-20">
+          <div class="max-w-3xl">
+            <div class="hero-eyebrow hero-animate">
+              Kablo Demeti &amp; Elektro-Mekanik Çözümler
+            </div>
+            <h1 class="hero-headline hero-animate-2">
+              GÜVENİLİR<br/>
+              <span class="hl-red">BAĞLANTI</span><br/>
+              <span class="hl-outline">ZORLU KOŞULLARDA</span>
+            </h1>
+            <p class="hero-description hero-animate-3">
+              Askeri ve sivil platformlar için kablo demeti tasarımı, üretimi ve
+              elektro-mekanik montaj. Kara, hava ve deniz sistemlerinde
+              AS9100D ve MIL-SPEC uyumlu üretim kabiliyeti.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FEATURED PROJECTS / REFERANSLAR -->
-    <section id="referanslar" class="py-16 px-6">
+    <!-- PLATFORM UZMANLIĞI -->
+    <section id="platformlar" class="platforms-section" aria-labelledby="platforms-heading">
       <div class="max-w-7xl mx-auto">
-        <div class="mb-10">
-          <div class="section-tag mb-3">Projeler</div>
+        <div class="reveal">
+          <div class="section-tag mb-3" style="color:rgba(120,160,220,0.55);">Platform Uzmanlığı</div>
           <div class="red-line"></div>
-          <h2 class="display font-black text-[2.2rem]" style="color:var(--dark);">
-            ÖNE ÇIKAN PROJELER
+          <h2 id="platforms-heading" class="display font-extrabold uppercase text-white leading-tight" style="font-size:clamp(2rem,3.5vw,2.8rem);">
+            KARA &nbsp;·&nbsp; HAVA &nbsp;·&nbsp; DENİZ
           </h2>
+          <p style="font-size:0.875rem;color:rgba(130,170,230,0.52);margin-top:0.75rem;max-width:520px;line-height:1.7;">
+            Her platformun kendine özgü güç, veri ve kontrol gereksinimlerine özelleştirilmiş
+            kablo demeti çözümleri sunuyoruz.
+          </p>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="block border border-gray-200 bg-white p-6 hover:border-[var(--red)] hover:shadow-md transition">
-            <div class="text-xs font-bold uppercase tracking-[0.16em] text-gray-400 mb-2">
-              Kara Platformu
-            </div>
-            <h3 class="font-semibold text-sm mb-2" style="color:var(--dark);">
-              Zırhlı Araç Kablaj Programı
-            </h3>
-            <p class="text-gray-500 text-xs leading-relaxed mb-4">
-              Zırhlı araçlar için EMI dayanımlı ana güç ve veri kablo demeti tasarımı ve üretimi.
-            </p>
-            <div class="text-[0.65rem] font-semibold uppercase tracking-[0.16em]" style="color:var(--red);">
-              DETAYLAR →
+        <div class="platforms-grid">
+          <div class="platform-card reveal reveal-delay-1">
+            <div class="platform-card-bg" style="background-image:url('images/hero-savunma-arac.jpg')" aria-hidden="true"></div>
+            <div class="platform-card-overlay" aria-hidden="true"></div>
+            <div class="platform-card-index" aria-hidden="true">01</div>
+            <div class="platform-card-content">
+              <div class="platform-category-tag">Platform</div>
+              <div class="platform-title">KARA</div>
+              <p class="platform-desc">
+                Zırhlı araçlar, muharip araçlar ve hafif taktik araçlar için
+                EMI dayanımlı güç, veri ve kontrol kablo demetleri.
+              </p>
             </div>
           </div>
-
-          <div class="block border border-gray-200 bg-white p-6 hover:border-[var(--red)] hover:shadow-md transition">
-            <div class="text-xs font-bold uppercase tracking-[0.16em] text-gray-400 mb-2">
-              Deniz Platformu
-            </div>
-            <h3 class="font-semibold text-sm mb-2" style="color:var(--dark);">
-              Gemi Üstü Sensör Ağı
-            </h3>
-            <p class="text-gray-500 text-xs leading-relaxed mb-4">
-              Deniz gözetleme ve elektro-optik sistemler için veri kablajı ve rack entegrasyonu.
-            </p>
-            <div class="text-[0.65rem] font-semibold uppercase tracking-[0.16em]" style="color:var(--red);">
-              DETAYLAR →
+          <div class="platform-card reveal reveal-delay-2">
+            <div class="platform-card-bg" style="background-image:url('images/hero-kablo-3.jpg')" aria-hidden="true"></div>
+            <div class="platform-card-overlay" aria-hidden="true"></div>
+            <div class="platform-card-index" aria-hidden="true">02</div>
+            <div class="platform-card-content">
+              <div class="platform-category-tag">Platform</div>
+              <div class="platform-title">HAVA</div>
+              <p class="platform-desc">
+                Helikopter, sabit kanatlı platform ve insansız hava araçları için
+                aviyonik kablo setleri ve panel montajı.
+              </p>
             </div>
           </div>
-
-          <div class="block border border-gray-200 bg-white p-6 hover:border-[var(--red)] hover:shadow-md transition">
-            <div class="text-xs font-bold uppercase tracking-[0.16em] text-gray-400 mb-2">
-              Hava Platformu
-            </div>
-            <h3 class="font-semibold text-sm mb-2" style="color:var(--dark);">
-              Aviyonik Modernizasyon
-            </h3>
-            <p class="text-gray-500 text-xs leading-relaxed mb-4">
-              Helikopter ve sabit kanatlı platformlar için görev bilgisayarı kablo setleri ve panel üretimi.
-            </p>
-            <div class="text-[0.65rem] font-semibold uppercase tracking-[0.16em]" style="color:var(--red);">
-              DETAYLAR →
+          <div class="platform-card reveal reveal-delay-3">
+            <div class="platform-card-bg" style="background-image:url('images/hero-kablo-2.jpg')" aria-hidden="true"></div>
+            <div class="platform-card-overlay" aria-hidden="true"></div>
+            <div class="platform-card-index" aria-hidden="true">03</div>
+            <div class="platform-card-content">
+              <div class="platform-category-tag">Platform</div>
+              <div class="platform-title">DENİZ</div>
+              <p class="platform-desc">
+                Deniz gözetleme, elektroptik ve muharip gemi sistemleri için
+                tuzlu suya dayanıklı veri kablajı ve rack entegrasyonu.
+              </p>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- ODAK ALANLAR: Tasarım / Üretim / Test --> 
+    <section class="focus-section" aria-label="Odak alanları">
+      <div class="focus-inner">
+        <div class="section-tag mb-3">Odak Alanlarımız</div>
+        <div class="red-line"></div>
+        <div class="focus-grid">
+          <a href="tasarim.html" class="focus-card">
+            <div>
+              <div class="focus-kicker">01 / TASARIM</div>
+              <div class="focus-header-row">
+                <div class="focus-title">Tasarım &amp; Mühendislik</div>
+                <div class="focus-icon-ring">T</div>
+              </div>
+              <p class="focus-sub">
+                Kablo demeti şemaları, formboard tasarımı ve ürün ağaçları ile üretim öncesi güvenli altyapı.
+              </p>
+            </div>
+            <div class="focus-link">
+              <span></span>
+              <span style="width:0;height:0;padding:0;margin:0;border:none;"></span>
+              TASARIM SAYFASINA GİT
+            </div>
+          </a>
+          <a href="uretim-askeri-kablaj.html" class="focus-card">
+            <div>
+              <div class="focus-kicker">02 / ÜRETİM</div>
+              <div class="focus-header-row">
+                <div class="focus-title">Kablo Demeti Üretimi</div>
+                <div class="focus-icon-ring">Ü</div>
+              </div>
+              <p class="focus-sub">
+                Askeri ve sivil kablo demetlerinde seri üretim, elektro-mekanik montaj ve izlenebilirlik.
+              </p>
+            </div>
+            <div class="focus-link">
+              <span></span>
+              <span style="width:0;height:0;padding:0;margin:0;border:none;"></span>
+              ÜRETİM SAYFASINA GİT
+            </div>
+          </a>
+          <a href="test.html" class="focus-card">
+            <div>
+              <div class="focus-kicker">03 / TEST</div>
+              <div class="focus-header-row">
+                <div class="focus-title">Test &amp; Doğrulama</div>
+                <div class="focus-icon-ring">T</div>
+              </div>
+              <p class="focus-sub">
+                Elektriksel süreklilik, çekme/kopma ve çevresel dayanım testleri ile kapsamlı doğrulama.
+              </p>
+            </div>
+            <div class="focus-link">
+              <span></span>
+              <span style="width:0;height:0;padding:0;margin:0;border:none;"></span>
+              TEST SAYFASINA GİT
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- (Projeler bölümü kaldırıldı) -->
+
+    <!-- (Hizmetler, süreç ve CTA bölümleri kaldırıldı) -->
+
   </main>
 
   <div id="site-footer"></div>
-
   <script src="js/layout.js"></script>
 
-  <!-- Note: if you add forms in the future, ensure server-side validation, client-side validation, and proper input sanitization are implemented for security. -->
 </body>
 </html>

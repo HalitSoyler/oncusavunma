@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none';" />
   <meta name="description" content="Öncü Savunma — Güçlü test altyapısı: çekme/kopma dayanım, elektriksel süreklilik ve kısa devre testleri, ölçüm ve kalite doğrulama." />
   <title>Öncü Savunma — Güçlü Test Altyapısı</title>
   <link rel="icon" href="images/favicon.ico" />
@@ -13,17 +14,140 @@
   <link rel="stylesheet" href="css/base.css" />
   <style>
     :root {
-      --red: #C8102E;
-      --red-dark: #9B0A22;
-      --navy: #0B2341;
-      --dark: var(--navy);
-      --mid: #3A3A3A;
-      --light: #F5F5F5;
+      --surface-0:   #020810;
+      --surface-1:   #060E1F;
+      --surface-2:   #091526;
+      --surface-3:   #0D1E38;
+      --surface-4:   #132540;
+      --primary:     #0B2341;
+      --primary-deep:#071629;
+      --brand:       #C8102E;
+      --brand-dark:  #A00E25;
+      --accent:      #00C2E0;
+      --accent-dark: #009AB8;
+      --accent-dim:  rgba(0,194,224,0.08);
+      /* legacy aliases */
+      --red:         #C8102E;
+      --red-dark:    #A00E25;
+      --navy:        #0B2341;
+      --anthracite:  #0D1E38;
+      --anthracite-light: #132540;
+      --dark:        #0B2341;
+      --mid:         #3A4A5E;
+      --light:       #EEF2FA;
+      --metallic:    #5A7090;
+      --metallic-light: #8AAAC8;
+      /* text */
+      --text-primary:   #E8F0FF;
+      --text-secondary: rgba(180,210,255,0.72);
+      --text-muted:     rgba(130,170,230,0.48);
+      --text-label:     rgba(120,160,220,0.58);
+      /* border */
+      --border-subtle: rgba(80,130,200,0.10);
+      --border-mid:    rgba(80,130,200,0.18);
+      --border-strong: rgba(80,130,200,0.32);
+      /* shadows — navy-based */
+      --shadow-sm: 0 2px 8px rgba(2,8,16,0.55);
+      --shadow-md: 0 8px 24px rgba(2,8,16,0.65), 0 2px 6px rgba(2,8,16,0.40);
+      --shadow-lg: 0 20px 50px rgba(2,8,16,0.78), 0 8px 20px rgba(2,8,16,0.50);
+      --shadow-brand: 0 8px 28px rgba(200,16,46,0.28);
+      --shadow-accent: 0 4px 18px rgba(0,194,224,0.22);
+      /* gradients */
+      --grad-card: linear-gradient(155deg,#0D1E38 0%,#060E1F 70%);
+      --anim-hover: 0.22s ease;
+      --anim-spring: cubic-bezier(0.16,1,0.3,1);
     }
     .red-line { width: 48px; height: 3px; background: var(--red); margin-bottom: 1.5rem; }
     .section-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); }
 
-    /* Üst fotoğraf alanları */
+    .projects-hero {
+      position: relative;
+      width: 100%;
+      min-height: 220px;
+      background-image: url("images/hero-test.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    @media (min-width: 768px) {
+      .projects-hero {
+        min-height: 300px;
+      }
+    }
+
+    .projects-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 64px 64px;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .projects-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(7,22,41,0.88), rgba(7,22,41,0.65));
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    .projects-hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 1.5rem 4.5rem;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    @media (min-width: 1024px) {
+      .projects-hero-inner {
+        padding-top: 5rem;
+        padding-bottom: 5.5rem;
+      }
+    }
+
+    .projects-hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .projects-hero-lead {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 620px;
+    }
+
+    .projects-hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .projects-hero-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(11, 35, 65, 0.35);
+    }
+
+    /* Üst fotoğraf alanları (artık kullanılmıyor, ileride kaldırılabilir) */
     .test-photo-block {
       aspect-ratio: 16/10;
       background-size: cover;
@@ -248,25 +372,32 @@
   <a href="#main-content" class="skip-link">İçeriğe geç</a>
   <div id="site-header"></div>
 
-  <main id="main-content" class="flex-1 pt-20 md:pt-24">
-    <!-- 1. İki fotoğraf alanı -->
-    <section class="max-w-7xl mx-auto px-6 pt-6 pb-8 md:pt-8 md:pb-10 reveal" aria-label="Test altyapısı görselleri">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-        <div class="test-photo-block relative reveal reveal-delay-1" style="background-image: url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800');" role="img" aria-label="Test laboratuvarı">
-          <span class="photo-overlay" aria-hidden="true"></span>
-        </div>
-        <div class="test-photo-block relative reveal reveal-delay-2" style="background-image: url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800');" role="img" aria-label="Ölçüm ve kalite kontrol">
-          <span class="photo-overlay" aria-hidden="true"></span>
+  <main id="main-content" class="flex-1 pt-24">
+    <!-- HERO -->
+    <section class="projects-hero" aria-labelledby="test-page-title">
+      <div class="projects-hero-inner max-w-7xl mx-auto">
+        <div class="max-w-2xl hero-animate">
+          <p class="section-tag mb-3">Test</p>
+          <h1 id="test-page-title" class="projects-hero-title">Güçlü test altyapısı</h1>
+          <p class="projects-hero-lead">
+            Çekme/kopma dayanım testlerinden elektriksel süreklilik ve kısa devre kontrollerine kadar, kablo demetlerimizi
+            sahadaki gerçek koşullara uygun şekilde doğruluyoruz. Her ürün, kayıt altına alınan test raporları ile birlikte teslim edilir.
+          </p>
+          <div class="projects-hero-tags">
+            <span class="projects-hero-tag">Çekme / kopma</span>
+            <span class="projects-hero-tag">Elektriksel süreklilik</span>
+            <span class="projects-hero-tag">Kısa devre testleri</span>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 2. Büyük paragraf -->
-    <section class="max-w-7xl mx-auto px-6 py-10 md:py-14 reveal" aria-labelledby="test-baslik">
-      <div class="section-tag mb-2 reveal reveal-delay-1">Test</div>
+    <section class="max-w-7xl mx-auto px-6 pt-24 pb-10 md:pt-28 md:pb-14" aria-labelledby="test-baslik">
+      <div class="section-tag mb-2">Test</div>
       <div class="red-line mb-6"></div>
-      <h1 id="test-baslik" class="font-black text-2xl md:text-3xl mb-8 reveal reveal-delay-2" style="font-family:'Barlow Condensed',sans-serif;color:var(--navy);letter-spacing:-0.02em;">GÜÇLÜ TEST ALTYAPISI</h1>
-      <div class="test-intro-block reveal reveal-delay-3">
+      <h2 id="test-baslik" class="font-black text-2xl md:text-3xl mb-8" style="font-family:'Barlow Condensed',sans-serif;color:var(--navy);letter-spacing:-0.02em;">GÜÇLÜ TEST ALTYAPISI</h2>
+      <div class="test-intro-block">
         <p>
           Birim içerisinde yer alan komponentlerin montajlanması, kablajın üretilip montajlanarak cihaz haline getirilmesi ve elektronik ile mekanik montaj desteği konusunda savunma sanayisine hizmet vermekteyiz. Öncü Savunma olarak, ürünlerimizin yaşam döngüsü boyunca güvenilirliğini ve uygunluğunu garanti altına almak için güçlü bir test altyapısı kullanıyoruz. Yağmurlama ve çevresel dayanım testlerinin yanı sıra tüm kablo demetlerinde %100 elektriksel doğrulama ve izlenebilirlik sağlanmaktadır. Test, ölçüm ve kalite kontrol aşamasında kullandığımız makine ve cihazlar ile müşteri teknik şartnamelerine ve askerî standartlara tam uyum hedeflenmektedir.
         </p>
@@ -279,29 +410,29 @@
         <div class="process-outline-wrap">
           <div class="process-header reveal">
             <div class="section-label" style="justify-content:center">Test, Ölçüm ve Kalite Kontrol</div>
-            <h2 id="process-baslik" class="section-title" style="text-align:center">Kullanılan <em>makine ve cihazlar</em></h2>
+            <h2 id="process-baslik" class="section-title" style="text-align:center">Test <em>ve ölçüm kapsamı</em></h2>
           </div>
           <div class="process-steps stagger-draw">
             <div class="process-step">
               <div class="process-step-number"><span>01</span></div>
-              <h4>IMADA ACT1000</h4>
-              <p>Makine. Çekme / kopma dayanım testleri.</p>
+              <h4>Çekme / kopma dayanım testleri</h4>
+              <p>Mekanik dayanım ve kopma testleri.</p>
             </div>
-          <div class="process-step">
-            <div class="process-step-number"><span>02</span></div>
-            <h4>CIRIS EASY TOUCH X 512</h4>
-            <p>Test Cihazı. Elektriksel süreklilik ve kısa devre testleri.</p>
-          </div>
-          <div class="process-step">
-            <div class="process-step-number"><span>03</span></div>
-            <h4>B440</h4>
-            <p>Ölçüm Cihazı. Elektriksel kontrol ve ölçüm.</p>
-          </div>
-          <div class="process-step">
-            <div class="process-step-number"><span>04</span></div>
-            <h4>MIC 08</h4>
-            <p>Ölçüm Cihazı. Hassas ölçüm ve kalite doğrulama.</p>
-          </div>
+            <div class="process-step">
+              <div class="process-step-number"><span>02</span></div>
+              <h4>Elektriksel süreklilik ve kısa devre testleri</h4>
+              <p>Kablo demetlerinde elektriksel doğrulama.</p>
+            </div>
+            <div class="process-step">
+              <div class="process-step-number"><span>03</span></div>
+              <h4>Elektriksel kontrol ve ölçüm</h4>
+              <p>Elektriksel parametrelerin ölçümü ve kontrolü.</p>
+            </div>
+            <div class="process-step">
+              <div class="process-step-number"><span>04</span></div>
+              <h4>Hassas ölçüm ve kalite doğrulama</h4>
+              <p>Kalite doğrulama ve raporlama.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -311,40 +442,5 @@
   <div id="site-footer"></div>
 
   <script src="js/layout.js"></script>
-  <script>
-  (function () {
-    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('reveal-no-motion', 'reveal-visible'); });
-      document.querySelectorAll('.stagger-draw').forEach(function (el) { el.classList.add('visible'); });
-      return;
-    }
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('reveal-visible');
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      });
-    }, { rootMargin: '0px 0px -40px 0px', threshold: 0.05 });
-    document.querySelectorAll('.reveal').forEach(function (el) {
-      var rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        el.classList.add('reveal-visible');
-        el.classList.add('visible');
-      } else {
-        observer.observe(el);
-      }
-    });
-    document.querySelectorAll('.stagger-draw').forEach(function (el) {
-      var rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        el.classList.add('visible');
-      } else {
-        observer.observe(el);
-      }
-    });
-  })();
-  </script>
 </body>
 </html>

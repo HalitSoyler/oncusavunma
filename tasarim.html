@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none';" />
+  <meta name="description" content="Öncü Savunma — Ar-Ge ve Mühendislik Tasarım Süreci: askeri standartlara uygun kablo demeti tasarımı, teknik çizim, 2D/3D modelleme ve BOM hazırlığı." />
+  <title>Öncü Savunma — Ar-Ge ve Mühendislik Tasarımı</title>
+  <link rel="icon" href="images/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tailwind.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <style>
+    :root {
+      --surface-0:   #020810;
+      --surface-1:   #060E1F;
+      --surface-2:   #091526;
+      --surface-3:   #0D1E38;
+      --surface-4:   #132540;
+      --primary:     #0B2341;
+      --primary-deep:#071629;
+      --brand:       #C8102E;
+      --brand-dark:  #A00E25;
+      --accent:      #00C2E0;
+      --accent-dark: #009AB8;
+      --accent-dim:  rgba(0,194,224,0.08);
+      /* legacy aliases */
+      --red:         #C8102E;
+      --red-dark:    #A00E25;
+      --navy:        #0B2341;
+      --anthracite:  #0D1E38;
+      --anthracite-light: #132540;
+      --dark:        #0B2341;
+      --mid:         #3A4A5E;
+      --light:       #EEF2FA;
+      --metallic:    #5A7090;
+      --metallic-light: #8AAAC8;
+      /* text */
+      --text-primary:   #E8F0FF;
+      --text-secondary: rgba(180,210,255,0.72);
+      --text-muted:     rgba(130,170,230,0.48);
+      --text-label:     rgba(120,160,220,0.58);
+      /* border */
+      --border-subtle: rgba(80,130,200,0.10);
+      --border-mid:    rgba(80,130,200,0.18);
+      --border-strong: rgba(80,130,200,0.32);
+      /* shadows — navy-based */
+      --shadow-sm: 0 2px 8px rgba(2,8,16,0.55);
+      --shadow-md: 0 8px 24px rgba(2,8,16,0.65), 0 2px 6px rgba(2,8,16,0.40);
+      --shadow-lg: 0 20px 50px rgba(2,8,16,0.78), 0 8px 20px rgba(2,8,16,0.50);
+      --shadow-brand: 0 8px 28px rgba(200,16,46,0.28);
+      --shadow-accent: 0 4px 18px rgba(0,194,224,0.22);
+      /* gradients */
+      --grad-card: linear-gradient(155deg,#0D1E38 0%,#060E1F 70%);
+      --anim-hover: 0.22s ease;
+      --anim-spring: cubic-bezier(0.16,1,0.3,1);
+    }
+
+    /* ── Hero ── */
+    .projects-hero {
+      position: relative;
+      width: 100%;
+      min-height: 220px;
+      background-image: url("images/hero-kablo-1.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    @media (min-width: 768px) {
+      .projects-hero { min-height: 300px; }
+    }
+    .projects-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 64px 64px;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    .projects-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(7,22,41,0.90), rgba(7,22,41,0.68));
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+    .projects-hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 1.5rem 4.5rem;
+      display: flex;
+      align-items: flex-end;
+    }
+    @media (min-width: 1024px) {
+      .projects-hero-inner { padding-top: 5rem; padding-bottom: 5.5rem; }
+    }
+    .projects-hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    .projects-hero-lead {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.8);
+      max-width: 620px;
+    }
+    .projects-hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+    .projects-hero-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.9);
+      background: rgba(11,35,65,0.35);
+    }
+
+    .red-line { width: 48px; height: 3px; background: var(--red); margin-bottom: 1.5rem; }
+    .section-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); }
+
+    /* ── Intro ── */
+    .tasarim-intro-block {
+      max-width: 52rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .tasarim-intro-block p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--mid);
+    }
+    @media (min-width: 768px) {
+      .tasarim-intro-block p { font-size: 1.1rem; }
+    }
+
+    /* ── Timeline ── */
+    .timeline-section {
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .timeline-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, rgba(11,35,65,0.02) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .timeline-track {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .timeline-track::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 44px;
+      width: 2px;
+      background: linear-gradient(180deg, transparent 0%, rgba(200,16,46,0.2) 5%, rgba(200,16,46,0.2) 95%, transparent 100%);
+    }
+    @media (min-width: 768px) {
+      .timeline-track::before {
+        left: 50%;
+        transform: translateX(-1px);
+      }
+    }
+
+    .timeline-item {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      padding-bottom: 3rem;
+    }
+    @media (min-width: 768px) {
+      .timeline-item {
+        padding-bottom: 4rem;
+      }
+      .timeline-item:nth-child(odd) {
+        flex-direction: row-reverse;
+        text-align: right;
+      }
+      .timeline-item:nth-child(odd) .timeline-content {
+        padding-right: 3rem;
+        padding-left: 0;
+      }
+      .timeline-item:nth-child(even) .timeline-content {
+        padding-left: 3rem;
+        padding-right: 0;
+      }
+    }
+
+    .timeline-marker {
+      position: relative;
+      flex-shrink: 0;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+      z-index: 2;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease;
+    }
+    .timeline-item:hover .timeline-marker {
+      transform: scale(1.1);
+      box-shadow: 0 8px 32px rgba(11,35,65,0.4);
+    }
+    .timeline-marker::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(200,16,46,0.25);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .timeline-item:hover .timeline-marker::after {
+      opacity: 1;
+    }
+    .timeline-marker span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .timeline-content {
+      flex: 1;
+      padding-top: 1.2rem;
+    }
+    @media (max-width: 767px) {
+      .timeline-content {
+        padding-left: 0;
+      }
+    }
+    .timeline-content h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+    .timeline-content p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--mid);
+    }
+    .timeline-content-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.6rem;
+    }
+
+    /* ── Reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .reveal.reveal-visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-no-motion { opacity: 1; transform: none !important; }
+
+    /* ── Stagger for standards ── */
+    .stagger-draw > * {
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    }
+    .stagger-draw.visible > *:nth-child(1) { transition-delay: 0s; }
+    .stagger-draw.visible > *:nth-child(2) { transition-delay: 0.15s; }
+    .stagger-draw.visible > *:nth-child(3) { transition-delay: 0.3s; }
+    .stagger-draw.visible > * {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* ── Timeline item stagger ── */
+    .timeline-stagger > .timeline-item {
+      opacity: 0;
+      transform: translateY(48px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+    .timeline-stagger.visible > .timeline-item:nth-child(1) { transition-delay: 0s; }
+    .timeline-stagger.visible > .timeline-item:nth-child(2) { transition-delay: 0.12s; }
+    .timeline-stagger.visible > .timeline-item:nth-child(3) { transition-delay: 0.24s; }
+    .timeline-stagger.visible > .timeline-item:nth-child(4) { transition-delay: 0.36s; }
+    .timeline-stagger.visible > .timeline-item:nth-child(5) { transition-delay: 0.48s; }
+    .timeline-stagger.visible > .timeline-item:nth-child(6) { transition-delay: 0.60s; }
+    .timeline-stagger.visible > .timeline-item:nth-child(7) { transition-delay: 0.72s; }
+    .timeline-stagger.visible > .timeline-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Geometric accent for industrial feel */
+    .geo-accent {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border: 1px solid rgba(200,16,46,0.08);
+      transform: rotate(45deg);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900 min-h-screen flex flex-col">
+
+  <a href="#main-content" class="skip-link">İçeriğe geç</a>
+  <div id="site-header"></div>
+
+  <main id="main-content" class="flex-1 pt-24">
+
+    <!-- ═══ HERO ═══ -->
+    <section class="projects-hero" aria-labelledby="tasarim-page-title">
+      <div class="projects-hero-inner max-w-7xl mx-auto">
+        <div class="max-w-2xl hero-animate">
+          <p class="section-tag mb-3">Ar-Ge & Tasarım</p>
+          <h1 id="tasarim-page-title" class="projects-hero-title">Mühendislik Tasarım Süreci</h1>
+          <p class="projects-hero-lead">
+            Üretilecek ürünlerin askeri standartlara uygun olarak tasarlanması ve teknik altyapısının oluşturulması;
+            gereksinim analizinden prototip doğrulamaya kadar eksiksiz bir mühendislik süreci ile yürütülmektedir.
+          </p>
+          <div class="projects-hero-tags">
+            <span class="projects-hero-tag">Ar-Ge</span>
+            <span class="projects-hero-tag">Mühendislik Tasarımı</span>
+            <span class="projects-hero-tag">2D / 3D Modelleme</span>
+            <span class="projects-hero-tag">BOM Hazırlığı</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ INTRO ═══ -->
+    <section class="max-w-7xl mx-auto px-6 pt-24 pb-10 md:pt-28 md:pb-14" aria-labelledby="tasarim-baslik">
+      <div class="reveal">
+        <div class="section-tag mb-2">Ar-Ge ve Mühendislik</div>
+        <div class="red-line mb-6"></div>
+        <h2 id="tasarim-baslik" class="font-black text-2xl md:text-3xl mb-8" style="font-family:'Barlow Condensed',sans-serif;color:var(--navy);letter-spacing:-0.02em;">
+          AR-GE VE MÜHENDİSLİK TASARIM SÜRECİ
+        </h2>
+      </div>
+      <div class="tasarim-intro-block reveal reveal-delay-1">
+        <p>
+          Bu aşamada, üretilecek ürünlerin askeri standartlara uygun olarak tasarlanması ve teknik altyapısının
+          oluşturulması sağlanır. Teknik ve fonksiyonel gereksinimlerin analiz edilmesi, müşteri talepleri ve askeri
+          standartlara uygunluk çalışmalarının yürütülmesi, kablo güzergâhlarının belirlenmesi ve prototip üretim
+          planlarının hazırlanması bu sürecin temel adımlarını oluşturur. Öncü Savunma olarak, her projeyi uluslararası
+          standartlara ve müşteri şartnamelerine tam uyum ile yürütmekteyiz.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section class="timeline-section" style="padding: clamp(5rem, 12vh, 9rem) 0;" aria-labelledby="surec-baslik">
+      <div class="geo-accent" style="top:8%;right:5%;"></div>
+      <div class="geo-accent" style="bottom:12%;left:3%;width:80px;height:80px;"></div>
+
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+          <div class="section-tag mb-3">Tasarım Süreci</div>
+          <h2 id="surec-baslik" class="font-black text-2xl md:text-3xl" style="font-family:'Barlow Condensed',sans-serif;color:var(--navy);letter-spacing:-0.02em;">
+            MÜHENDİSLİK <em style="font-style:italic;color:var(--red);">ADIMLARI</em>
+          </h2>
+          <div style="width:48px;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);margin:1.25rem auto 0;opacity:0.7;"></div>
+        </div>
+
+        <div class="timeline-track timeline-stagger stagger-draw">
+
+          <!-- 01 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"><span>01</span></div>
+            <div class="timeline-content">
+              <span class="timeline-content-tag">Analiz</span>
+              <h4>Gereksinim Analizi</h4>
+              <p>
+                Teknik ve fonksiyonel gereksinimlerin analiz edilmesi; projenin kapsamı, performans kriterleri
+                ve çevresel koşulların detaylı şekilde belirlenmesi.
+              </p>
+            </div>
+          </div>
+
+          <!-- 02 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"><span>02</span></div>
+            <div class="timeline-content">
+              <span class="timeline-content-tag">Uygunluk</span>
+              <h4>Standartlara Uygunluk Çalışmaları</h4>
+              <p>
+                Müşteri talepleri ve askeri standartlara uygunluk çalışmalarının yürütülmesi.
+                MIL-STD standartları, IPC/WHMA-A-620 gereklilikleri ve AS9100 kalite sistemi şartlarına uyum sağlanması.
+              </p>
+            </div>
+          </div>
+
+          <!-- 03 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"><span>03</span></div>
+            <div class="timeline-content">
+              <span class="timeline-content-tag">Tasarım</span>
+              <h4>Kablo Güzergâh ve Bağlantı Şemaları</h4>
+              <p>
+                Kablo güzergâhlarının, kablo demeti yapılarının ve bağlantı şemalarının oluşturulması;
+                optimum rota planlaması ve mekanik uyumluluk analizi.
+              </p>
+            </div>
+          </div>
+
+          <!-- 04 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"><span>04</span></div>
+            <div class="timeline-content">
+              <span class="timeline-content-tag">Çizim</span>
+              <h4>Teknik Çizimler</h4>
+              <p>
+                Elektriksel ve mekanik teknik çizimlerin hazırlanması; devre şemaları, pin atamaları
+                ve mekanik montaj detaylarının dökümantasyonu.
+              </p>
+            </div>
+          </div>
+
+          <!-- 05 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"><span>05</span></div>
+            <div class="timeline-content">
+              <span class="timeline-content-tag">Modelleme</span>
+              <h4>2D ve 3D Teknik Resimler</h4>
+              <p>
+                2D ve 3D teknik resimlerin oluşturulması; dijital ortamda tam ölçekli modelleme
+                ile üretim öncesi doğrulama ve görselleştirme.
+              </p>
+            </div>
+          </div>
+
+          <!-- 06 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"><span>06</span></div>
+            <div class="timeline-content">
+              <span class="timeline-content-tag">Malzeme</span>
+              <h4>BOM — Ürün Ağacı Hazırlığı</h4>
+              <p>
+                Ürün ağaçlarının (BOM – Bill of Materials) hazırlanması; her bileşenin malzeme kodu,
+                miktarı ve tedarik bilgilerinin yapılandırılması.
+              </p>
+            </div>
+          </div>
+
+          <!-- 07 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"><span>07</span></div>
+            <div class="timeline-content">
+              <span class="timeline-content-tag">Prototip</span>
+              <h4>Prototip Üretim ve Doğrulama</h4>
+              <p>
+                Prototip üretim ve doğrulama planlarının yapılması; ilk numune üretimi,
+                fonksiyonel testler ve tasarım revizyon sürecinin yönetimi.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/layout.js"></script>
+</body>
+</html>

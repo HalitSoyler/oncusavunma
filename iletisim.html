@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none';" />
   <title>Öncü Savunma — İletişim</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,8 +11,127 @@
   <link rel="stylesheet" href="css/tailwind.css" />
   <link rel="stylesheet" href="css/base.css" />
   <style>
+    :root {
+      --surface-0:   #020810;
+      --surface-1:   #060E1F;
+      --surface-2:   #091526;
+      --surface-3:   #0D1E38;
+      --surface-4:   #132540;
+      --primary:     #0B2341;
+      --primary-deep:#071629;
+      --brand:       #C8102E;
+      --brand-dark:  #A00E25;
+      --accent:      #00C2E0;
+      --accent-dark: #009AB8;
+      --accent-dim:  rgba(0,194,224,0.08);
+      /* legacy aliases */
+      --red:         #C8102E;
+      --red-dark:    #A00E25;
+      --navy:        #0B2341;
+      --anthracite:  #0D1E38;
+      --anthracite-light: #132540;
+      --dark:        #0B2341;
+      --mid:         #3A4A5E;
+      --light:       #EEF2FA;
+      --metallic:    #5A7090;
+      --metallic-light: #8AAAC8;
+      /* text */
+      --text-primary:   #E8F0FF;
+      --text-secondary: rgba(180,210,255,0.72);
+      --text-muted:     rgba(130,170,230,0.48);
+      --text-label:     rgba(120,160,220,0.58);
+      /* border */
+      --border-subtle: rgba(80,130,200,0.10);
+      --border-mid:    rgba(80,130,200,0.18);
+      --border-strong: rgba(80,130,200,0.32);
+      /* shadows — navy-based */
+      --shadow-sm: 0 2px 8px rgba(2,8,16,0.55);
+      --shadow-md: 0 8px 24px rgba(2,8,16,0.65), 0 2px 6px rgba(2,8,16,0.40);
+      --shadow-lg: 0 20px 50px rgba(2,8,16,0.78), 0 8px 20px rgba(2,8,16,0.50);
+      --shadow-brand: 0 8px 28px rgba(200,16,46,0.28);
+      --shadow-accent: 0 4px 18px rgba(0,194,224,0.22);
+      /* gradients */
+      --grad-card: linear-gradient(155deg,#0D1E38 0%,#060E1F 70%);
+      --anim-hover: 0.22s ease;
+      --anim-spring: cubic-bezier(0.16,1,0.3,1);
+    }
     .red-line { width: 48px; height: 3px; background: var(--red); margin-bottom: 1.5rem; }
     .section-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); }
+
+    .projects-hero {
+      position: relative;
+      width: 100%;
+      min-height: 260px;
+      background-image: url("images/hero-iletisim.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    @media (min-width: 768px) {
+      .projects-hero {
+        min-height: 340px;
+      }
+    }
+
+    .projects-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(7,22,41,0.88), rgba(7,22,41,0.65));
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    .projects-hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 1.5rem 4.5rem;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    @media (min-width: 1024px) {
+      .projects-hero-inner {
+        padding-top: 5rem;
+        padding-bottom: 5.5rem;
+      }
+    }
+
+    .projects-hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .projects-hero-lead {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 620px;
+    }
+
+    .projects-hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .projects-hero-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(11, 35, 65, 0.35);
+    }
 
     /* Form */
     .form-field { display: flex; flex-direction: column; gap: 6px; }
@@ -23,7 +143,7 @@
       color: #0A0A0A;
       background: white;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color var(--anim-hover);
       font-family: 'Inter', sans-serif;
       border-radius: 0;
       -webkit-appearance: none;
@@ -42,7 +162,7 @@
       padding: 14px 32px;
       border: none;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background var(--anim-hover);
       font-family: 'Inter', sans-serif;
     }
     .submit-btn:hover { background: #9B0A22; }
@@ -85,22 +205,29 @@
 
   <div id="site-header"></div>
 
-  <main id="main-content" class="flex-1 pt-20 md:pt-24">
+  <main id="main-content" class="flex-1 pt-24">
 
     <!-- PAGE HERO -->
-    <section style="background:#F5F5F6;border-bottom:1px solid #e5e5e5;" class="px-6 py-16">
-      <div class="max-w-7xl mx-auto">
-        <div class="section-tag mb-4">İletişim / Contact</div>
-        <div class="red-line"></div>
-        <h1 class="display font-black mb-4" style="font-size:3rem;line-height:1.0;color:#0A0A0A;">BİZE ULAŞIN</h1>
-        <p class="text-gray-500 max-w-xl leading-relaxed" style="font-size:0.92rem;">
-          Proje teklifi, teknik danışmanlık veya genel sorularınız için ekibimizle iletişime geçin. En geç 1 iş günü içinde yanıt veriyoruz.
-        </p>
+    <section class="projects-hero" aria-labelledby="iletisim-page-title">
+      <div class="projects-hero-inner max-w-7xl mx-auto">
+        <div class="max-w-2xl hero-animate">
+          <p class="section-tag mb-3">İletişim / Contact</p>
+          <h1 id="iletisim-page-title" class="projects-hero-title">Bize ulaşın</h1>
+          <p class="projects-hero-lead">
+            Proje teklifi, teknik danışmanlık veya genel sorularınız için ekibimizle iletişime geçin. Talebinizi
+            platform ve teknik gereksinimlerle birlikte paylaşın, en geç 1 iş günü içinde size dönüş yapalım.
+          </p>
+          <div class="projects-hero-tags">
+            <span class="projects-hero-tag">Proje teklifi</span>
+            <span class="projects-hero-tag">Teknik destek</span>
+            <span class="projects-hero-tag">Genel bilgi</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- MAIN CONTENT -->
-    <section class="py-14 px-6">
+    <section class="pt-24 pb-14 px-6 md:pt-28">
       <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
 
         <!-- LEFT: Form -->
@@ -109,7 +236,7 @@
           <div class="red-line"></div>
           <h2 class="display font-black mb-8" style="font-size:1.8rem;color:#0A0A0A;">TALEP / TEKLİF FORMU</h2>
 
-          <form onsubmit="handleSubmit(event)" class="space-y-5">
+          <form id="contact-form" class="space-y-5" novalidate>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div class="form-field">
                 <label class="form-label" for="contact-name">Ad Soyad *</label>
@@ -231,18 +358,5 @@
   <div id="site-footer"></div>
 
   <script src="js/layout.js"></script>
-  <script>
-    function handleSubmit(e) {
-      e.preventDefault();
-      var success = document.getElementById('form-success');
-      if (success) {
-        success.style.display = 'block';
-        setTimeout(function () {
-          success.style.display = 'none';
-        }, 5000);
-      }
-      e.target.reset();
-    }
-  </script>
 </body>
 </html>

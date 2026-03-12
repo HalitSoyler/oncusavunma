@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none';" />
   <title>Öncü Savunma — Kurumsal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,34 +12,92 @@
   <link rel="stylesheet" href="css/base.css" />
   <style>
     :root {
-      --red: #C8102E;
-      --red-dark: #9B0A22;
-      --navy: #0B2341;
-      --anthracite: #1a1d23;
-      --anthracite-light: #2d3139;
-      --metallic: #6b7280;
-      --metallic-light: #9ca3af;
-      --dark: var(--navy);
-      --mid: #3A3A3A;
-      --light: #F5F5F5;
+      --surface-0:   #020810;
+      --surface-1:   #060E1F;
+      --surface-2:   #091526;
+      --surface-3:   #0D1E38;
+      --surface-4:   #132540;
+      --primary:     #0B2341;
+      --primary-deep:#071629;
+      --brand:       #C8102E;
+      --brand-dark:  #A00E25;
+      --accent:      #00C2E0;
+      --accent-dark: #009AB8;
+      --accent-dim:  rgba(0,194,224,0.08);
+      /* legacy aliases */
+      --red:         #C8102E;
+      --red-dark:    #A00E25;
+      --navy:        #0B2341;
+      --anthracite:  #0D1E38;
+      --anthracite-light: #132540;
+      --dark:        #0B2341;
+      --mid:         #3A4A5E;
+      --light:       #EEF2FA;
+      --metallic:    #5A7090;
+      --metallic-light: #8AAAC8;
+      /* text */
+      --text-primary:   #E8F0FF;
+      --text-secondary: rgba(180,210,255,0.72);
+      --text-muted:     rgba(130,170,230,0.48);
+      --text-label:     rgba(120,160,220,0.58);
+      /* border */
+      --border-subtle: rgba(80,130,200,0.10);
+      --border-mid:    rgba(80,130,200,0.18);
+      --border-strong: rgba(80,130,200,0.32);
+      /* shadows — navy-based */
+      --shadow-sm: 0 2px 8px rgba(2,8,16,0.55);
+      --shadow-md: 0 8px 24px rgba(2,8,16,0.65), 0 2px 6px rgba(2,8,16,0.40);
+      --shadow-lg: 0 20px 50px rgba(2,8,16,0.78), 0 8px 20px rgba(2,8,16,0.50);
+      --shadow-brand: 0 8px 28px rgba(200,16,46,0.28);
+      --shadow-accent: 0 4px 18px rgba(0,194,224,0.22);
+      /* gradients */
+      --grad-card: linear-gradient(155deg,#0D1E38 0%,#060E1F 70%);
+      --anim-hover: 0.22s ease;
+      --anim-spring: cubic-bezier(0.16,1,0.3,1);
     }
-    .red-line { width: 48px; height: 3px; background: var(--red); margin-bottom: 1.5rem; }
-    .section-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); }
-    .timeline-dot { width: 10px; height: 10px; background: var(--red); flex-shrink: 0; margin-top: 5px; }
-    .value-card { border: 1px solid #e5e5e5; padding: 2rem; background: white; }
-    .value-card:hover { border-color: var(--red); }
+
+    .red-line {
+      width: 48px;
+      height: 3px;
+      background: var(--red);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    .value-card {
+      border: 1px solid #e5e5e5;
+      padding: 2rem;
+      background: #ffffff;
+      transition: border-color var(--anim-hover), transform var(--anim-hover), box-shadow var(--anim-hover);
+    }
+
+    .value-card:hover {
+      border-color: var(--red);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
 
     /* Faaliyet kartları */
     .activity-card {
-      border: 1px solid rgba(11,35,65,0.12);
+      border: 1px solid rgba(11, 35, 65, 0.12);
       background: #fff;
       padding: 2rem;
-      transition: border-color 0.25s, box-shadow 0.25s;
+      transition: border-color var(--anim-hover), box-shadow var(--anim-hover), transform var(--anim-hover);
     }
+
     .activity-card:hover {
       border-color: var(--navy);
-      box-shadow: 0 8px 24px rgba(11,35,65,0.08);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
     }
+
     .activity-icon {
       width: 64px;
       height: 64px;
@@ -59,15 +118,19 @@
       color: var(--anthracite);
       letter-spacing: 0.02em;
     }
-    .cert-badge strong { color: var(--navy); }
 
-    /* Vizyon/Misyon kutusu: oval köşeler, mavi (navy) kutu, ortada ince çizgi */
+    .cert-badge strong {
+      color: var(--navy);
+    }
+
+    /* Vizyon/Misyon kutusu */
     .vision-mission-box {
       border: 1px solid rgba(11, 35, 65, 0.35);
       border-radius: 1rem;
       overflow: hidden;
-      background: rgba(11, 35, 65, 0.08);
+      background: rgba(11, 35, 65, 0.06);
     }
+
     .vision-mission-divider {
       width: 1px;
       background: rgba(11, 35, 65, 0.35);
@@ -75,60 +138,96 @@
       align-self: stretch;
     }
 
-    /* Hero: savunma sanayii görseli + overlay; kendi görseliniz için .profile-hero'a background-image ekleyin (örn. images/hero-kurumsal.jpg) */
-    .profile-hero {
+    /* Hakkımızda hero */
+    .about-hero {
       position: relative;
       width: 100%;
-      height: 300px;
-      background-color: var(--navy);
+      min-height: 220px;
+      background-image: url("images/hero-kurumsal.jpg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
     }
+
     @media (min-width: 768px) {
-      .profile-hero { height: 400px; }
+      .about-hero {
+        min-height: 300px;
+      }
     }
-    .profile-hero::after {
-      content: '';
+
+    .about-hero::before {
+      content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.4);
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 64px 64px;
+      opacity: 0.7;
       pointer-events: none;
     }
-    /* Taşan başlık: birkaç px aşağı, hero alt kenarına hizalı (0’a 0); sağ üst oval; koyu kırmızı */
-    .profile-title-wrap {
+
+    .about-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(11, 35, 65, 0.88),
+        rgba(11, 35, 65, 0.68)
+      );
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    .about-hero-inner {
       position: relative;
-      z-index: 2;
-      margin-top: -62px;
-      margin-bottom: 0;
+      z-index: 1;
+      padding: 4rem 1.5rem 4.5rem;
+      display: flex;
+      align-items: flex-end;
     }
-    @media (min-width: 768px) {
-      .profile-title-wrap { margin-top: -96px; }
-    }
-    .profile-title-box {
-      display: block;
-      width: 100%;
-      max-width: 90%;
-      min-width: 280px;
-      background: rgba(165, 4, 16, 0.78);
-      padding: 1.5rem 2rem;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      border-top-right-radius: 1.25rem;
-    }
-    @media (min-width: 768px) {
-      .profile-title-box {
-        max-width: 40%;
-        padding: 2rem 2.75rem;
-      }
-    }
+
     @media (min-width: 1024px) {
-      .profile-title-box {
-        max-width: 38%;
-        padding: 2.25rem 3rem;
+      .about-hero-inner {
+        padding-top: 5rem;
+        padding-bottom: 5.5rem;
       }
+    }
+
+    .about-hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+    }
+
+    .about-hero-lead {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 620px;
+    }
+
+    .about-hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .about-hero-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(11, 35, 65, 0.35);
     }
   </style>
 </head>
@@ -138,43 +237,56 @@
 
   <div id="site-header"></div>
 
-  <main id="main-content" class="flex-1 pt-20 md:pt-24">
-    <!-- Şirket Profili — cdksavunma.com tarzı taşan başlık; Teknoloji: HTML + Tailwind CSS -->
-
-    <!-- Hero: savunma sanayii temalı görsel; %40 overlay ile kırmızı kutunun şeffaflığında derinlik -->
-    <section class="profile-hero" aria-hidden="true" style="background-image: url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1920');"></section>
-
-    <!-- Taşan başlık: logodaki kırmızı (#E30613) %85 şeffaf kutu, -60px taşma, beyaz büyük harf -->
-    <section class="px-6 profile-title-wrap" aria-labelledby="page-title">
-      <div class="max-w-7xl mx-auto">
-        <h1 id="page-title" class="profile-title-box text-xl md:text-2xl lg:text-3xl xl:text-4xl font-black tracking-tight" style="font-family:'Inter',sans-serif;">
-          Hakkımızda
-        </h1>
+  <main id="main-content" class="flex-1 pt-24">
+    <!-- HERO -->
+    <section class="about-hero" aria-labelledby="page-title">
+      <div class="about-hero-inner max-w-7xl mx-auto">
+        <div class="max-w-2xl reveal">
+          <p class="section-tag mb-3">Kurumsal</p>
+          <h1 id="page-title" class="about-hero-title">Hakkımızda</h1>
+          <p class="about-hero-lead">
+            Öncü Savunma, savunma sanayiine yönelik askerî standartlara uygun kablo, kablaj ve konnektörlü kablo sistemlerini tasarlayan, üreten ve test eden yerli bir mühendislik ve üretim şirketidir.
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- İki paragraf: kutu ile dikey hizalı, aşağıda tam gözükecek şekilde boşluk, text-justify -->
-    <section class="bg-white pt-20 pb-16 md:pt-24 md:pb-20 lg:pt-28 lg:pb-24">
+    <!-- Şirket Profili -->
+    <section class="bg-white pt-24 pb-16 md:pt-28 md:pb-20 lg:pt-32 lg:pb-24">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-20">
-          <div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-20 items-start">
+          <div class="reveal">
+            <div class="section-tag mb-2">Biz kimiz?</div>
+            <div class="red-line"></div>
+            <h2 class="display font-black text-2xl md:text-3xl mb-6" style="color:var(--anthracite);letter-spacing:-0.02em;">ŞİRKET PROFİLİ</h2>
             <p class="text-gray-700 leading-relaxed text-justify" style="font-family:'Inter',sans-serif;line-height:1.75;">
               Öncü Savunma Sanayi Limited Şirketi, savunma sanayiine yönelik askerî standartlara uygun kablo, kablaj ve konnektörlü kablo sistemlerinin tasarım, üretim ve test süreçlerinde faaliyet göstermek üzere kurulmuş yerli bir üretim firmasıdır. Şirketimiz; MIL-DTL, IPC/WHMA ve müşteri teknik şartnamelerine uygun olarak, yüksek güvenilirlik gerektiren askerî kablaj çözümleri üretmekte; kalite, izlenebilirlik ve süreç disiplinini temel ilke olarak benimsemektedir.
             </p>
-          </div>
-          <div>
-            <p class="text-gray-700 leading-relaxed text-justify" style="font-family:'Inter',sans-serif;line-height:1.75;">
+            <p class="text-gray-700 leading-relaxed text-justify mt-4" style="font-family:'Inter',sans-serif;line-height:1.75;">
               Üretim faaliyetlerimiz kapsamında; kara, hava ve deniz platformlarında kullanılan güç, sinyal ve veri iletim kabloları ile özel amaçlı kablaj sistemleri geliştirilmekte ve seri numarası bazlı izlenebilirlik sağlanmaktadır. Öncü Savunma Sanayi, yerli üretim kabiliyetini artırmayı ve savunma sanayiinde dışa bağımlılığı azaltmayı hedefleyen stratejik bir yaklaşım ile çalışmalarını sürdürmektedir.
             </p>
+          </div>
+          <div class="reveal reveal-delay-1 max-w-md">
+            <ul class="text-sm text-gray-700 leading-relaxed space-y-2 list-none pl-0">
+              <li>⦁ Askerî ve endüstriyel standartlara uyumlu kablo ve kablaj çözümleri</li>
+              <li>⦁ Seri numarası ve lot bazlı izlenebilirlik yaklaşımı</li>
+              <li>⦁ Tasarım, üretim ve test süreçlerinin tek çatı altında yönetilmesi</li>
+              <li>⦁ Kara, hava ve deniz platformlarına yönelik mühendislik desteği</li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Vizyonumuz & Misyonumuz — kutu, oval köşeler, ortada ince çizgi -->
-    <section class="py-16 px-6 bg-white">
+    <!-- Misyon & Vizyon -->
+    <section class="py-16 px-6 bg-[#F9FAFB]">
       <div class="max-w-7xl mx-auto">
-        <div class="vision-mission-box flex flex-col md:flex-row">
+        <div class="mb-10 reveal">
+          <div class="section-tag mb-2">Yönümüz</div>
+          <div class="red-line"></div>
+          <h2 class="display font-black text-2xl md:text-3xl" style="color:var(--anthracite);letter-spacing:-0.02em;">Misyon &amp; Vizyon</h2>
+        </div>
+        <div class="vision-mission-box flex flex-col md:flex-row reveal reveal-delay-1">
           <div class="p-6 md:p-8 flex-1">
             <h2 class="text-lg font-semibold text-gray-900 mb-3">Misyonumuz</h2>
             <p class="text-gray-700 leading-relaxed text-sm">
@@ -192,17 +304,48 @@
       </div>
     </section>
 
-    <!-- Faaliyet Alanlarımız -->
-    <section class="pt-20 pb-16 md:pt-28 md:pb-20 px-6" style="background:#fafafa;">
+    <!-- Değerlerimiz -->
+    <section class="py-20 px-6 bg-white">
       <div class="max-w-7xl mx-auto">
-        <div class="section-tag mb-4 mt-2">Platformlar</div>
+        <div class="mb-10 reveal">
+          <div class="section-tag mb-2">Değerler</div>
+          <div class="red-line"></div>
+          <h2 class="display font-black text-2xl md:text-3xl" style="color:var(--anthracite);letter-spacing:-0.02em;">ÇALIŞMA PRENSİPLERİMİZ</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <article class="value-card reveal reveal-delay-1">
+            <h3 class="font-semibold mb-3 text-gray-900">Kalite ve izlenebilirlik</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Her kablo demeti, kullanılan komponentlerden nihai teste kadar kayıt altına alınır; böylece sahada geri izlenebilirlik ve tekrarlanabilirlik sağlanır.
+            </p>
+          </article>
+          <article class="value-card reveal reveal-delay-2">
+            <h3 class="font-semibold mb-3 text-gray-900">Mühendislik odaklı yaklaşım</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Tasarım, üretim ve test ekipleri birlikte çalışarak platform gereksinimlerine uygun, sahaya hazır çözümler geliştirir.
+            </p>
+          </article>
+          <article class="value-card reveal reveal-delay-3">
+            <h3 class="font-semibold mb-3 text-gray-900">Güvenilir iş ortaklığı</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Zamanında teslimat, şeffaf iletişim ve uzun vadeli iş birliği anlayışı ile savunma sanayii paydaşlarına destek verilir.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Faaliyet Alanlarımız -->
+    <section class="pt-20 pb-24 md:pt-28 md:pb-32 px-6" style="background:#fafafa;">
+      <div class="max-w-7xl mx-auto">
+        <div class="section-tag mb-4 mt-2 reveal">Platformlar</div>
         <div class="red-line"></div>
-        <h2 class="font-black text-2xl md:text-3xl mb-10" style="font-family:'Barlow Condensed',sans-serif;color:var(--anthracite);letter-spacing:-0.02em;">FAALİYET ALANLARIMIZ</h2>
-        <p class="text-gray-600 max-w-2xl mb-12 text-sm leading-relaxed">
+        <h2 class="font-black text-2xl md:text-3xl mb-10 reveal reveal-delay-1" style="font-family:'Barlow Condensed',sans-serif;color:var(--anthracite);letter-spacing:-0.02em;">FAALİYET ALANLARIMIZ</h2>
+        <p class="text-gray-600 max-w-2xl mb-12 text-sm leading-relaxed reveal reveal-delay-2">
           Kara, hava ve deniz platformları için kablo demeti ve elektro-mekanik sistem çözümleri sunuyoruz.
         </p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <article class="activity-card">
+          <article class="activity-card reveal reveal-delay-1">
             <div class="activity-icon" aria-hidden="true">
               <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                 <path d="M8 40h48v4H8v-4zm4-8l4-6 4 2 6-8 6 4 4-4 8 6-2 6H10l2-6zM12 44h40v6H12v-6zm6 6v4h4v-4h-4zm8 0v4h4v-4h-4zm8 0v4h4v-4h-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -213,7 +356,7 @@
             <h3 class="font-bold text-lg uppercase tracking-wider mb-2" style="color:var(--navy);">Kara</h3>
             <p class="text-gray-600 text-sm leading-relaxed">Zırhlı araçlar, kara araçları ve kara platformları için kablo demeti ve elektro-mekanik sistemler.</p>
           </article>
-          <article class="activity-card">
+          <article class="activity-card reveal reveal-delay-2">
             <div class="activity-icon" aria-hidden="true">
               <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                 <path d="M32 8l20 12v8L32 44 12 28v-8L32 8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
@@ -224,7 +367,7 @@
             <h3 class="font-bold text-lg uppercase tracking-wider mb-2" style="color:var(--navy);">Hava</h3>
             <p class="text-gray-600 text-sm leading-relaxed">Helikopter, sabit kanat ve insansız hava araçları için aviyonik kablo setleri ve panel çözümleri.</p>
           </article>
-          <article class="activity-card">
+          <article class="activity-card reveal reveal-delay-3">
             <div class="activity-icon" aria-hidden="true">
               <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                 <path d="M4 36l6-8 6 4 8-12 10 6 8-6 10 8 8-4v20H4V36z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none';" />
   <title>Öncü Savunma — Sertifikalar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,52 +11,203 @@
   <link rel="stylesheet" href="css/tailwind.css" />
   <link rel="stylesheet" href="css/base.css" />
   <style>
+    :root {
+      --surface-0:   #020810;
+      --surface-1:   #060E1F;
+      --surface-2:   #091526;
+      --surface-3:   #0D1E38;
+      --surface-4:   #132540;
+      --primary:     #0B2341;
+      --primary-deep:#071629;
+      --brand:       #C8102E;
+      --brand-dark:  #A00E25;
+      --accent:      #00C2E0;
+      --accent-dark: #009AB8;
+      --accent-dim:  rgba(0,194,224,0.08);
+      /* legacy aliases */
+      --red:         #C8102E;
+      --red-dark:    #A00E25;
+      --navy:        #0B2341;
+      --anthracite:  #0D1E38;
+      --anthracite-light: #132540;
+      --dark:        #0B2341;
+      --mid:         #3A4A5E;
+      --light:       #EEF2FA;
+      --metallic:    #5A7090;
+      --metallic-light: #8AAAC8;
+      /* text */
+      --text-primary:   #E8F0FF;
+      --text-secondary: rgba(180,210,255,0.72);
+      --text-muted:     rgba(130,170,230,0.48);
+      --text-label:     rgba(120,160,220,0.58);
+      /* border */
+      --border-subtle: rgba(80,130,200,0.10);
+      --border-mid:    rgba(80,130,200,0.18);
+      --border-strong: rgba(80,130,200,0.32);
+      /* shadows — navy-based */
+      --shadow-sm: 0 2px 8px rgba(2,8,16,0.55);
+      --shadow-md: 0 8px 24px rgba(2,8,16,0.65), 0 2px 6px rgba(2,8,16,0.40);
+      --shadow-lg: 0 20px 50px rgba(2,8,16,0.78), 0 8px 20px rgba(2,8,16,0.50);
+      --shadow-brand: 0 8px 28px rgba(200,16,46,0.28);
+      --shadow-accent: 0 4px 18px rgba(0,194,224,0.22);
+      /* gradients */
+      --grad-card: linear-gradient(155deg,#0D1E38 0%,#060E1F 70%);
+      --anim-hover: 0.22s ease;
+      --anim-spring: cubic-bezier(0.16,1,0.3,1);
+    }
     .red-line { width: 48px; height: 3px; background: var(--red); margin-bottom: 1.5rem; }
     .section-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); }
-    .cert-card {
-      border: 1px solid #e5e5e5;
-      background: white;
-      padding: 2rem;
+
+    .projects-hero {
       position: relative;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .cert-card:hover {
-      border-color: var(--red);
-      box-shadow: 4px 4px 0 0 var(--red);
-    }
-    .cert-seal {
-      width: 80px; height: 80px;
-      border: 2px solid #e5e5e5;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.2rem;
-      position: relative;
-    }
-    .cert-seal-inner {
-      width: 64px; height: 64px;
-      border: 1px dashed #ccc;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .cert-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: 0.9rem;
-      color: var(--red);
-      letter-spacing: 0.05em;
-    }
-    .status-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 0.62rem; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: #2a7a2a; padding: 3px 8px;
-      background: #f0fff0; border: 1px solid #b8dfb8;
-    }
-    .status-badge::before {
-      content: ''; width: 6px; height: 6px;
-      background: #2a7a2a; border-radius: 50%;
+      width: 100%;
+      min-height: 260px;
+      background-image: url("images/hero-sertifikalar.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
+    @media (min-width: 768px) {
+      .projects-hero {
+        min-height: 340px;
+      }
+    }
+
+    .projects-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(7,22,41,0.88), rgba(7,22,41,0.65));
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    .projects-hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 1.5rem 4.5rem;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    @media (min-width: 1024px) {
+      .projects-hero-inner {
+        padding-top: 5rem;
+        padding-bottom: 5.5rem;
+      }
+    }
+
+    .projects-hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .projects-hero-lead {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 620px;
+    }
+
+    .projects-hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .projects-hero-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(11, 35, 65, 0.35);
+    }
+
+    .cert-block {
+      border: 1px solid #e5e5e5;
+      background: white;
+      overflow: hidden;
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out, border-color 0.3s, box-shadow 0.3s;
+    }
+    .cert-block.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .cert-block:nth-child(4) { transition-delay: 0s; }
+    .cert-block:nth-child(5) { transition-delay: 0.08s; }
+    .cert-block:nth-child(6) { transition-delay: 0.16s; }
+    .cert-block:nth-child(7) { transition-delay: 0.24s; }
+    .cert-block:nth-child(8) { transition-delay: 0.32s; }
+    .cert-block:hover {
+      border-color: rgba(180, 30, 45, 0.4);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+    }
+
+    .cert-photo {
+      width: 100%;
+      max-width: 220px;
+      margin: 0 auto;
+      aspect-ratio: 1 / 3.2;
+      min-height: 320px;
+      background: linear-gradient(180deg, #e8e8e8 0%, #eee 50%, #e8e8e8 100%);
+      background-size: 100% 200%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 0.85rem;
+      overflow: hidden;
+      animation: cert-shimmer 4s ease-in-out infinite;
+    }
+    .cert-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease-out;
+    }
+    .cert-block:hover .cert-photo img {
+      transform: scale(1.03);
+    }
+    @keyframes cert-shimmer {
+      0%, 100% { background-position: 0 100%; }
+      50% { background-position: 0 0; }
+    }
+
+    .cert-texts {
+      padding: 1.25rem 1.5rem 1.75rem;
+      transition: opacity 0.4s ease;
+    }
+    .cert-texts .label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.35rem;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
+    }
+    .cert-block.is-visible .cert-texts .label {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .cert-texts .value { font-size: 1rem; color: #0A0A0A; line-height: 1.5; }
+    .cert-texts .row { margin-bottom: 0.9rem; }
+    .cert-texts .row:last-child { margin-bottom: 0; }
   </style>
 </head>
 <body class="bg-white text-gray-900 min-h-screen flex flex-col">
@@ -64,148 +216,109 @@
 
   <div id="site-header"></div>
 
-  <main id="main-content" class="flex-1 pt-20 md:pt-24">
+  <main id="main-content" class="flex-1 pt-24">
 
     <!-- PAGE HERO -->
-    <section style="background:#F5F5F6;border-bottom:1px solid #e5e5e5;" class="px-6 py-16">
-      <div class="max-w-7xl mx-auto">
-        <div class="section-tag mb-4">Sertifikalar / Akreditasyon</div>
-        <div class="red-line"></div>
-        <h1 class="display font-black mb-4" style="font-size:3rem;line-height:1.0;color:#0A0A0A;">SERTİFİKA PORTFÖYÜ</h1>
-        <p class="text-gray-500 max-w-xl leading-relaxed" style="font-size:0.92rem;">
-          Ulusal ve uluslararası kuruluşlar tarafından akredite edilen sertifikalarımız, tasarım, üretim, test ve çevre yönetimi alanlarındaki
-          yetkinliğimizi belgelendirmektedir.
-        </p>
+    <section class="projects-hero" aria-labelledby="sertifikalar-page-title">
+      <div class="projects-hero-inner max-w-7xl mx-auto">
+        <div class="max-w-2xl hero-animate">
+          <p class="section-tag mb-3">Sertifikalar / Akreditasyon</p>
+          <h1 id="sertifikalar-page-title" class="projects-hero-title">Sertifika portföyü</h1>
+          <p class="projects-hero-lead">
+            Ulusal ve uluslararası kuruluşlar tarafından akredite edilen sertifikalarımız; tasarım, üretim, test,
+            çevre ve bilgi güvenliği yönetimi alanlarındaki yetkinliğimizi belgelendirir.
+          </p>
+          <div class="projects-hero-tags">
+            <span class="projects-hero-tag">Kalite yönetimi</span>
+            <span class="projects-hero-tag">Çevre & iş güvenliği</span>
+            <span class="projects-hero-tag">Bilgi güvenliği</span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- CERTIFICATE GRID -->
-    <section class="py-14 px-6">
-      <div class="max-w-7xl mx-auto">
+    <!-- SERTİFİKA BLOKLARI (5 adet) -->
+    <section class="pt-24 pb-14 px-6 md:pt-28">
+      <div class="max-w-5xl mx-auto">
         <div class="section-tag mb-3">Sertifika Galerisi</div>
         <div class="red-line"></div>
-        <h2 class="display font-black mb-10" style="font-size:2rem;color:#0A0A0A;">AKREDİTE SERTİFİKALARIMIZ</h2>
+        <h2 class="display font-black mb-10" style="font-size:2rem;color:#0A0A0A;">SERTİFİKALARIMIZ</h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-
-          <!-- ISO 9001 -->
-          <div class="cert-card">
-            <div class="cert-seal">
-              <div class="cert-seal-inner">
-                <span class="cert-num">ISO</span>
-              </div>
+        <!-- Blok 1 -->
+        <div class="cert-block">
+          <div class="cert-photo"><!-- Sertifika fotoğrafı --></div>
+          <div class="cert-texts">
+            <div class="row">
+              <div class="label">İsmi</div>
+              <div class="value">Sertifika adı buraya</div>
             </div>
-            <span class="status-badge mb-3 inline-flex">Geçerli</span>
-            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">ISO 9001:2015</h3>
-            <p class="text-gray-400 text-xs leading-relaxed mb-4">Kalite Yönetim Sistemi. Tasarım, üretim ve teslimat süreçlerinin tamamını kapsar.</p>
-            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Yenileme: 2026 · Belge No: TR-QMS-00124</div>
-          </div>
-
-          <!-- AS9100D -->
-          <div class="cert-card">
-            <div class="cert-seal">
-              <div class="cert-seal-inner">
-                <span class="cert-num">AS</span>
-              </div>
+            <div class="row">
+              <div class="label">Açıklaması</div>
+              <div class="value">Sertifika açıklaması buraya yazılır.</div>
             </div>
-            <span class="status-badge mb-3 inline-flex">Geçerli</span>
-            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">AS9100 Rev. D</h3>
-            <p class="text-gray-400 text-xs leading-relaxed mb-4">Havacılık, Uzay ve Savunma Kalite Yönetim Sistemi. Uluslararası IAQG kapsamındadır.</p>
-            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Yenileme: 2026 · Belge No: TR-AS-00089</div>
           </div>
-
-          <!-- AQAP 2110 -->
-          <div class="cert-card">
-            <div class="cert-seal">
-              <div class="cert-seal-inner">
-                <span class="cert-num">NATO</span>
-              </div>
-            </div>
-            <span class="status-badge mb-3 inline-flex">Geçerli</span>
-            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">AQAP 2110</h3>
-            <p class="text-gray-400 text-xs leading-relaxed mb-4">NATO Tedarik Kalite Güvence Gereksinimleri. Tasarım, geliştirme ve üretim kapsamlıdır.</p>
-            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Yenileme: 2025 · Belge No: TR-AQAP-00041</div>
-          </div>
-
-          <!-- MIL-DTL-27500 -->
-          <div class="cert-card">
-            <div class="cert-seal">
-              <div class="cert-seal-inner">
-                <span class="cert-num">MIL</span>
-              </div>
-            </div>
-            <span class="status-badge mb-3 inline-flex">Geçerli</span>
-            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">MIL-DTL-27500</h3>
-            <p class="text-gray-400 text-xs leading-relaxed mb-4">Askeri havacılık kablo detay şartnamesi. Kablo demeti üretimi özelinde ABD DoD yetkilendirmesi.</p>
-            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Yenileme: 2027 · Belge No: US-MIL-TR-0312</div>
-          </div>
-
-          <!-- EN 9120 -->
-          <div class="cert-card">
-            <div class="cert-seal">
-              <div class="cert-seal-inner">
-                <span class="cert-num">EN</span>
-              </div>
-            </div>
-            <span class="status-badge mb-3 inline-flex">Geçerli</span>
-            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">EN 9120:2018</h3>
-            <p class="text-gray-400 text-xs leading-relaxed mb-4">Havacılık ve Uzay Dağıtıcılar için Kalite Yönetim Sistemi standartı. Avrupa EASA uyumlu.</p>
-            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Yenileme: 2026 · Belge No: EU-EN9120-0087</div>
-          </div>
-
-          <!-- TÜRKAK -->
-          <div class="cert-card">
-            <div class="cert-seal">
-              <div class="cert-seal-inner">
-                <span class="cert-num" style="font-size:0.7rem;">TÜRKAK</span>
-              </div>
-            </div>
-            <span class="status-badge mb-3 inline-flex">Geçerli</span>
-            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">TÜRKAK Akreditasyonu</h3>
-            <p class="text-gray-400 text-xs leading-relaxed mb-4">Türk Akreditasyon Kurumu onaylı test ve muayene laboratuvarı statüsü. TS EN ISO/IEC 17025.</p>
-            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Yenileme: 2025 · Belge No: TK-LAB-0234</div>
-          </div>
-
-          <!-- SSB -->
-          <div class="cert-card">
-            <div class="cert-seal">
-              <div class="cert-seal-inner">
-                <span class="cert-num" style="font-size:0.75rem;">SSB</span>
-              </div>
-            </div>
-            <span class="status-badge mb-3 inline-flex">Geçerli</span>
-            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">SSB Tedarikçi Yeterliliği</h3>
-            <p class="text-gray-400 text-xs leading-relaxed mb-4">Savunma Sanayii Başkanlığı onaylı tedarikçi. Millî savunma projelerinde doğrudan sözleşme yetkisi.</p>
-            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Yenileme: 2026 · Tedarikçi No: SSB-TR-1182</div>
-          </div>
-
-          <!-- MIL-STD-461 -->
-          <div class="cert-card">
-            <div class="cert-seal">
-              <div class="cert-seal-inner">
-                <span class="cert-num" style="font-size:0.75rem;">EMC</span>
-              </div>
-            </div>
-            <span class="status-badge mb-3 inline-flex">Geçerli</span>
-            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">MIL-STD-461G</h3>
-            <p class="text-gray-400 text-xs leading-relaxed mb-4">EMI/EMC uyumluluk doğrulaması. Emisyon ve duyarlılık testleri için akredite ölçüm altyapısı.</p>
-            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Kapsam: CE / CS / RE / RS</div>
-          </div>
-
-          <!-- ISO 14001 -->
-          <div class="cert-card">
-            <div class="cert-seal">
-              <div class="cert-seal-inner">
-                <span class="cert-num" style="font-size:0.75rem;">ENV</span>
-              </div>
-            </div>
-            <span class="status-badge mb-3 inline-flex">Geçerli</span>
-            <h3 class="font-bold text-sm mb-1" style="color:#0A0A0A;">ISO 14001:2015</h3>
-            <p class="text-gray-400 text-xs leading-relaxed mb-4">Çevre Yönetim Sistemi. Üretim atıklarının kontrolü ve çevresel etkilerin minimize edilmesi.</p>
-            <div style="font-size:0.65rem;color:#bbb;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Yenileme: 2026 · Belge No: TR-EMS-00055</div>
-          </div>
-
         </div>
+
+        <!-- Blok 2 -->
+        <div class="cert-block">
+          <div class="cert-photo"><!-- Sertifika fotoğrafı --></div>
+          <div class="cert-texts">
+            <div class="row">
+              <div class="label">İsmi</div>
+              <div class="value">Sertifika adı buraya</div>
+            </div>
+            <div class="row">
+              <div class="label">Açıklaması</div>
+              <div class="value">Sertifika açıklaması buraya yazılır.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blok 3 -->
+        <div class="cert-block">
+          <div class="cert-photo"><!-- Sertifika fotoğrafı --></div>
+          <div class="cert-texts">
+            <div class="row">
+              <div class="label">İsmi</div>
+              <div class="value">Sertifika adı buraya</div>
+            </div>
+            <div class="row">
+              <div class="label">Açıklaması</div>
+              <div class="value">Sertifika açıklaması buraya yazılır.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blok 4 -->
+        <div class="cert-block">
+          <div class="cert-photo"><!-- Sertifika fotoğrafı --></div>
+          <div class="cert-texts">
+            <div class="row">
+              <div class="label">İsmi</div>
+              <div class="value">Sertifika adı buraya</div>
+            </div>
+            <div class="row">
+              <div class="label">Açıklaması</div>
+              <div class="value">Sertifika açıklaması buraya yazılır.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blok 5 -->
+        <div class="cert-block">
+          <div class="cert-photo"><!-- Sertifika fotoğrafı --></div>
+          <div class="cert-texts">
+            <div class="row">
+              <div class="label">İsmi</div>
+              <div class="value">Sertifika adı buraya</div>
+            </div>
+            <div class="row">
+              <div class="label">Açıklaması</div>
+              <div class="value">Sertifika açıklaması buraya yazılır.</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -214,7 +327,6 @@
   <div id="site-footer"></div>
 
   <script src="js/layout.js"></script>
-
 </body>
 </html>
 
