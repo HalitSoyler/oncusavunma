@@ -18,43 +18,40 @@
 
   <style>
     :root {
-      --surface-0:   #020810;
-      --surface-1:   #060E1F;
-      --surface-2:   #091526;
-      --surface-3:   #0D1E38;
-      --surface-4:   #132540;
-      --primary:     #0B2341;
-      --primary-deep:#071629;
-      --brand:       #C8102E;
-      --brand-dark:  #A00E25;
-      --brand-glow:  rgba(200,16,46,0.12);
-      --accent:      #00C2E0;
-      --accent-dark: #009AB8;
-      --accent-dim:  rgba(0,194,224,0.08);
-      --accent-glow: rgba(0,194,224,0.18);
-      /* legacy aliases */
+      --surface-0:   #FFFFFF;
+      --surface-1:   #F4F6F9;
+      --surface-2:   #EEF1F6;
+      --surface-3:   #E2E8F0;
+      --surface-4:   #D8DEE8;
+      --primary:     #041E3D;
+      --primary-deep:#021526;
+      --primary-light:#0F3460;
+      --brand:       #E31E24;
+      --brand-dark:  #C41A1F;
+      --brand-glow:  rgba(227,30,36,0.12);
+      --accent:      #1E3A5F;
+      --accent-dark: #152E4D;
+      --accent-dim:  rgba(4,30,61,0.06);
+      --accent-glow: rgba(30,58,95,0.15);
       --red:     var(--brand);
       --red-dark:var(--brand-dark);
       --navy:    var(--primary);
       --dark:    var(--primary);
-      --charcoal:var(--surface-1);
-      --mid:     #3A4A5E;
-      --light:   #EEF2FA;
-      /* text */
-      --text-primary:   #E8F0FF;
-      --text-secondary: rgba(180,210,255,0.72);
-      --text-muted:     rgba(130,170,230,0.48);
-      --text-label:     rgba(120,160,220,0.58);
-      /* border */
-      --border-subtle: rgba(80,130,200,0.10);
-      --border-mid:    rgba(80,130,200,0.18);
-      --border-strong: rgba(80,130,200,0.32);
-      /* shadows — navy-based */
-      --shadow-sm: 0 2px 8px rgba(2,8,16,0.55);
-      --shadow-md: 0 8px 24px rgba(2,8,16,0.65), 0 2px 6px rgba(2,8,16,0.40);
-      --shadow-lg: 0 20px 50px rgba(2,8,16,0.78), 0 8px 20px rgba(2,8,16,0.50);
-      /* gradients */
-      --grad-card: linear-gradient(155deg,#0D1E38 0%,#060E1F 70%);
+      --charcoal:var(--surface-3);
+      --mid:     #5A6B80;
+      --light:   #EEF1F6;
+      --text-primary:   #0F2438;
+      --text-secondary: rgba(15,36,56,0.72);
+      --text-muted:     rgba(15,36,56,0.48);
+      --text-label:     rgba(15,36,56,0.58);
+      --border-subtle: rgba(4,30,61,0.08);
+      --border-mid:    rgba(4,30,61,0.14);
+      --border-strong: rgba(4,30,61,0.24);
+      --shadow-sm: 0 1px 4px rgba(4,30,61,0.06), 0 0 0 1px rgba(4,30,61,0.04);
+      --shadow-md: 0 8px 24px rgba(4,30,61,0.10), 0 2px 8px rgba(4,30,61,0.06);
+      --shadow-lg: 0 20px 48px rgba(4,30,61,0.12), 0 8px 20px rgba(4,30,61,0.08);
+      --shadow-brand: 0 8px 28px rgba(227,30,36,0.22);
+      --grad-card: linear-gradient(155deg,#FFFFFF 0%,#EEF1F6 100%);
       --anim-spring: cubic-bezier(0.16,1,0.3,1);
     }
 
@@ -134,137 +131,160 @@
     .reveal-delay-3 { transition-delay: 0.27s; }
     .reveal-delay-4 { transition-delay: 0.36s; }
     @media (prefers-reduced-motion: reduce) {
-      .reveal, .hero-animate, .hero-animate-2, .hero-animate-3, .hero-animate-4 {
+      .reveal, .lh-fade, .lh-fade--2, .lh-fade--3, .lh-fade--4 {
         animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important;
+      }
+      .landing-hero__slide {
+        animation: none !important;
+        opacity: 0 !important;
+      }
+      .landing-hero__slide--1 {
+        opacity: 1 !important;
       }
     }
 
-    /* ═══ HERO ═══ */
-    .hero-section {
+    /* ═══ LANDING HERO — Ateksan Defence tarzı: tam genişlik slayt, ortalanmış blok, slogan + marka + özet + CTA ═══ */
+    .landing-hero {
       position: relative;
-      min-height: 100vh;
+      isolation: isolate;
+      min-height: min(calc(100vh - 5.75rem - 4px), 880px);
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 0 3.5rem;
+      border-bottom: 1px solid rgba(4,30,61,0.12);
       overflow: hidden;
     }
-
-    .hero-slideshow { position: absolute; inset: 0; z-index: 0; }
-    .hero-slide {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center; background-repeat: no-repeat;
+    .landing-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red) 0%, var(--red) 14%, transparent 14%, transparent 18%, rgba(255,255,255,0.15) 18%, rgba(255,255,255,0.15) 100%);
+      z-index: 5;
+      pointer-events: none;
     }
-    .hero-slide-1 { background-image: url('images/hero-kablo-1.jpg'); animation: hero-fade1 28s ease-in-out infinite; }
-    .hero-slide-2 { background-image: url('images/hero-kablo-2.jpg'); animation: hero-fade2 28s ease-in-out infinite; }
-    .hero-slide-3 { background-image: url('images/hero-kablo-3.jpg'); animation: hero-fade3 28s ease-in-out infinite; }
-    .hero-slide-4 { background-image: url('images/hero-kablo-4.jpg'); animation: hero-fade4 28s ease-in-out infinite; }
-    .hero-slide-5 { background-image: url('images/hero-kablo-5.jpg'); animation: hero-fade5 28s ease-in-out infinite; }
-    @keyframes hero-fade1 { 0%,12%{opacity:1} 18%,100%{opacity:0} }
-    @keyframes hero-fade2 { 0%,14%{opacity:0} 20%,34%{opacity:1} 40%,100%{opacity:0} }
-    @keyframes hero-fade3 { 0%,36%{opacity:0} 42%,56%{opacity:1} 62%,100%{opacity:0} }
-    @keyframes hero-fade4 { 0%,58%{opacity:0} 64%,76%{opacity:1} 82%,100%{opacity:0} }
-    @keyframes hero-fade5 { 0%,78%{opacity:0} 84%,96%{opacity:1} 100%{opacity:0} }
-
-    .hero-unicorn { position: absolute; inset: 0; z-index: 0; }
-    .hero-overlay-dark {
-      position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(155deg, rgba(2,8,16,0.92) 0%, rgba(11,35,65,0.76) 52%, rgba(2,8,16,0.68) 100%);
+    .landing-hero__slideshow {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
     }
-    .hero-overlay-grid {
-      position: absolute; inset: 0; z-index: 2;
+    .landing-hero__slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .landing-hero__slide--1 { background-image: url('images/hero-kablo-1.jpg'); animation: lh-hero-fade1 28s ease-in-out infinite; }
+    .landing-hero__slide--2 { background-image: url('images/hero-kablo-2.jpg'); animation: lh-hero-fade2 28s ease-in-out infinite; }
+    .landing-hero__slide--3 { background-image: url('images/hero-kablo-3.jpg'); animation: lh-hero-fade3 28s ease-in-out infinite; }
+    .landing-hero__slide--4 { background-image: url('images/hero-kablo-4.jpg'); animation: lh-hero-fade4 28s ease-in-out infinite; }
+    .landing-hero__slide--5 { background-image: url('images/hero-kablo-5.jpg'); animation: lh-hero-fade5 28s ease-in-out infinite; }
+    @keyframes lh-hero-fade1 { 0%,12%{opacity:1} 18%,100%{opacity:0} }
+    @keyframes lh-hero-fade2 { 0%,14%{opacity:0} 20%,34%{opacity:1} 40%,100%{opacity:0} }
+    @keyframes lh-hero-fade3 { 0%,36%{opacity:0} 42%,56%{opacity:1} 62%,100%{opacity:0} }
+    @keyframes lh-hero-fade4 { 0%,58%{opacity:0} 64%,76%{opacity:1} 82%,100%{opacity:0} }
+    @keyframes lh-hero-fade5 { 0%,78%{opacity:0} 84%,96%{opacity:1} 100%{opacity:0} }
+    /* Tüm alan üzerinde dengeli karartma — metin her slaytta okunur */
+    .landing-hero__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(
+        180deg,
+        rgba(2,21,38,0.48) 0%,
+        rgba(4,30,61,0.55) 45%,
+        rgba(2,21,38,0.62) 100%
+      );
+    }
+    .landing-hero__grid-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.35;
       background-image:
-        linear-gradient(to right, rgba(80,130,200,0.045) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(80,130,200,0.045) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);
       background-size: 72px 72px;
     }
-    .hero-overlay-vignette {
-      position: absolute; inset: 0; z-index: 2;
-      background: radial-gradient(ellipse at 30% 50%, transparent 45%, rgba(2,8,16,0.65) 100%);
-    }
-    .hero-accent-bar {
-      position: absolute; top: 0; left: 0; bottom: 0;
-      width: 4px; background: var(--red);
+    .landing-hero__inner {
+      position: relative;
       z-index: 3;
-    }
-    .hero-body-layer {
-      position: relative; z-index: 4;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       flex: 1;
-      display: flex; flex-direction: column; justify-content: center;
     }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 0.85rem;
-      font-size: 0.63rem; font-weight: 600;
-      letter-spacing: 0.24em; text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 1.75rem;
+    .landing-hero__center {
+      text-align: center;
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 0 0.5rem;
     }
-    .hero-eyebrow::before {
-      content: ''; display: block; width: 28px; height: 1px;
-      background: var(--red); flex-shrink: 0;
-    }
-    .hero-headline {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: clamp(3.5rem, 8vw, 7.5rem);
-      line-height: 0.93;
-      letter-spacing: -0.01em;
-      color: #fff;
-      margin-bottom: 2rem;
+    .landing-hero__pretitle {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.7rem, 1.8vw, 0.8rem);
+      font-weight: 600;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
+      color: rgba(255,255,255,0.82);
+      margin: 0 0 1.25rem;
+      line-height: 1.5;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.45);
     }
-    .hero-headline .hl-red { color: var(--red); }
-    .hero-headline .hl-outline {
-      -webkit-text-stroke: 2px rgba(255,255,255,0.45);
-      color: transparent;
+    .landing-hero__brand {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.25rem, 11vw, 6rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: #fff;
+      margin: 0 0 1.5rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.35);
     }
-    .hero-description {
-      font-size: 0.88rem; line-height: 1.75;
-      color: rgba(255,255,255,0.58);
-      max-width: 500px;
-      margin-bottom: 2.5rem;
+    .landing-hero__brand .brand-accent {
+      color: var(--red);
     }
-    .hero-cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
-    @keyframes fade-up {
-      from { opacity: 0; transform: translateY(24px); }
+    .landing-hero__lead {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.95rem, 2.2vw, 1.125rem);
+      font-weight: 400;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.88);
+      margin: 0 auto 2rem;
+      max-width: 36rem;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+    .landing-hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem 1.1rem;
+    }
+    .landing-hero__actions .btn-primary {
+      min-width: 11rem;
+      justify-content: center;
+    }
+    .landing-hero__actions .btn-outline-light {
+      min-width: 11rem;
+      justify-content: center;
+      border-color: rgba(255,255,255,0.55);
+    }
+    @keyframes lh-rise {
+      from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .hero-animate   { animation: fade-up 0.75s ease-out both; }
-    .hero-animate-2 { animation: fade-up 0.75s 0.12s ease-out both; }
-    .hero-animate-3 { animation: fade-up 0.75s 0.24s ease-out both; }
-    .hero-animate-4 { animation: fade-up 0.75s 0.38s ease-out both; }
-
-    .hero-stats-bar {
-      position: relative; z-index: 4;
-      border-top: 1px solid rgba(80,130,200,0.12);
-      background: rgba(2,8,16,0.7);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-    .hero-stats-inner {
-      max-width: 88rem; margin: 0 auto; padding: 0 1.5rem;
-      display: grid; grid-template-columns: repeat(4, 1fr);
-    }
-    .hero-stat {
-      padding: 1.5rem 1.25rem;
-      border-right: 1px solid rgba(80,130,200,0.1);
-    }
-    .hero-stat:last-child { border-right: none; }
-    .hero-stat-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800; font-size: 1.85rem;
-      color: #fff; line-height: 1; margin-bottom: 0.3rem;
-    }
-    .hero-stat-num .accent { color: var(--red); }
-    .hero-stat-label {
-      font-size: 0.62rem; font-weight: 600;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(120,160,220,0.42);
-    }
-    @media (max-width: 640px) {
-      .hero-stats-inner { grid-template-columns: 1fr 1fr; }
-      .hero-stat:nth-child(2) { border-right: none; }
-      .hero-stat:nth-child(3) { border-top: 1px solid rgba(80,130,200,0.1); }
-      .hero-stat:nth-child(4) { border-top: 1px solid rgba(80,130,200,0.1); }
-    }
+    .lh-fade   { animation: lh-rise 0.7s var(--anim-spring) both; }
+    .lh-fade--2 { animation: lh-rise 0.7s 0.09s var(--anim-spring) both; }
+    .lh-fade--3 { animation: lh-rise 0.7s 0.18s var(--anim-spring) both; }
+    .lh-fade--4 { animation: lh-rise 0.72s 0.26s var(--anim-spring) both; }
 
     /* ═══ FOCUS GRID (TASARIM / ÜRETİM / TEST) ═══ */
     .focus-section {
@@ -315,7 +335,7 @@
     .focus-card::before {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(105deg, transparent 30%, rgba(80,140,220,0.06) 50%, transparent 70%);
+      background: linear-gradient(105deg, transparent 30%, rgba(227,30,36,0.06) 50%, transparent 70%);
       opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
     }
     /* Red accent top bar — expands on hover */
@@ -339,25 +359,12 @@
       letter-spacing: 0.22em; text-transform: uppercase;
       color: var(--text-muted); margin-bottom: 0.7rem;
     }
-    .focus-header-row {
-      display: flex; align-items: center;
-      justify-content: space-between; gap: 1rem; margin-bottom: 0.65rem;
-    }
     .focus-title {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 800; font-size: 1.6rem;
       text-transform: uppercase;
       color: var(--text-primary); letter-spacing: 0.05em;
-    }
-    .focus-icon-ring {
-      width: 38px; height: 38px;
-      border-radius: 4px;
-      border: 1px solid var(--border-mid);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.68rem; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--text-label);
-      background: linear-gradient(135deg, rgba(80,130,200,0.08), transparent);
+      margin-bottom: 0.65rem;
     }
     .focus-sub {
       font-size: 0.82rem; line-height: 1.72;
@@ -370,7 +377,7 @@
       display: inline-flex; align-items: center; gap: 0.6rem;
       transition: color 0.2s ease;
     }
-    .focus-card:hover .focus-link { color: var(--accent); }
+    .focus-card:hover .focus-link { color: var(--brand); }
     .focus-link span {
       display: inline-block; width: 28px; height: 1px;
       background: linear-gradient(90deg, var(--border-mid), var(--border-strong));
@@ -378,7 +385,7 @@
     }
     .focus-card:hover .focus-link span {
       transform: scaleX(1.2);
-      background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+      background: linear-gradient(90deg, rgba(227,30,36,0.25), var(--brand));
     }
     @media (max-width: 1024px) {
       .focus-card { min-height: 195px; padding: 1.9rem 1.75rem 1.85rem; }
@@ -418,7 +425,7 @@
     .service-num {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 800; font-size: 5rem;
-      color: rgba(11,35,65,0.04);
+      color: rgba(4,30,61,0.06);
       position: absolute; top: 0.5rem; right: 1rem;
       line-height: 1; user-select: none; pointer-events: none;
     }
@@ -429,7 +436,7 @@
       margin-bottom: 1.75rem; flex-shrink: 0;
       transition: background 0.25s ease;
     }
-    .service-card:hover .service-icon { background: rgba(200,16,46,0.08); }
+    .service-card:hover .service-icon { background: rgba(227,30,36,0.08); }
     .service-icon svg { width: 22px; height: 22px; stroke: var(--navy); fill: none; }
     .service-card:hover .service-icon svg { stroke: var(--red); }
     .service-title {
@@ -484,11 +491,11 @@
     .platform-card:hover .platform-card-bg { transform: scale(1.06); }
     .platform-card-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(2,8,16,0.92) 0%, rgba(11,35,65,0.52) 55%, rgba(2,8,16,0.22) 100%);
+      background: linear-gradient(to top, rgba(2,21,38,0.92) 0%, rgba(4,30,61,0.52) 55%, rgba(2,21,38,0.22) 100%);
       transition: background 0.35s ease;
     }
     .platform-card:hover .platform-card-overlay {
-      background: linear-gradient(to top, rgba(7,22,41,0.96) 0%, rgba(11,35,65,0.70) 55%, rgba(7,22,41,0.22) 100%);
+      background: linear-gradient(to top, rgba(2,21,38,0.96) 0%, rgba(4,30,61,0.70) 55%, rgba(2,21,38,0.22) 100%);
     }
     .platform-card::before {
       content: '';
@@ -553,7 +560,7 @@
       transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
     }
     .project-card:hover {
-      border-color: rgba(200,16,46,0.25);
+      border-color: rgba(227,30,36,0.25);
       box-shadow: 0 8px 30px rgba(0,0,0,0.08);
       transform: translateY(-4px);
     }
@@ -562,7 +569,7 @@
     .project-platform {
       font-size: 0.6rem; font-weight: 700;
       letter-spacing: 0.18em; text-transform: uppercase;
-      color: rgba(11,35,65,0.4); margin-bottom: 0.8rem;
+      color: rgba(4,30,61,0.4); margin-bottom: 0.8rem;
       display: flex; align-items: center; gap: 0.4rem;
     }
     .project-platform::before {
@@ -619,8 +626,8 @@
       gap: 2rem 5rem; align-items: start; margin-top: 2.5rem;
     }
     .process-note {
-      background: rgba(200,16,46,0.12);
-      border: 1px solid rgba(200,16,46,0.3);
+      background: rgba(227,30,36,0.1);
+      border: 1px solid rgba(227,30,36,0.28);
       border-radius: 12px;
       padding: 1.25rem 1.5rem;
     }
@@ -637,7 +644,7 @@
       content: '';
       position: absolute; left: 23px; top: 24px; bottom: 24px;
       width: 2px;
-      background: linear-gradient(to bottom, var(--red), rgba(200,16,46,0.4), rgba(200,16,46,0.15));
+      background: linear-gradient(to bottom, var(--red), rgba(227,30,36,0.4), rgba(227,30,36,0.15));
       z-index: 0;
     }
     .process-step {
@@ -656,7 +663,7 @@
     }
     .process-step:hover .step-badge {
       transform: scale(1.08);
-      box-shadow: 0 4px 18px rgba(200,16,46,0.45);
+      box-shadow: 0 4px 18px rgba(227,30,36,0.38);
     }
     .process-step:nth-child(2) .step-badge { background: var(--red-dark); }
     .process-step:nth-child(3) .step-badge { background: #7a1a2e; }
@@ -684,7 +691,7 @@
       justify-content: space-between; gap: 3rem; flex-wrap: wrap;
       position: relative; z-index: 1;
     }
-    .cta-section .section-tag { color: rgba(200,16,46,0.7); }
+    .cta-section .section-tag { color: rgba(227,30,36,0.75); }
     .cta-title {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 800; font-size: clamp(2rem, 3.5vw, 3rem);
@@ -729,42 +736,30 @@
   <a href="#main-content" class="skip-link">İçeriğe geç</a>
   <div id="site-header"></div>
 
-  <main id="main-content" class="flex-1 pt-[4.5rem]">
+  <main id="main-content" class="flex-1 pt-[calc(5.75rem+4px)]">
 
-    <!-- HERO -->
-    <section class="hero-section" aria-label="Ana tanıtım">
-      <div aria-hidden="true">
-        <div class="hero-slideshow">
-          <div class="hero-slide hero-slide-1" role="img" aria-label="Kablo demeti üretimi"></div>
-          <div class="hero-slide hero-slide-2" role="img" aria-label="Endüstriyel kablolama"></div>
-          <div class="hero-slide hero-slide-3" role="img" aria-label="Elektronik montaj"></div>
-          <div class="hero-slide hero-slide-4" role="img" aria-label="Askeri teçhizat kablajı"></div>
-          <div class="hero-slide hero-slide-5" role="img" aria-label="Kablo demeti üretim süreci"></div>
-        </div>
-        <div data-us-project="PajrBMWUFGqNAiEXzN3m" data-us-production="true" class="hero-unicorn" aria-hidden="true"></div>
-        <script src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.3/dist/unicornStudio.umd.js"></script>
-        <div class="hero-overlay-dark"></div>
-        <div class="hero-overlay-vignette"></div>
-        <div class="hero-overlay-grid"></div>
+    <!-- LANDING HERO -->
+    <section class="landing-hero" aria-label="Ana tanıtım">
+      <div class="landing-hero__slideshow" aria-hidden="true">
+        <div class="landing-hero__slide landing-hero__slide--1"></div>
+        <div class="landing-hero__slide landing-hero__slide--2"></div>
+        <div class="landing-hero__slide landing-hero__slide--3"></div>
+        <div class="landing-hero__slide landing-hero__slide--4"></div>
+        <div class="landing-hero__slide landing-hero__slide--5"></div>
       </div>
-      <div class="hero-accent-bar" aria-hidden="true"></div>
-
-      <div class="hero-body-layer">
-        <div class="max-w-7xl mx-auto px-6 lg:px-10 w-full py-20">
-          <div class="max-w-3xl">
-            <div class="hero-eyebrow hero-animate">
-              Kablo Demeti &amp; Elektro-Mekanik Çözümler
-            </div>
-            <h1 class="hero-headline hero-animate-2">
-              GÜVENİLİR<br/>
-              <span class="hl-red">BAĞLANTI</span><br/>
-              <span class="hl-outline">ZORLU KOŞULLARDA</span>
-            </h1>
-            <p class="hero-description hero-animate-3">
-              Askeri ve sivil platformlar için kablo demeti tasarımı, üretimi ve
-              elektro-mekanik montaj. Kara, hava ve deniz sistemlerinde
-              AS9100D ve MIL-SPEC uyumlu üretim kabiliyeti.
-            </p>
+      <div class="landing-hero__bg" aria-hidden="true"></div>
+      <div class="landing-hero__grid-overlay" aria-hidden="true"></div>
+      <div class="landing-hero__inner max-w-7xl mx-auto px-6 lg:px-10 w-full">
+        <div class="landing-hero__center">
+          <p class="landing-hero__pretitle lh-fade">Tasarım · üretim · doğrulama</p>
+          <h1 class="landing-hero__brand lh-fade--2">Öncü <span class="brand-accent">Savunma</span></h1>
+          <p class="landing-hero__lead lh-fade--3">
+            Zorlu kara, hava ve deniz koşullarında tasarım, üretim ve entegrasyon; askeri ve sivil
+            platformlarda güvenilir mühendislik ve izlenebilir üretim sunuyoruz.
+          </p>
+          <div class="landing-hero__actions lh-fade--4">
+            <a href="kurumsal.html" class="btn-primary">Kurumsal</a>
+            <a href="iletisim.html" class="btn-outline-light">İletişim</a>
           </div>
         </div>
       </div>
@@ -774,12 +769,12 @@
     <section id="platformlar" class="platforms-section" aria-labelledby="platforms-heading">
       <div class="max-w-7xl mx-auto">
         <div class="reveal">
-          <div class="section-tag mb-3" style="color:rgba(120,160,220,0.55);">Platform Uzmanlığı</div>
+          <div class="section-tag mb-3">Platform Uzmanlığı</div>
           <div class="red-line"></div>
-          <h2 id="platforms-heading" class="display font-extrabold uppercase text-white leading-tight" style="font-size:clamp(2rem,3.5vw,2.8rem);">
+          <h2 id="platforms-heading" class="display font-extrabold uppercase leading-tight" style="font-size:clamp(2rem,3.5vw,2.8rem);color:var(--navy);">
             KARA &nbsp;·&nbsp; HAVA &nbsp;·&nbsp; DENİZ
           </h2>
-          <p style="font-size:0.875rem;color:rgba(130,170,230,0.52);margin-top:0.75rem;max-width:520px;line-height:1.7;">
+          <p style="font-size:0.875rem;color:var(--mid);margin-top:0.75rem;max-width:520px;line-height:1.7;">
             Her platformun kendine özgü güç, veri ve kontrol gereksinimlerine özelleştirilmiş
             kablo demeti çözümleri sunuyoruz.
           </p>
@@ -837,10 +832,7 @@
           <a href="tasarim.html" class="focus-card">
             <div>
               <div class="focus-kicker">01 / TASARIM</div>
-              <div class="focus-header-row">
-                <div class="focus-title">Tasarım &amp; Mühendislik</div>
-                <div class="focus-icon-ring">T</div>
-              </div>
+              <div class="focus-title">Tasarım &amp; Mühendislik</div>
               <p class="focus-sub">
                 Kablo demeti şemaları, formboard tasarımı ve ürün ağaçları ile üretim öncesi güvenli altyapı.
               </p>
@@ -854,10 +846,7 @@
           <a href="uretim-askeri-kablaj.html" class="focus-card">
             <div>
               <div class="focus-kicker">02 / ÜRETİM</div>
-              <div class="focus-header-row">
-                <div class="focus-title">Kablo Demeti Üretimi</div>
-                <div class="focus-icon-ring">Ü</div>
-              </div>
+              <div class="focus-title">Kablo Demeti Üretimi</div>
               <p class="focus-sub">
                 Askeri ve sivil kablo demetlerinde seri üretim, elektro-mekanik montaj ve izlenebilirlik.
               </p>
@@ -871,10 +860,7 @@
           <a href="test.html" class="focus-card">
             <div>
               <div class="focus-kicker">03 / TEST</div>
-              <div class="focus-header-row">
-                <div class="focus-title">Test &amp; Doğrulama</div>
-                <div class="focus-icon-ring">T</div>
-              </div>
+              <div class="focus-title">Test &amp; Doğrulama</div>
               <p class="focus-sub">
                 Elektriksel süreklilik, çekme/kopma ve çevresel dayanım testleri ile kapsamlı doğrulama.
               </p>

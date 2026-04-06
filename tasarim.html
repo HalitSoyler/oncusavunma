@@ -14,46 +14,42 @@
   <link rel="stylesheet" href="css/base.css" />
   <style>
     :root {
-      --surface-0:   #020810;
-      --surface-1:   #060E1F;
-      --surface-2:   #091526;
-      --surface-3:   #0D1E38;
-      --surface-4:   #132540;
-      --primary:     #0B2341;
-      --primary-deep:#071629;
-      --brand:       #C8102E;
-      --brand-dark:  #A00E25;
-      --accent:      #00C2E0;
-      --accent-dark: #009AB8;
-      --accent-dim:  rgba(0,194,224,0.08);
-      /* legacy aliases */
-      --red:         #C8102E;
-      --red-dark:    #A00E25;
-      --navy:        #0B2341;
-      --anthracite:  #0D1E38;
-      --anthracite-light: #132540;
-      --dark:        #0B2341;
-      --mid:         #3A4A5E;
-      --light:       #EEF2FA;
-      --metallic:    #5A7090;
-      --metallic-light: #8AAAC8;
-      /* text */
-      --text-primary:   #E8F0FF;
-      --text-secondary: rgba(180,210,255,0.72);
-      --text-muted:     rgba(130,170,230,0.48);
-      --text-label:     rgba(120,160,220,0.58);
-      /* border */
-      --border-subtle: rgba(80,130,200,0.10);
-      --border-mid:    rgba(80,130,200,0.18);
-      --border-strong: rgba(80,130,200,0.32);
-      /* shadows — navy-based */
-      --shadow-sm: 0 2px 8px rgba(2,8,16,0.55);
-      --shadow-md: 0 8px 24px rgba(2,8,16,0.65), 0 2px 6px rgba(2,8,16,0.40);
-      --shadow-lg: 0 20px 50px rgba(2,8,16,0.78), 0 8px 20px rgba(2,8,16,0.50);
-      --shadow-brand: 0 8px 28px rgba(200,16,46,0.28);
-      --shadow-accent: 0 4px 18px rgba(0,194,224,0.22);
-      /* gradients */
-      --grad-card: linear-gradient(155deg,#0D1E38 0%,#060E1F 70%);
+      --surface-0:   #FFFFFF;
+      --surface-1:   #F4F6F9;
+      --surface-2:   #EEF1F6;
+      --surface-3:   #E2E8F0;
+      --surface-4:   #D8DEE8;
+      --primary:     #041E3D;
+      --primary-deep:#021526;
+      --primary-light:#0F3460;
+      --brand:       #E31E24;
+      --brand-dark:  #C41A1F;
+      --accent:      #1E3A5F;
+      --accent-dark: #152E4D;
+      --accent-dim:  rgba(4,30,61,0.06);
+      --red:         var(--brand);
+      --red-dark:    var(--brand-dark);
+      --navy:        var(--primary);
+      --anthracite:  var(--primary);
+      --anthracite-light: var(--primary-light);
+      --dark:        var(--primary);
+      --mid:         #5A6B80;
+      --light:       #EEF1F6;
+      --metallic:    #5A6B80;
+      --metallic-light: #7A8FA6;
+      --text-primary:   #0F2438;
+      --text-secondary: rgba(15,36,56,0.72);
+      --text-muted:     rgba(15,36,56,0.48);
+      --text-label:     rgba(15,36,56,0.58);
+      --border-subtle: rgba(4,30,61,0.08);
+      --border-mid:    rgba(4,30,61,0.14);
+      --border-strong: rgba(4,30,61,0.24);
+      --shadow-sm: 0 1px 4px rgba(4,30,61,0.06), 0 0 0 1px rgba(4,30,61,0.04);
+      --shadow-md: 0 8px 24px rgba(4,30,61,0.10), 0 2px 8px rgba(4,30,61,0.06);
+      --shadow-lg: 0 20px 48px rgba(4,30,61,0.12), 0 8px 20px rgba(4,30,61,0.08);
+      --shadow-brand: 0 8px 28px rgba(227,30,36,0.22);
+      --shadow-accent: 0 4px 18px rgba(30,58,95,0.18);
+      --grad-card: linear-gradient(155deg,#FFFFFF 0%,#EEF1F6 100%);
       --anim-hover: 0.22s ease;
       --anim-spring: cubic-bezier(0.16,1,0.3,1);
     }
@@ -86,14 +82,14 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, rgba(7,22,41,0.90), rgba(7,22,41,0.68));
+      background: linear-gradient(to right, rgba(2,21,38,0.90), rgba(2,21,38,0.68));
       mix-blend-mode: multiply;
       pointer-events: none;
     }
     .projects-hero-inner {
       position: relative;
       z-index: 1;
-      padding: 4rem 1.5rem 4.5rem;
+      padding: 4rem 0 4.5rem;
       display: flex;
       align-items: flex-end;
     }
@@ -129,7 +125,7 @@
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.35);
       color: rgba(255,255,255,0.9);
-      background: rgba(11,35,65,0.35);
+      background: rgba(4,30,61,0.35);
     }
 
     .red-line { width: 48px; height: 3px; background: var(--red); margin-bottom: 1.5rem; }
@@ -164,28 +160,13 @@
       transform: translate(-50%, -50%);
       width: 900px;
       height: 900px;
-      background: radial-gradient(circle, rgba(11,35,65,0.02) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(4,30,61,0.02) 0%, transparent 70%);
       pointer-events: none;
     }
     .timeline-track {
       position: relative;
       max-width: 900px;
       margin: 0 auto;
-    }
-    .timeline-track::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 44px;
-      width: 2px;
-      background: linear-gradient(180deg, transparent 0%, rgba(200,16,46,0.2) 5%, rgba(200,16,46,0.2) 95%, transparent 100%);
-    }
-    @media (min-width: 768px) {
-      .timeline-track::before {
-        left: 50%;
-        transform: translateX(-1px);
-      }
     }
 
     .timeline-item {
@@ -229,14 +210,14 @@
     }
     .timeline-item:hover .timeline-marker {
       transform: scale(1.1);
-      box-shadow: 0 8px 32px rgba(11,35,65,0.4);
+      box-shadow: 0 8px 32px rgba(4,30,61,0.4);
     }
     .timeline-marker::after {
       content: '';
       position: absolute;
       inset: -4px;
       border-radius: 50%;
-      border: 2px solid rgba(200,16,46,0.25);
+      border: 2px solid rgba(227,30,36,0.25);
       opacity: 0;
       transition: opacity 0.35s ease;
     }
@@ -333,7 +314,7 @@
       position: absolute;
       width: 120px;
       height: 120px;
-      border: 1px solid rgba(200,16,46,0.08);
+      border: 1px solid rgba(227,30,36,0.08);
       transform: rotate(45deg);
       pointer-events: none;
     }
@@ -344,11 +325,11 @@
   <a href="#main-content" class="skip-link">İçeriğe geç</a>
   <div id="site-header"></div>
 
-  <main id="main-content" class="flex-1 pt-24">
+  <main id="main-content" class="flex-1 pt-[calc(5.75rem+4px)]">
 
     <!-- ═══ HERO ═══ -->
     <section class="projects-hero" aria-labelledby="tasarim-page-title">
-      <div class="projects-hero-inner max-w-7xl mx-auto">
+      <div class="projects-hero-inner max-w-7xl mx-auto px-6 lg:px-10">
         <div class="max-w-2xl hero-animate">
           <p class="section-tag mb-3">Ar-Ge & Tasarım</p>
           <h1 id="tasarim-page-title" class="projects-hero-title">Mühendislik Tasarım Süreci</h1>
@@ -367,7 +348,7 @@
     </section>
 
     <!-- ═══ INTRO ═══ -->
-    <section class="max-w-7xl mx-auto px-6 pt-24 pb-10 md:pt-28 md:pb-14" aria-labelledby="tasarim-baslik">
+    <section class="max-w-7xl mx-auto px-6 lg:px-10 pt-24 pb-10 md:pt-28 md:pb-14" aria-labelledby="tasarim-baslik">
       <div class="reveal">
         <div class="section-tag mb-2">Ar-Ge ve Mühendislik</div>
         <div class="red-line mb-6"></div>
@@ -391,11 +372,11 @@
       <div class="geo-accent" style="top:8%;right:5%;"></div>
       <div class="geo-accent" style="bottom:12%;left:3%;width:80px;height:80px;"></div>
 
-      <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10">
         <div class="text-center mb-16 reveal">
           <div class="section-tag mb-3">Tasarım Süreci</div>
           <h2 id="surec-baslik" class="font-black text-2xl md:text-3xl" style="font-family:'Barlow Condensed',sans-serif;color:var(--navy);letter-spacing:-0.02em;">
-            MÜHENDİSLİK <em style="font-style:italic;color:var(--red);">ADIMLARI</em>
+            MÜHENDİSLİK ADIMLARI
           </h2>
           <div style="width:48px;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);margin:1.25rem auto 0;opacity:0.7;"></div>
         </div>

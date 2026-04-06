@@ -224,6 +224,9 @@ function initContactForm() {
 }
 
 function initCertBlocks() {
+  var gallery = document.getElementById('cert-gallery-source');
+  if (gallery && gallery.hasAttribute('hidden')) return;
+
   var blocks = document.querySelectorAll('.cert-block');
   if (!blocks.length) return;
 

@@ -24,46 +24,42 @@
 
   <style>
     :root {
-      --surface-0:   #020810;
-      --surface-1:   #060E1F;
-      --surface-2:   #091526;
-      --surface-3:   #0D1E38;
-      --surface-4:   #132540;
-      --primary:     #0B2341;
-      --primary-deep:#071629;
-      --brand:       #C8102E;
-      --brand-dark:  #A00E25;
-      --accent:      #00C2E0;
-      --accent-dark: #009AB8;
-      --accent-dim:  rgba(0,194,224,0.08);
-      /* legacy aliases */
-      --red:         #C8102E;
-      --red-dark:    #A00E25;
-      --navy:        #0B2341;
-      --anthracite:  #0D1E38;
-      --anthracite-light: #132540;
-      --dark:        #0B2341;
-      --mid:         #3A4A5E;
-      --light:       #EEF2FA;
-      --metallic:    #5A7090;
-      --metallic-light: #8AAAC8;
-      /* text */
-      --text-primary:   #E8F0FF;
-      --text-secondary: rgba(180,210,255,0.72);
-      --text-muted:     rgba(130,170,230,0.48);
-      --text-label:     rgba(120,160,220,0.58);
-      /* border */
-      --border-subtle: rgba(80,130,200,0.10);
-      --border-mid:    rgba(80,130,200,0.18);
-      --border-strong: rgba(80,130,200,0.32);
-      /* shadows — navy-based */
-      --shadow-sm: 0 2px 8px rgba(2,8,16,0.55);
-      --shadow-md: 0 8px 24px rgba(2,8,16,0.65), 0 2px 6px rgba(2,8,16,0.40);
-      --shadow-lg: 0 20px 50px rgba(2,8,16,0.78), 0 8px 20px rgba(2,8,16,0.50);
-      --shadow-brand: 0 8px 28px rgba(200,16,46,0.28);
-      --shadow-accent: 0 4px 18px rgba(0,194,224,0.22);
-      /* gradients */
-      --grad-card: linear-gradient(155deg,#0D1E38 0%,#060E1F 70%);
+      --surface-0:   #FFFFFF;
+      --surface-1:   #F4F6F9;
+      --surface-2:   #EEF1F6;
+      --surface-3:   #E2E8F0;
+      --surface-4:   #D8DEE8;
+      --primary:     #041E3D;
+      --primary-deep:#021526;
+      --primary-light:#0F3460;
+      --brand:       #E31E24;
+      --brand-dark:  #C41A1F;
+      --accent:      #1E3A5F;
+      --accent-dark: #152E4D;
+      --accent-dim:  rgba(4,30,61,0.06);
+      --red:         var(--brand);
+      --red-dark:    var(--brand-dark);
+      --navy:        var(--primary);
+      --anthracite:  var(--primary);
+      --anthracite-light: var(--primary-light);
+      --dark:        var(--primary);
+      --mid:         #5A6B80;
+      --light:       #EEF1F6;
+      --metallic:    #5A6B80;
+      --metallic-light: #7A8FA6;
+      --text-primary:   #0F2438;
+      --text-secondary: rgba(15,36,56,0.72);
+      --text-muted:     rgba(15,36,56,0.48);
+      --text-label:     rgba(15,36,56,0.58);
+      --border-subtle: rgba(4,30,61,0.08);
+      --border-mid:    rgba(4,30,61,0.14);
+      --border-strong: rgba(4,30,61,0.24);
+      --shadow-sm: 0 1px 4px rgba(4,30,61,0.06), 0 0 0 1px rgba(4,30,61,0.04);
+      --shadow-md: 0 8px 24px rgba(4,30,61,0.10), 0 2px 8px rgba(4,30,61,0.06);
+      --shadow-lg: 0 20px 48px rgba(4,30,61,0.12), 0 8px 20px rgba(4,30,61,0.08);
+      --shadow-brand: 0 8px 28px rgba(227,30,36,0.22);
+      --shadow-accent: 0 4px 18px rgba(30,58,95,0.18);
+      --grad-card: linear-gradient(155deg,#FFFFFF 0%,#EEF1F6 100%);
       --anim-hover: 0.22s ease;
       --anim-spring: cubic-bezier(0.16,1,0.3,1);
     }
@@ -88,7 +84,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, rgba(7,22,41,0.88), rgba(7,22,41,0.65));
+      background: linear-gradient(to right, rgba(2,21,38,0.88), rgba(2,21,38,0.65));
       mix-blend-mode: multiply;
       pointer-events: none;
     }
@@ -96,7 +92,7 @@
     .projects-hero-inner {
       position: relative;
       z-index: 1;
-      padding: 4rem 1.5rem 4.5rem;
+      padding: 4rem 0 4.5rem;
       display: flex;
       align-items: flex-end;
     }
@@ -140,16 +136,16 @@
       border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.35);
       color: rgba(255, 255, 255, 0.9);
-      background: rgba(11, 35, 65, 0.35);
+      background: rgba(4, 30, 61, 0.35);
     }
 
     .projects-section {
-      padding: 4rem 1.5rem;
+      padding: 4rem 0;
     }
 
     @media (min-width: 768px) {
       .projects-section {
-        padding: 4.5rem 1.5rem 5rem;
+        padding: 4.5rem 0 5rem;
       }
     }
 
@@ -265,7 +261,7 @@
     .projects-value-card {
       border-radius: 0.9rem;
       padding: 1.3rem 1.1rem;
-      background: #0b2341;
+      background: #0F3460;
       color: #e5e7eb;
       border: 1px solid rgba(255, 255, 255, 0.06);
       box-shadow: 0 20px 60px rgba(15, 23, 42, 0.4);
@@ -292,10 +288,10 @@
 
   <div id="site-header"></div>
 
-  <main id="main-content" class="flex-1 pt-24">
+  <main id="main-content" class="flex-1 pt-[calc(5.75rem+4px)]">
     <!-- HERO -->
     <section class="projects-hero" aria-labelledby="page-title">
-      <div class="projects-hero-inner max-w-7xl mx-auto">
+      <div class="projects-hero-inner max-w-7xl mx-auto px-6 lg:px-10">
         <div class="max-w-2xl hero-animate">
           <p class="section-tag mb-3">Projeler</p>
           <h1 id="page-title" class="projects-hero-title">Savunma ve elektromekanik projelerimiz</h1>
@@ -315,7 +311,7 @@
 
     <!-- GİRİŞ -->
     <section class="projects-section pt-24 md:pt-28" aria-labelledby="projeler-giris">
-      <div class="max-w-7xl mx-auto">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10 w-full">
         <div class="max-w-3xl reveal">
           <div class="section-tag mb-3">Yaklaşımımız</div>
           <div class="red-line mb-6"></div>
@@ -344,7 +340,7 @@
 
     <!-- PROJE ALANLARI / KISA ÖZET KARTLAR -->
     <section class="projects-section projects-section--muted" aria-labelledby="proje-alanlari">
-      <div class="max-w-7xl mx-auto">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10 w-full">
         <header class="mb-8 md:mb-10 max-w-3xl reveal">
           <div class="section-tag mb-3">Proje Alanlarımız</div>
           <div class="red-line mb-5"></div>
@@ -421,7 +417,7 @@
 
     <!-- DETAYLI PROJE KAPSAMLARI (GNY ELEKTROMEKANIK REFERANSININ YAPISINA BENZER) -->
     <section class="projects-section projects-section--soft" aria-labelledby="detayli-projeler">
-      <div class="max-w-7xl mx-auto">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10 w-full">
         <header class="mb-8 md:mb-10 max-w-3xl reveal">
           <div class="section-tag mb-3">Detaylı proje kapsamları</div>
           <div class="red-line mb-5"></div>
@@ -511,8 +507,8 @@
     </section>
 
     <!-- DEĞER ÖNERİLERİ: KALİTE / GÜVENİLİRLİK / İNOVASYON / DENEYİM -->
-    <section class="projects-section" aria-labelledby="projeler-degerler" style="background: #0B2341;">
-      <div class="max-w-7xl mx-auto">
+    <section class="projects-section" aria-labelledby="projeler-degerler" style="background: #041E3D;">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10 w-full">
         <header class="mb-8 md:mb-10 max-w-2xl reveal">
           <div class="section-tag mb-3" style="color: rgba(248, 250, 252, 0.7);">Değerlerimiz</div>
           <div class="red-line mb-5" style="background: var(--red);"></div>
@@ -568,7 +564,7 @@
 
     <!-- KURUMSAL PROJE BAKIŞI -->
     <section class="projects-section projects-section--soft" aria-labelledby="projeler-kurumsal">
-      <div class="max-w-7xl mx-auto">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10 w-full">
         <div class="max-w-4xl space-y-4 reveal">
           <div class="section-tag mb-3">Projelerimize kurumsal bakış</div>
           <div class="red-line mb-5"></div>

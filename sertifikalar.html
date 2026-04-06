@@ -12,46 +12,42 @@
   <link rel="stylesheet" href="css/base.css" />
   <style>
     :root {
-      --surface-0:   #020810;
-      --surface-1:   #060E1F;
-      --surface-2:   #091526;
-      --surface-3:   #0D1E38;
-      --surface-4:   #132540;
-      --primary:     #0B2341;
-      --primary-deep:#071629;
-      --brand:       #C8102E;
-      --brand-dark:  #A00E25;
-      --accent:      #00C2E0;
-      --accent-dark: #009AB8;
-      --accent-dim:  rgba(0,194,224,0.08);
-      /* legacy aliases */
-      --red:         #C8102E;
-      --red-dark:    #A00E25;
-      --navy:        #0B2341;
-      --anthracite:  #0D1E38;
-      --anthracite-light: #132540;
-      --dark:        #0B2341;
-      --mid:         #3A4A5E;
-      --light:       #EEF2FA;
-      --metallic:    #5A7090;
-      --metallic-light: #8AAAC8;
-      /* text */
-      --text-primary:   #E8F0FF;
-      --text-secondary: rgba(180,210,255,0.72);
-      --text-muted:     rgba(130,170,230,0.48);
-      --text-label:     rgba(120,160,220,0.58);
-      /* border */
-      --border-subtle: rgba(80,130,200,0.10);
-      --border-mid:    rgba(80,130,200,0.18);
-      --border-strong: rgba(80,130,200,0.32);
-      /* shadows — navy-based */
-      --shadow-sm: 0 2px 8px rgba(2,8,16,0.55);
-      --shadow-md: 0 8px 24px rgba(2,8,16,0.65), 0 2px 6px rgba(2,8,16,0.40);
-      --shadow-lg: 0 20px 50px rgba(2,8,16,0.78), 0 8px 20px rgba(2,8,16,0.50);
-      --shadow-brand: 0 8px 28px rgba(200,16,46,0.28);
-      --shadow-accent: 0 4px 18px rgba(0,194,224,0.22);
-      /* gradients */
-      --grad-card: linear-gradient(155deg,#0D1E38 0%,#060E1F 70%);
+      --surface-0:   #FFFFFF;
+      --surface-1:   #F4F6F9;
+      --surface-2:   #EEF1F6;
+      --surface-3:   #E2E8F0;
+      --surface-4:   #D8DEE8;
+      --primary:     #041E3D;
+      --primary-deep:#021526;
+      --primary-light:#0F3460;
+      --brand:       #E31E24;
+      --brand-dark:  #C41A1F;
+      --accent:      #1E3A5F;
+      --accent-dark: #152E4D;
+      --accent-dim:  rgba(4,30,61,0.06);
+      --red:         var(--brand);
+      --red-dark:    var(--brand-dark);
+      --navy:        var(--primary);
+      --anthracite:  var(--primary);
+      --anthracite-light: var(--primary-light);
+      --dark:        var(--primary);
+      --mid:         #5A6B80;
+      --light:       #EEF1F6;
+      --metallic:    #5A6B80;
+      --metallic-light: #7A8FA6;
+      --text-primary:   #0F2438;
+      --text-secondary: rgba(15,36,56,0.72);
+      --text-muted:     rgba(15,36,56,0.48);
+      --text-label:     rgba(15,36,56,0.58);
+      --border-subtle: rgba(4,30,61,0.08);
+      --border-mid:    rgba(4,30,61,0.14);
+      --border-strong: rgba(4,30,61,0.24);
+      --shadow-sm: 0 1px 4px rgba(4,30,61,0.06), 0 0 0 1px rgba(4,30,61,0.04);
+      --shadow-md: 0 8px 24px rgba(4,30,61,0.10), 0 2px 8px rgba(4,30,61,0.06);
+      --shadow-lg: 0 20px 48px rgba(4,30,61,0.12), 0 8px 20px rgba(4,30,61,0.08);
+      --shadow-brand: 0 8px 28px rgba(227,30,36,0.22);
+      --shadow-accent: 0 4px 18px rgba(30,58,95,0.18);
+      --grad-card: linear-gradient(155deg,#FFFFFF 0%,#EEF1F6 100%);
       --anim-hover: 0.22s ease;
       --anim-spring: cubic-bezier(0.16,1,0.3,1);
     }
@@ -78,7 +74,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, rgba(7,22,41,0.88), rgba(7,22,41,0.65));
+      background: linear-gradient(to right, rgba(2,21,38,0.88), rgba(2,21,38,0.65));
       mix-blend-mode: multiply;
       pointer-events: none;
     }
@@ -86,7 +82,7 @@
     .projects-hero-inner {
       position: relative;
       z-index: 1;
-      padding: 4rem 1.5rem 4.5rem;
+      padding: 4rem 0 4.5rem;
       display: flex;
       align-items: flex-end;
     }
@@ -130,7 +126,7 @@
       border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.35);
       color: rgba(255, 255, 255, 0.9);
-      background: rgba(11, 35, 65, 0.35);
+      background: rgba(4, 30, 61, 0.35);
     }
 
     .cert-block {
@@ -208,6 +204,64 @@
     .cert-texts .value { font-size: 1rem; color: #0A0A0A; line-height: 1.5; }
     .cert-texts .row { margin-bottom: 0.9rem; }
     .cert-texts .row:last-child { margin-bottom: 0; }
+
+    /* Geçici: galeri kapalı — “çalışma altında” (site paletiyle) */
+    .cert-wip {
+      position: relative;
+      max-width: 28rem;
+      margin: 0 auto 2rem;
+      padding: 2.75rem 2rem 2.5rem;
+      text-align: center;
+      border: 1px solid var(--border-mid);
+      background: linear-gradient(165deg, rgba(248,250,252,0.98) 0%, rgba(241,245,249,0.95) 45%, rgba(255,255,255,1) 100%);
+      box-shadow: var(--shadow-md);
+    }
+    .cert-wip::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red) 0%, var(--navy) 100%);
+    }
+    .cert-wip__icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      margin: 0 auto 1.25rem;
+      color: var(--navy);
+      opacity: 0.92;
+    }
+    .cert-wip__title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(1.35rem, 3.5vw, 1.65rem);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin: 0 0 0.75rem;
+    }
+    .cert-wip__text {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      margin: 0;
+      max-width: 22rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cert-wip__badge {
+      display: inline-block;
+      margin-top: 1.35rem;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      padding: 0.4rem 0.85rem;
+      border: 1px solid rgba(227, 30, 36, 0.35);
+      background: rgba(227, 30, 36, 0.06);
+    }
   </style>
 </head>
 <body class="bg-white text-gray-900 min-h-screen flex flex-col">
@@ -216,11 +270,11 @@
 
   <div id="site-header"></div>
 
-  <main id="main-content" class="flex-1 pt-24">
+  <main id="main-content" class="flex-1 pt-[calc(5.75rem+4px)]">
 
     <!-- PAGE HERO -->
     <section class="projects-hero" aria-labelledby="sertifikalar-page-title">
-      <div class="projects-hero-inner max-w-7xl mx-auto">
+      <div class="projects-hero-inner max-w-7xl mx-auto px-6 lg:px-10">
         <div class="max-w-2xl hero-animate">
           <p class="section-tag mb-3">Sertifikalar / Akreditasyon</p>
           <h1 id="sertifikalar-page-title" class="projects-hero-title">Sertifika portföyü</h1>
@@ -238,12 +292,33 @@
     </section>
 
     <!-- SERTİFİKA BLOKLARI (5 adet) -->
-    <section class="pt-24 pb-14 px-6 md:pt-28">
+    <section class="pt-24 pb-14 px-6 lg:px-10 md:pt-28">
       <div class="max-w-5xl mx-auto">
         <div class="section-tag mb-3">Sertifika Galerisi</div>
         <div class="red-line"></div>
-        <h2 class="display font-black mb-10" style="font-size:2rem;color:#0A0A0A;">SERTİFİKALARIMIZ</h2>
+        <h2 class="display font-black mb-8" style="font-size:2rem;color:#0A0A0A;">SERTİFİKALARIMIZ</h2>
 
+        <div class="cert-wip" role="status" aria-live="polite">
+          <div class="cert-wip__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full">
+              <rect x="2" y="6" width="20" height="8" rx="1" />
+              <path d="M17 14v7" />
+              <path d="M7 14v7" />
+              <path d="M17 3v3" />
+              <path d="M7 3v3" />
+              <path d="M10 14 2.3 6.3" />
+              <path d="m14 6 7.7 7.7" />
+              <path d="m8 6 8 8" />
+            </svg>
+          </div>
+          <p class="cert-wip__title">Çalışma altında</p>
+          <p class="cert-wip__text">
+            Sertifika galerisi şu anda yenileniyor; belge görselleri ve metinleri kısa süre içinde burada yayınlanacaktır.
+          </p>
+          <span class="cert-wip__badge">Geçici durum</span>
+        </div>
+
+        <div id="cert-gallery-source" hidden aria-hidden="true">
         <!-- Blok 1 -->
         <div class="cert-block">
           <div class="cert-photo"><!-- Sertifika fotoğrafı --></div>
@@ -319,6 +394,7 @@
           </div>
         </div>
 
+        </div>
       </div>
     </section>
 

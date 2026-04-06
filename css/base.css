@@ -1,79 +1,78 @@
 /* ════════════════════════════════════════════════════════
    ÖNCÜ SAVUNMA — Advanced Industrial Excellence
-   Design System · v2.0
-   Palette DNA: globalwireharness.com × aerospace lab aesthetic
+   Design System · v3.0 (light-first, logo-aligned)
+   Primary: white surfaces · Accent: navy + brand red (logo-yeni.png)
    ════════════════════════════════════════════════════════ */
 
 :root {
 
-  /* ── Surface Hierarchy (deep void → elevated panel) ── */
-  --surface-0:   #020810;   /* deepest void — page bg on dark sections   */
-  --surface-1:   #060E1F;   /* primary dark surface                      */
-  --surface-2:   #091526;   /* secondary surface / section bg            */
-  --surface-3:   #0D1E38;   /* card / panel bg                           */
-  --surface-4:   #132540;   /* elevated surface / hover state            */
+  /* ── Surface hierarchy (white → elevated panel) ── */
+  --surface-0:   #FFFFFF;
+  --surface-1:   #F4F6F9;
+  --surface-2:   #EEF1F6;
+  --surface-3:   #E2E8F0;
+  --surface-4:   #D8DEE8;
 
-  /* ── Primary Navy (DNA from globalwireharness + evolved) ── */
-  --primary:       #0B2341;   /* heritage navy — headers, footer          */
-  --primary-deep:  #071629;   /* deeper navy for gradients                */
-  --primary-light: #1A3F70;   /* lighter navy for hover accents           */
+  /* ── Primary navy (logo typography) ── */
+  --primary:       #041E3D;
+  --primary-deep:  #021526;
+  --primary-light: #0F3460;
 
-  /* ── Brand Red (evolved — more precise, surgical) ── */
-  --brand:      #C8102E;
-  --brand-dark: #A00E25;
-  --brand-glow: rgba(200, 16, 46, 0.12);
+  /* ── Brand red (logo icon) ── */
+  --brand:      #E31E24;
+  --brand-dark: #C41A1F;
+  --brand-glow: rgba(227, 30, 36, 0.12);
 
-  /* ── Third Accent: Electric Teal (Aerospace / Data-Center) ──
-     Used ONLY on: primary buttons, critical data, hover moments  */
-  --accent:      #00C2E0;
-  --accent-dark: #009AB8;
-  --accent-dim:  rgba(0, 194, 224, 0.08);
-  --accent-glow: rgba(0, 194, 224, 0.18);
+  /* ── Secondary accent (navy mid — replaces teal) ── */
+  --accent:      #1E3A5F;
+  --accent-dark: #152E4D;
+  --accent-dim:  rgba(4, 30, 61, 0.06);
+  --accent-glow: rgba(30, 58, 95, 0.15);
 
-  /* ── Legacy aliases (backwards-compat with inline page CSS) ── */
+  /* ── Legacy aliases ── */
   --red:       var(--brand);
   --red-dark:  var(--brand-dark);
   --navy:      var(--primary);
   --dark:      var(--primary);
-  --charcoal:  var(--surface-1);
-  --mid:       #3A4A5E;
-  --light:     #EEF2FA;
+  --charcoal:  var(--surface-3);
+  --mid:       #5A6B80;
+  --light:     #EEF1F6;
 
-  /* ── Text Tokens ── */
-  --text-primary:   #E8F0FF;             /* near-white with blue cast      */
-  --text-secondary: rgba(180,210,255,0.72);
-  --text-muted:     rgba(130,170,230,0.48);
-  --text-label:     rgba(120,160,220,0.58);  /* section tags, kickers       */
+  /* ── Text (dark on light) ── */
+  --text-primary:   #0F2438;
+  --text-secondary: rgba(15, 36, 56, 0.72);
+  --text-muted:     rgba(15, 36, 56, 0.48);
+  --text-label:     rgba(15, 36, 56, 0.58);
 
-  /* ── Border Tokens ── */
-  --border-subtle: rgba(80, 130, 200, 0.10);
-  --border-mid:    rgba(80, 130, 200, 0.18);
-  --border-strong: rgba(80, 130, 200, 0.32);
+  /* ── Borders ── */
+  --border-subtle: rgba(4, 30, 61, 0.08);
+  --border-mid:    rgba(4, 30, 61, 0.14);
+  --border-strong: rgba(4, 30, 61, 0.24);
 
-  /* ── Shadow Tokens (navy-based, never flat black) ── */
-  --shadow-sm:     0 2px 8px rgba(2,8,16,0.55), 0 0 0 1px rgba(80,130,200,0.05);
-  --shadow-md:     0 8px 24px rgba(2,8,16,0.65), 0 2px 6px rgba(2,8,16,0.40);
-  --shadow-lg:     0 20px 50px rgba(2,8,16,0.78), 0 8px 20px rgba(2,8,16,0.50);
-  --shadow-xl:     0 32px 80px rgba(2,8,16,0.88), 0 12px 32px rgba(2,8,16,0.60);
-  --shadow-brand:  0 8px 28px rgba(200,16,46,0.28);
-  --shadow-accent: 0 4px 18px rgba(0,194,224,0.22);
+  /* ── Shadows (light surfaces) ── */
+  --shadow-sm:     0 1px 4px rgba(4, 30, 61, 0.06), 0 0 0 1px rgba(4, 30, 61, 0.04);
+  --shadow-md:     0 8px 24px rgba(4, 30, 61, 0.10), 0 2px 8px rgba(4, 30, 61, 0.06);
+  --shadow-lg:     0 20px 48px rgba(4, 30, 61, 0.12), 0 8px 20px rgba(4, 30, 61, 0.08);
+  --shadow-xl:     0 28px 64px rgba(4, 30, 61, 0.14), 0 12px 28px rgba(4, 30, 61, 0.10);
+  --shadow-brand:  0 8px 28px rgba(227, 30, 36, 0.22);
+  --shadow-accent: 0 4px 18px rgba(30, 58, 95, 0.18);
 
-  /* ── Metallic Gradients ── */
-  --grad-surface:  linear-gradient(145deg, #091526 0%, #020810 100%);
-  --grad-card:     linear-gradient(155deg, #0D1E38 0%, #060E1F 70%);
-  --grad-card-hover: linear-gradient(155deg, #132540 0%, #091526 70%);
-  --grad-header:   linear-gradient(180deg, #060E1F 0%, #0B2341 100%);
+  /* ── Gradients (light UI; dark photo overlays use --grad-hero-overlay) ── */
+  --grad-surface:  linear-gradient(145deg, #F4F6F9 0%, #FFFFFF 100%);
+  --grad-card:     linear-gradient(155deg, #FFFFFF 0%, #EEF1F6 100%);
+  --grad-card-hover: linear-gradient(155deg, #F4F6F9 0%, #E2E8F0 100%);
+  --grad-header:   linear-gradient(180deg, #FFFFFF 0%, #F4F6F9 100%);
   --grad-sheen:    linear-gradient(105deg,
                      transparent 30%,
-                     rgba(80,140,220,0.04) 50%,
+                     rgba(4, 30, 61, 0.03) 50%,
                      transparent 70%);
   --grad-hero-overlay: linear-gradient(
                      155deg,
-                     rgba(2,8,16,0.92) 0%,
-                     rgba(11,35,65,0.76) 52%,
-                     rgba(2,8,16,0.68) 100%);
+                     rgba(2, 21, 38, 0.88) 0%,
+                     rgba(4, 30, 61, 0.72) 52%,
+                     rgba(2, 21, 38, 0.65) 100%);
 
-  /* ── Animation Tokens ── */
+  /* ── Animation ── */
   --anim-duration: 0.55s;
   --anim-ease:     ease-out;
   --anim-hover:    0.22s ease;
@@ -90,8 +89,8 @@
 .skip-link {
   position: absolute; top: -40px; left: 1.5rem;
   padding: 0.5rem 1rem;
-  background: var(--surface-3); color: var(--text-primary);
-  border: 1px solid var(--border-mid); z-index: 60;
+  background: #fff; color: var(--primary);
+  border: 1px solid var(--border-strong); z-index: 60;
   font-size: 0.75rem; font-weight: 600;
   letter-spacing: 0.12em; text-transform: uppercase;
   transition: top 0.15s ease;
@@ -168,22 +167,22 @@
 }
 .btn-primary:hover {
   background: var(--brand-dark);
-  box-shadow: 0 10px 30px rgba(200,16,46,0.35);
+  box-shadow: 0 10px 30px rgba(227, 30, 36, 0.28);
 }
 
-/* Accent button — electric teal, use very sparingly */
+/* Secondary — navy fill */
 .btn-accent {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.8rem 2rem; font-size: 0.72rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.12em;
-  background: var(--accent); color: #020810;
+  background: var(--accent); color: #fff;
   border-radius: 0; text-decoration: none;
   box-shadow: var(--shadow-accent);
   transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 .btn-accent:hover {
   background: var(--accent-dark);
-  box-shadow: 0 8px 24px rgba(0,194,224,0.32);
+  box-shadow: 0 8px 24px rgba(30, 58, 95, 0.28);
 }
 
 .btn-outline-light {
@@ -195,7 +194,7 @@
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 .btn-outline-light:hover {
-  background: rgba(80,130,200,0.08);
+  background: var(--accent-dim);
   border-color: var(--border-strong);
   color: var(--text-primary);
 }
@@ -264,7 +263,7 @@
 .uretim-photo-block:hover { transform: scale(1.03); }
 .uretim-photo-block .photo-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(2,8,16,0.3) 0%, transparent 50%);
+  background: linear-gradient(to top, rgba(4, 30, 61, 0.35) 0%, transparent 50%);
   opacity: 0; transition: opacity 0.35s ease; pointer-events: none;
 }
 .uretim-photo-block:hover .photo-overlay { opacity: 1; }

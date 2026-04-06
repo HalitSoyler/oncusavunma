@@ -14,46 +14,42 @@
   <link rel="stylesheet" href="css/base.css" />
   <style>
     :root {
-      --surface-0:   #020810;
-      --surface-1:   #060E1F;
-      --surface-2:   #091526;
-      --surface-3:   #0D1E38;
-      --surface-4:   #132540;
-      --primary:     #0B2341;
-      --primary-deep:#071629;
-      --brand:       #C8102E;
-      --brand-dark:  #A00E25;
-      --accent:      #00C2E0;
-      --accent-dark: #009AB8;
-      --accent-dim:  rgba(0,194,224,0.08);
-      /* legacy aliases */
-      --red:         #C8102E;
-      --red-dark:    #A00E25;
-      --navy:        #0B2341;
-      --anthracite:  #0D1E38;
-      --anthracite-light: #132540;
-      --dark:        #0B2341;
-      --mid:         #3A4A5E;
-      --light:       #EEF2FA;
-      --metallic:    #5A7090;
-      --metallic-light: #8AAAC8;
-      /* text */
-      --text-primary:   #E8F0FF;
-      --text-secondary: rgba(180,210,255,0.72);
-      --text-muted:     rgba(130,170,230,0.48);
-      --text-label:     rgba(120,160,220,0.58);
-      /* border */
-      --border-subtle: rgba(80,130,200,0.10);
-      --border-mid:    rgba(80,130,200,0.18);
-      --border-strong: rgba(80,130,200,0.32);
-      /* shadows — navy-based */
-      --shadow-sm: 0 2px 8px rgba(2,8,16,0.55);
-      --shadow-md: 0 8px 24px rgba(2,8,16,0.65), 0 2px 6px rgba(2,8,16,0.40);
-      --shadow-lg: 0 20px 50px rgba(2,8,16,0.78), 0 8px 20px rgba(2,8,16,0.50);
-      --shadow-brand: 0 8px 28px rgba(200,16,46,0.28);
-      --shadow-accent: 0 4px 18px rgba(0,194,224,0.22);
-      /* gradients */
-      --grad-card: linear-gradient(155deg,#0D1E38 0%,#060E1F 70%);
+      --surface-0:   #FFFFFF;
+      --surface-1:   #F4F6F9;
+      --surface-2:   #EEF1F6;
+      --surface-3:   #E2E8F0;
+      --surface-4:   #D8DEE8;
+      --primary:     #041E3D;
+      --primary-deep:#021526;
+      --primary-light:#0F3460;
+      --brand:       #E31E24;
+      --brand-dark:  #C41A1F;
+      --accent:      #1E3A5F;
+      --accent-dark: #152E4D;
+      --accent-dim:  rgba(4,30,61,0.06);
+      --red:         var(--brand);
+      --red-dark:    var(--brand-dark);
+      --navy:        var(--primary);
+      --anthracite:  var(--primary);
+      --anthracite-light: var(--primary-light);
+      --dark:        var(--primary);
+      --mid:         #5A6B80;
+      --light:       #EEF1F6;
+      --metallic:    #5A6B80;
+      --metallic-light: #7A8FA6;
+      --text-primary:   #0F2438;
+      --text-secondary: rgba(15,36,56,0.72);
+      --text-muted:     rgba(15,36,56,0.48);
+      --text-label:     rgba(15,36,56,0.58);
+      --border-subtle: rgba(4,30,61,0.08);
+      --border-mid:    rgba(4,30,61,0.14);
+      --border-strong: rgba(4,30,61,0.24);
+      --shadow-sm: 0 1px 4px rgba(4,30,61,0.06), 0 0 0 1px rgba(4,30,61,0.04);
+      --shadow-md: 0 8px 24px rgba(4,30,61,0.10), 0 2px 8px rgba(4,30,61,0.06);
+      --shadow-lg: 0 20px 48px rgba(4,30,61,0.12), 0 8px 20px rgba(4,30,61,0.08);
+      --shadow-brand: 0 8px 28px rgba(227,30,36,0.22);
+      --shadow-accent: 0 4px 18px rgba(30,58,95,0.18);
+      --grad-card: linear-gradient(155deg,#FFFFFF 0%,#EEF1F6 100%);
       --anim-hover: 0.22s ease;
       --anim-spring: cubic-bezier(0.16,1,0.3,1);
     }
@@ -80,7 +76,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, rgba(7,22,41,0.88), rgba(7,22,41,0.65));
+      background: linear-gradient(to right, rgba(2,21,38,0.88), rgba(2,21,38,0.65));
       mix-blend-mode: multiply;
       pointer-events: none;
     }
@@ -88,7 +84,7 @@
     .projects-hero-inner {
       position: relative;
       z-index: 1;
-      padding: 4rem 1.5rem 4.5rem;
+      padding: 4rem 0 4.5rem;
       display: flex;
       align-items: flex-end;
     }
@@ -132,7 +128,7 @@
       border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.35);
       color: rgba(255, 255, 255, 0.9);
-      background: rgba(11, 35, 65, 0.35);
+      background: rgba(4, 30, 61, 0.35);
     }
 
     /* Üst fotoğraf alanları (eski yapı, ileride kaldırılabilir) */
@@ -158,56 +154,35 @@
       overflow: hidden;
     }
     .aura-card:hover {
-      border-color: rgba(11,35,65,0.12);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 28px rgba(11,35,65,0.08);
+      border-color: rgba(4,30,61,0.12);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 28px rgba(4,30,61,0.08);
       transform: translateY(-2px);
     }
-    .aura-card-grid {
+    /* Üç kart: mobilde alt alta, geniş ekranda üç sütun */
+    .uretim-cards-row {
       display: grid;
       grid-template-columns: 1fr;
       gap: 1rem;
     }
-    @media (min-width: 768px) {
-      .aura-card-grid { gap: 1.25rem; }
-    }
-
-    /* Yazıların yanında sağda ürün/kablo foto alanı */
-    .uretim-cards-with-photo {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      align-items: start;
-    }
     @media (min-width: 1024px) {
-      .uretim-cards-with-photo {
-        grid-template-columns: 1fr minmax(280px, 380px);
-        gap: 2.5rem;
+      .uretim-cards-row {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem;
+        align-items: stretch;
       }
     }
-    .uretim-product-photo {
-      aspect-ratio: 3/4;
-      background-size: cover;
-      background-position: center;
-      background-color: var(--navy);
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 28px rgba(11,35,65,0.08);
-      overflow: hidden;
-    }
-    @media (min-width: 1024px) {
-      .uretim-product-photo { aspect-ratio: 4/5; min-height: 320px; }
-    }
 
-    /* Alt bölüm: bölünmüş ekran / Hero – Aura tarzı */
+    /* Alt bölüm: görsel solda, metin sağda (geniş ekranda) */
     .uretim-split {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 1.75rem;
       align-items: center;
     }
     @media (min-width: 1024px) {
       .uretim-split {
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
+        grid-template-columns: minmax(240px, 1fr) minmax(0, 1.15fr);
+        gap: 2.5rem;
         min-height: 0;
       }
     }
@@ -220,16 +195,16 @@
       background-position: center;
       background-color: var(--navy);
       border-radius: 0.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(11,35,65,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(4,30,61,0.1);
       transition: transform 0.4s ease, box-shadow 0.4s ease;
       overflow: hidden;
     }
     .uretim-split-media:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 20px 40px rgba(11,35,65,0.12);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 20px 40px rgba(4,30,61,0.12);
     }
     @media (min-width: 768px) {
-      .uretim-split-media { aspect-ratio: 16/10; min-height: 320px; }
+      .uretim-split-media { aspect-ratio: 16/10; min-height: 280px; }
     }
 
   </style>
@@ -240,10 +215,10 @@
 
   <div id="site-header"></div>
 
-  <main id="main-content" class="flex-1 pt-24">
+  <main id="main-content" class="flex-1 pt-[calc(5.75rem+4px)]">
     <!-- HERO -->
     <section class="projects-hero" aria-labelledby="askeri-page-title">
-      <div class="projects-hero-inner max-w-7xl mx-auto">
+      <div class="projects-hero-inner max-w-7xl mx-auto px-6 lg:px-10">
         <div class="max-w-2xl hero-animate">
           <p class="section-tag mb-3">Üretim</p>
           <h1 id="askeri-page-title" class="projects-hero-title">Askeri kablaj üretimi</h1>
@@ -261,57 +236,48 @@
       </div>
     </section>
 
-    <!-- 2. Üç satır baloncuk metin düzeni -->
-    <section class="max-w-7xl mx-auto px-6 pt-24 pb-10 md:pt-28 md:pb-14 reveal" aria-labelledby="uretim-baslik">
+    <!-- 2. Üç sütun kart -->
+    <section class="max-w-7xl mx-auto px-6 lg:px-10 pt-14 pb-16 md:pt-16 md:pb-20 reveal" aria-labelledby="uretim-baslik">
       <div class="section-tag mb-2 reveal reveal-delay-1">Üretim</div>
       <div class="red-line red-line-anim mb-6"></div>
-      <h2 id="uretim-baslik" class="font-black text-2xl md:text-3xl mb-10 reveal reveal-delay-2" style="font-family:'Barlow Condensed',sans-serif;color:var(--navy);letter-spacing:-0.02em;">ASKERİ KABLAJ ÜRETİMİ</h2>
+      <h2 id="uretim-baslik" class="font-black text-2xl md:text-3xl mb-8 reveal reveal-delay-2" style="font-family:'Barlow Condensed',sans-serif;color:var(--navy);letter-spacing:-0.02em;">ASKERİ KABLAJ ÜRETİMİ</h2>
 
-      <div class="uretim-cards-with-photo">
-        <div class="aura-card-grid">
-          <div class="reveal reveal-from-left reveal-delay-1 flex justify-start">
-            <div class="aura-card w-full max-w-3xl">
-              <p class="text-gray-700 leading-relaxed text-sm md:text-base">
-                Sivil kurum ve kuruluşların gereksinimlerine yönelik analog kablo tasarımı, kablo ağacı ve takımı üretimi ile her türlü ekranlı kablo sonlandırma işlemleri, üstün kalite ve uygun fiyat prensibiyle gerçekleştirilmektedir.
-              </p>
-            </div>
-          </div>
-          <div class="reveal reveal-from-right reveal-delay-2 flex justify-end">
-            <div class="aura-card w-full max-w-3xl">
-              <p class="text-gray-700 leading-relaxed text-sm md:text-base">
-                Öncü Savunma olarak, elektromekanik montaj işlemlerinin yanı sıra bu süreci bütünleyen kontrol paneli, kontrol kutusu ve çeşitli alt malzeme montaj hizmetlerini sunuyoruz.
-              </p>
-            </div>
-          </div>
-          <div class="reveal reveal-from-left reveal-delay-3 flex justify-start">
-            <div class="aura-card w-full max-w-3xl">
-              <p class="text-gray-700 leading-relaxed text-sm md:text-base">
-                Ayrıca üretim sürecine dahil olan boyama işlemleri ile PCB, switch, anahtar, ampul ve LED gibi tüm bileşenlerin tedarik zinciri yönetimi de tarafımızca profesyonelce yürütülmektedir.
-              </p>
-            </div>
-          </div>
+      <div class="uretim-cards-row">
+        <div class="aura-card h-full reveal reveal-delay-1">
+          <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+            Sivil kurum ve kuruluşların gereksinimlerine yönelik analog kablo tasarımı, kablo ağacı ve takımı üretimi ile her türlü ekranlı kablo sonlandırma işlemleri, üstün kalite ve uygun fiyat prensibiyle gerçekleştirilmektedir.
+          </p>
         </div>
-        <div class="uretim-product-photo reveal reveal-delay-2 order-first lg:order-last" style="background-image: url('images/hero-savunma-arac.jpg');" role="img" aria-label="Savunma aracı / kablo uygulaması"></div>
+        <div class="aura-card h-full reveal reveal-delay-2">
+          <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+            Öncü Savunma olarak, elektromekanik montaj işlemlerinin yanı sıra bu süreci bütünleyen kontrol paneli, kontrol kutusu ve çeşitli alt malzeme montaj hizmetlerini sunuyoruz.
+          </p>
+        </div>
+        <div class="aura-card h-full reveal reveal-delay-3">
+          <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+            Ayrıca üretim sürecine dahil olan boyama işlemleri ile PCB, switch, anahtar, ampul ve LED gibi tüm bileşenlerin tedarik zinciri yönetimi de tarafımızca profesyonelce yürütülmektedir.
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- 3. Alt bölüm: bölünmüş ekran / Hero – sol metin, sağ görsel -->
-    <section class="bg-[#fafafa] py-14 md:py-20 px-6 reveal" aria-labelledby="alt-bolum-baslik">
+    <!-- 3. Kabiliyetler: görsel solda, metin sağda -->
+    <section class="bg-[#fafafa] py-14 md:py-16 px-6 lg:px-10 reveal" aria-labelledby="alt-bolum-baslik">
       <div class="max-w-7xl mx-auto">
         <div class="uretim-split">
-          <div class="uretim-split-content order-2 lg:order-1">
-            <h2 id="alt-bolum-baslik" class="font-black text-xl md:text-2xl mb-6 reveal reveal-delay-1" style="font-family:'Barlow Condensed',sans-serif;color:var(--navy);letter-spacing:-0.02em;">KABİLİYETLERİMİZ</h2>
-            <p class="text-gray-700 leading-relaxed mb-4">
+          <div class="uretim-split-media reveal reveal-delay-1" style="background-image: url('images/askeri-kablaj-kara-platform.jpg'); background-position: center 45%;" role="img" aria-label="Kara platformu — sensör ve dış birimler için kablo demeti"></div>
+          <div class="uretim-split-content">
+            <h2 id="alt-bolum-baslik" class="font-black text-xl md:text-2xl mb-5 reveal reveal-delay-1" style="font-family:'Barlow Condensed',sans-serif;color:var(--navy);letter-spacing:-0.02em;">KABİLİYETLERİMİZ</h2>
+            <p class="text-gray-700 leading-relaxed text-sm md:text-base mb-4">
               Sivil kurum ve kuruluşların gereksinimlerine yönelik analog kablo tasarımı, kablo ağacı ve takımı üretimi ile her türlü ekranlı kablo sonlandırma işlemleri, üstün kalite ve uygun fiyat prensibiyle gerçekleştirilmektedir.
             </p>
-            <p class="text-gray-700 leading-relaxed mb-4">
+            <p class="text-gray-700 leading-relaxed text-sm md:text-base mb-4">
               Öncü Savunma olarak, elektromekanik montaj işlemlerinin yanı sıra bu süreci bütünleyen kontrol paneli, kontrol kutusu ve çeşitli alt malzeme montaj hizmetlerini sunuyoruz.
             </p>
-            <p class="text-gray-700 leading-relaxed">
+            <p class="text-gray-700 leading-relaxed text-sm md:text-base">
               Ayrıca üretim sürecine dahil olan boyama işlemleri ile PCB, switch, anahtar, ampul ve LED gibi tüm bileşenlerin tedarik zinciri yönetimi de tarafımızca profesyonelce yürütülmektedir.
             </p>
           </div>
-          <div class="uretim-split-media order-1 lg:order-2 reveal reveal-delay-2" style="background-image: url('images/hero-savunma-arac.jpg');" role="img" aria-label="Elektromekanik montaj"></div>
         </div>
       </div>
     </section>
